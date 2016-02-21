@@ -3,6 +3,8 @@
   "name": "ASP.NET",
   "private": true,
   "dependencies": {
+    "bootstrap": "3.3.6",
+    "jquery": "2.2.0",
     "angular2": "2.0.0-beta.3",
     "systemjs": "0.19.6",
     "es6-promise": "^3.0.2",

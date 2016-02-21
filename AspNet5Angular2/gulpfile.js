@@ -9,10 +9,13 @@ var gulp = require('gulp');
 
 var paths = {
     npmSrc: "./node_modules/",
-    libTarget: "./wwwroot/libs/"
+    jsTarget: "./wwwroot/js/",
+    cssTarget: "./wwwroot/css/"
 };
 
-var libsToMove = [
+var jsToMove = [
+   paths.npmSrc + '/bootstrap/dist/js/bootstrap.min.js',
+   paths.npmSrc + '/jquery/dist/jquery.min.js',
    paths.npmSrc + '/angular2/bundles/angular2-polyfills.js',
    paths.npmSrc + '/systemjs/dist/system.js',
    paths.npmSrc + '/systemjs/dist/system-polyfills.js',
@@ -20,6 +23,17 @@ var libsToMove = [
    paths.npmSrc + '/angular2/bundles/angular2.dev.js',
    paths.npmSrc + '/es6-shim/es6-shim.min.js'
 ];
-gulp.task('moveToLibs', function () {
-    return gulp.src(libsToMove).pipe(gulp.dest(paths.libTarget));
+
+var cssToMove = [
+   paths.npmSrc + '/bootstrap/dist/css/bootstrap.min.css',
+   paths.npmSrc + '/bootstrap/dist/css/bootstrap.min.css.map',
+   paths.npmSrc + '/bootstrap/dist/css/bootstrap-theme.min.css',
+   paths.npmSrc + '/bootstrap/dist/css/bootstrap-theme.min.css.map',
+];
+gulp.task('moveToJs', function () {
+    return gulp.src(jsToMove).pipe(gulp.dest(paths.jsTarget));
+});
+
+gulp.task('moveToCss', function () {
+    return gulp.src(cssToMove).pipe(gulp.dest(paths.cssTarget));
 });
