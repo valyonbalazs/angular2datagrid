@@ -12,6 +12,14 @@ var rows = [
     { firstName: 'Karcsi', lastName: 'Doe', age: 50 },
     { firstName: 'Helén', lastName: 'Doe', age: 50 },
     { firstName: 'Tamás', lastName: 'Doe', age: 50 },
+    { firstName: 'Joe', lastName: 'Jackson', age: 20 },
+    { firstName: 'Peter', lastName: 'Smith', age: 30 },
+    { firstName: 'Jane', lastName: 'Doe', age: 50 },
+    { firstName: 'Béla', lastName: 'Doe', age: 50 },
+    { firstName: 'Józsi', lastName: 'Doe', age: 50 },
+    { firstName: 'Karcsi', lastName: 'Doe', age: 50 },
+    { firstName: 'Helén', lastName: 'Doe', age: 50 },
+    { firstName: 'Tamás', lastName: 'Doe', age: 50 },
     { firstName: 'Tim', lastName: 'Smith', age: 80 }
 ];
 

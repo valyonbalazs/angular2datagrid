@@ -1,4 +1,4 @@
-﻿<table class="table table-striped">
+﻿<table id="paginate" class="table table-striped">
     <thead>
         <tr>
             <td *ngFor="#col of columns"><a (click)="sort(col.name)">{{col.descr}}</a></td>
@@ -10,3 +10,8 @@
         </tr>
     </tbody>
 </table>
+
+<input type='hidden' id='current_page' />
+<input type='hidden' id='show_per_page' />
+<div id='page_navigation'>
+</div>

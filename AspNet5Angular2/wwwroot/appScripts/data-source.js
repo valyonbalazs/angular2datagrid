@@ -18,6 +18,9 @@ var DataSource = (function () {
     DataSource.setColumns = function (cols) {
         DataSource.columns = cols;
     };
+    DataSource.getNumberOfRows = function () {
+        return DataSource.rows.length;
+    };
     DataSource.instance = new DataSource();
     return DataSource;
 })();

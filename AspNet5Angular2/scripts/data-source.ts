@@ -15,11 +15,11 @@ export class DataSource {
     private static rows: Array<any>;
     private static columns: Array<Column>;
 
-    public static getRows() {
+    public static getRows() : Array<any> {
         return DataSource.rows;
     }
 
-    public static getColumns() {
+    public static getColumns() : Array<Column> {
         return DataSource.columns;
     }
 
@@ -29,6 +29,10 @@ export class DataSource {
 
     public static setColumns(cols: Array<any>) {
         DataSource.columns = cols;
+    }
+
+    public static getNumberOfRows(): number {
+        return DataSource.rows.length;
     }
 }
 
