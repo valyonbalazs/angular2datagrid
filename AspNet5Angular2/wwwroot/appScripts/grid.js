@@ -10,23 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var sorter_1 = require('./sorter');
-var data_source_1 = require('./data-source');
 var Grid = (function () {
     function Grid() {
         this.sorter = new sorter_1.Sorter();
-        this.pageSize = 3;
     }
     Grid.prototype.sort = function (key) {
         this.sorter.sort(key, this.rows);
     };
     Grid.prototype.ngOnInit = function () {
         console.log(this.name);
-        this.showPage(1);
+        setTimeout(function () { this.showPage(1); }.bind(this), 900);
+        // this.showPage(1);
     };
     Grid.prototype.createPager = function (page) {
         // TODO: paraméterként kapja maga a grid
-        this.showRowsPerPage = 5;
-        var numberOfAllItems = data_source_1.DataSource.getNumberOfRows();
+        var showRowsPerPage = 5;
+        // var numberOfAllItems = $('#paginate tr').size();
+        var numberOfAllItems = $('#paginate tr').length;
+        var numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
         var numberOfPagesToDisplay = 5;
         var navigationHtml = '';
         var currentPage = page;
@@ -37,11 +38,11 @@ var Grid = (function () {
         if (currentLink != 1) {
             navigationHtml += "<a class='nextbutton' href=\"javascript:first();\">« Start&nbsp;</a>&nbsp;<a class='nextbutton' href=\"javascript:previous();\">« Prev&nbsp;</a>&nbsp;";
         }
-        if (currentLink == numberOfPagesToDisplay - 1) {
+        if (currentLink == numberOfPages - 1) {
             // TODO: numberofpagestodisplay-től függ, paraméterezhetővé kéne tenni
             currentLink = currentLink - 3;
         }
-        else if (currentLink == numberOfPagesToDisplay) {
+        else if (currentLink == numberOfPages) {
             currentLink = currentLink - 4;
         }
         else if (currentLink > 2) {
@@ -52,7 +53,7 @@ var Grid = (function () {
         }
         var pages = numberOfPagesToDisplay;
         while (pages != 0) {
-            if (numberOfPagesToDisplay < currentLink) {
+            if (numberOfPages < currentLink) {
                 break;
             }
             if (currentLink >= 1) {
@@ -60,18 +61,20 @@ var Grid = (function () {
                 currentLink++;
                 pages--;
             }
-            if (numberOfPagesToDisplay > currentPage) {
-                navigationHtml += "<a class='nextbutton' href=\"javascript:next()\">Next »</a>&nbsp;<a class='nextbutton' href=\"javascript:last(" + numberOfPagesToDisplay + ");\">Last »</a>";
-            }
-            $('#page_navigation').html(navigationHtml);
         }
+        if (numberOfPages > currentPage) {
+            navigationHtml += "<a class='nextbutton' href=\"javascript:next()\">Next »</a>&nbsp;<a class='nextbutton' href=\"javascript:last(" + numberOfPages + ");\">Last »</a>";
+        }
+        $('#page_navigation').html(navigationHtml);
     };
     Grid.prototype.showPage = function (page) {
         $("#paginate tr").hide();
-        $('#current_page').val(page);
+        $("#current_page").val(page);
         $("#paginate tr").each(function (n) {
             console.log(this);
-            if (n >= this.pageSize * (page - 1) && n < this.pageSize * page)
+            console.log(n);
+            console.log(this.pageSize);
+            if (n >= Grid.pageSize * (page - 1) && n < Grid.pageSize * page)
                 $(this).show();
         });
         var pager = this.createPager(page);
@@ -95,6 +98,7 @@ var Grid = (function () {
         $('#current_page').val(newPage);
         this.showPage(newPage);
     };
+    Grid.pageSize = 3;
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)

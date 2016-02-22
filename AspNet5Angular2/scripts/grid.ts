@@ -12,8 +12,6 @@ import {DataSource} from './data-source';
 })
 export class Grid implements OnInit {
 
-    private showRowsPerPage: number;
-
     columns: Array<Column>;
     rows: Array<any>;
 
@@ -27,17 +25,19 @@ export class Grid implements OnInit {
 
     ngOnInit() {
         console.log(this.name);
-        this.showPage(1);
+        setTimeout(function () { this.showPage(1); }.bind(this), 900);
+        // this.showPage(1);
     }
 
 
     public createPager(page: number) {
 
         // TODO: paraméterként kapja maga a grid
-        this.showRowsPerPage = 5;
-        var numberOfAllItems = DataSource.getNumberOfRows();
+        var showRowsPerPage = 5;
+        // var numberOfAllItems = $('#paginate tr').size();
+        var numberOfAllItems = $('#paginate tr').length;
+        var numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
         var numberOfPagesToDisplay = 5;
-
         var navigationHtml = '';
         var currentPage = page;
         var currentLink = (numberOfPagesToDisplay >= currentPage ? 1 : numberOfPagesToDisplay + 1);
@@ -48,11 +48,11 @@ export class Grid implements OnInit {
         if (currentLink != 1) {
             navigationHtml += "<a class='nextbutton' href=\"javascript:first();\">« Start&nbsp;</a>&nbsp;<a class='nextbutton' href=\"javascript:previous();\">« Prev&nbsp;</a>&nbsp;";
         }
-        if (currentLink == numberOfPagesToDisplay - 1) {
+        if (currentLink == numberOfPages - 1) {
             // TODO: numberofpagestodisplay-től függ, paraméterezhetővé kéne tenni
             currentLink = currentLink - 3;
         }
-        else if (currentLink == numberOfPagesToDisplay) {
+        else if (currentLink == numberOfPages) {
             currentLink = currentLink - 4;
         }
         else if (currentLink > 2) {
@@ -64,7 +64,7 @@ export class Grid implements OnInit {
 
         var pages = numberOfPagesToDisplay;
         while (pages != 0) {
-            if (numberOfPagesToDisplay < currentLink) {
+            if (numberOfPages < currentLink) {
                 break;
             }
             if (currentLink >= 1) {
@@ -72,22 +72,24 @@ export class Grid implements OnInit {
                 currentLink++;
                 pages--;
             }
-            if (numberOfPagesToDisplay > currentPage) {
-                navigationHtml += "<a class='nextbutton' href=\"javascript:next()\">Next »</a>&nbsp;<a class='nextbutton' href=\"javascript:last(" + numberOfPagesToDisplay + ");\">Last »</a>";
-            }
-
-            $('#page_navigation').html(navigationHtml);
         }
+        if (numberOfPages > currentPage) {
+            navigationHtml += "<a class='nextbutton' href=\"javascript:next()\">Next »</a>&nbsp;<a class='nextbutton' href=\"javascript:last(" + numberOfPages + ");\">Last »</a>";
+        }
+
+        $('#page_navigation').html(navigationHtml);
     }
 
-    pageSize = 3;
+    public static pageSize = 3;
 
     public showPage(page) {
         $("#paginate tr").hide();
-        $('#current_page').val(page);
+        $("#current_page").val(page);
         $("#paginate tr").each(function (n) {
             console.log(this);
-            if (n >= this.pageSize * (page - 1) && n < this.pageSize * page)
+            console.log(n);
+            console.log(this.pageSize);
+            if (n >= Grid.pageSize * (page - 1) && n < Grid.pageSize * page)
                 $(this).show();
         });
         var pager = this.createPager(page);
