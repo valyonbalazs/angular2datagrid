@@ -6,6 +6,7 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 /// <binding AfterBuild='moveToLibs' />
 
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
 
 var paths = {
     npmSrc: "./node_modules/",
@@ -37,3 +38,12 @@ gulp.task('moveToJs', function () {
 gulp.task('moveToCss', function () {
     return gulp.src(cssToMove).pipe(gulp.dest(paths.cssTarget));
 });
+
+gulp.task('RunAllTasks', function (cb) {
+    runSequence(
+      'moveToJs',
+      'moveToCss',
+      cb
+    );
+});
+
