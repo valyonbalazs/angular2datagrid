@@ -1,0 +1,16 @@
+﻿<input type="hidden" id="current_page" />
+<input type="hidden" id="show_per_page" />
+<div id="page_navigation" >
+    <div id="page_nav_startPrev">
+        
+    </div>
+
+    <div id="page_nav_pageNumbers">
+        <button *ngFor="#item of numberOfPagesArray" (click)="showPage(item)"> {{ item }} </button>&nbsp;
+    </div>
+
+    <div id="page_nav_nextLast">
+        <button (click)="next()">Next</button>&nbsp;
+        <button (click)="Last(3)">Last</button>
+    </div>
+</div>

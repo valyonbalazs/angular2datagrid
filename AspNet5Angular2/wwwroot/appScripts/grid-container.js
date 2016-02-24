@@ -9,17 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var grid_1 = require('./grid');
+var pagination_1 = require('./pagination');
 var data_source_1 = require('./data-source');
 var GridContainer = (function () {
     function GridContainer() {
         this.rows = data_source_1.DataSource.getRows();
         this.columns = data_source_1.DataSource.getColumns();
+        setTimeout(function () { new pagination_1.Pagination(); }.bind(this), 50);
     }
     GridContainer = __decorate([
         core_1.Component({
             selector: 'grid-container',
-            directives: [grid_1.Grid],
-            template: '<grid id="gridId" name="gridName" [rows]="rows" [columns]="columns"></grid>'
+            directives: [grid_1.Grid, pagination_1.Pagination],
+            template: '<grid id="gridId" name="gridName" [rows]="rows" [columns]="columns"></grid><pagination></pagination>'
         }), 
         __metadata('design:paramtypes', [])
     ], GridContainer);
