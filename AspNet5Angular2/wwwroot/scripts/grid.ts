@@ -11,21 +11,20 @@ import {Pagination} from './pagination';
     inputs: ['rows: rows', 'columns: columns'],
     templateUrl: './grid.html'
 })
+
 export class Grid implements OnInit {
 
-    columns: Array<Column>;
-    rows: Array<any>;
-
+    public columns: Array<Column>;
+    public rows: Array<any>;
+    private sorter: Sorter = new Sorter();
     @Input() name: string;
+    @Input() id: string;
 
-    private sorter = new Sorter();
+    ngOnInit() {
+        console.log("Grid was created with name: " + this.name + " and id: " + this.id);
+    }
 
     public sort(key) {
         this.sorter.sort(key, this.rows);
     }
-
-    ngOnInit() {
-        console.log(this.name);
-    }
-
 }

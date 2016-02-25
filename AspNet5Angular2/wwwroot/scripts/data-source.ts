@@ -1,8 +1,12 @@
 ﻿import {Column} from './column';
 
-// Singleton datasource object for one grid
+/** 
+ * Singleton datasource object for one grid
+ */
 export class DataSource {
     
+    private static rows: Array<any>;
+    private static columns: Array<Column>;
     private static instance: DataSource = new DataSource();
 
     constructor() {
@@ -11,9 +15,6 @@ export class DataSource {
         }
         DataSource.instance = this;
     }
-
-    private static rows: Array<any>;
-    private static columns: Array<Column>;
 
     public static getRows() : Array<any> {
         return DataSource.rows;

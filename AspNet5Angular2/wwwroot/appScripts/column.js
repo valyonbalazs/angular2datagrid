@@ -1,7 +1,6 @@
 var Column = (function () {
-    function Column(name, descr) {
+    function Column(name) {
         this.name = name;
-        this.descr = descr;
     }
     return Column;
 })();

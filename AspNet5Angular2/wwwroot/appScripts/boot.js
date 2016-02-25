@@ -2,6 +2,9 @@ var browser_1 = require('angular2/platform/browser');
 var grid_container_1 = require('./grid-container');
 var data_source_1 = require('./data-source');
 var column_1 = require('./column');
+/**
+ * Test data for development phase 1
+ */
 var rows = [
     { firstName: 'Joe', lastName: 'Jackson', age: 1 },
     { firstName: 'Peter', lastName: 'Smith', age: 2 },

@@ -1,6 +1,6 @@
 ﻿/// <reference path="typings/jquery/jquery.d.ts" />
 
-import {Component, Input, OnInit, Injector} from 'angular2/core';
+import {Component, Input, OnInit} from 'angular2/core';
 import {Grid} from './grid';
 import {DataSource} from './data-source';
 
@@ -100,7 +100,6 @@ export class Pagination {
 
         $("#paginate tr").hide();
         $("#current_page").val(page);
-
         $("#paginate tr").each(function (n) {
             if (n >= pageS * (page - 1) && n < pageS * page)
                 $(this).show();

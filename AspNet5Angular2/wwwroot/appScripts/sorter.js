@@ -5,7 +5,7 @@ var Sorter = (function () {
     Sorter.prototype.sort = function (key, data) {
         var _this = this;
         if (this.key === key) {
-            this.direction = this.direction * -1;
+            this.direction = this.direction * (-1);
         }
         else {
             this.direction = 1;

@@ -3,7 +3,10 @@ import {GridContainer} from './grid-container';
 import {DataSource} from './data-source';
 import {Column} from './column';
 
-var rows = [
+/**
+ * Test data for development phase 1
+ */
+let rows = [
     { firstName: 'Joe', lastName: 'Jackson', age: 1 },
     { firstName: 'Peter', lastName: 'Smith', age: 2 },
     { firstName: 'Jane', lastName: 'Doe', age: 3 },
@@ -69,10 +72,10 @@ var rows = [
 ];
 
 
-var cols = [
-    new Column('firstName', 'First Name'),
-    new Column('lastName', 'Last Name'),
-    new Column('age', 'Age')
+let cols = [
+    new Column('First Name'),
+    new Column('Last Name'),
+    new Column('Age')
 ];
 
 DataSource.setRows(rows);

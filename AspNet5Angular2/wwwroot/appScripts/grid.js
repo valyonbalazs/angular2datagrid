@@ -14,16 +14,20 @@ var Grid = (function () {
     function Grid() {
         this.sorter = new sorter_1.Sorter();
     }
+    Grid.prototype.ngOnInit = function () {
+        console.log("Grid was created with name: " + this.name + " and id: " + this.id);
+    };
     Grid.prototype.sort = function (key) {
         this.sorter.sort(key, this.rows);
-    };
-    Grid.prototype.ngOnInit = function () {
-        console.log(this.name);
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
     ], Grid.prototype, "name", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], Grid.prototype, "id", void 0);
     Grid = __decorate([
         core_1.Component({
             selector: 'grid',

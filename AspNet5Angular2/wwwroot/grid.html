@@ -1,7 +1,7 @@
 ﻿<table  class="table table-striped">
     <thead>
         <tr>
-            <td *ngFor="#col of columns"><a (click)="sort(col.name)">{{col.descr}}</a></td>
+            <td *ngFor="#col of columns"> {{col.name}} <a (click)="sort(col.name)"> S </a></td>
         </tr>
     </thead>
     <tbody id="paginate">
@@ -10,8 +10,3 @@
         </tr>
     </tbody>
 </table>
-
-<!--<input type='hidden' id='current_page' />
-<input type='hidden' id='show_per_page' />
-<div id='page_navigation'>
-</div>-->

@@ -1,12 +1,16 @@
 ﻿export class Sorter {
-    direction: number;
-    key: string;
+
+    private direction: number;
+    private key: string;
+
     constructor() {
         this.direction = 1;
     }
-    sort(key, data) {
+
+    public sort(key: string, data: Array<any>) {
+
         if (this.key === key) {
-            this.direction = this.direction * -1;
+            this.direction = this.direction * (-1);
         }
         else {
             this.direction = 1;

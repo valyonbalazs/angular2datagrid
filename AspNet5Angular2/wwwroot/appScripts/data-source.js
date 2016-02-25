@@ -1,4 +1,6 @@
-// Singleton datasource object for one grid
+/**
+ * Singleton datasource object for one grid
+ */
 var DataSource = (function () {
     function DataSource() {
         if (DataSource.instance) {

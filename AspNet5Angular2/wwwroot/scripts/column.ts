@@ -1,8 +1,8 @@
 ﻿export class Column {
-    name: string;
-    descr: string;
-    constructor(name, descr) {
+
+    public name: string;
+
+    constructor(name: string) {
         this.name = name;
-        this.descr = descr;
     }
 }
