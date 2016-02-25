@@ -13,6 +13,7 @@ var data_source_1 = require('./data-source');
 var Pagination = (function () {
     function Pagination() {
         this.numberOfRowsOfTableToDisplay = 8;
+        this.rowsPerPage = 6;
         this.currentLink = 1;
         this.numberOfPages = 0;
         this.numberOfPagesArray = [];
@@ -20,16 +21,19 @@ var Pagination = (function () {
         this.initializer();
         this.showPage(1, this.numberOfRowsOfTableToDisplay);
     }
+    /**
+     * Basic component initalization: number of rows, number of all items, number of pages.
+     */
     Pagination.prototype.initializer = function () {
-        var showRowsPerPage = Pagination.rowsPerPage;
+        var showRowsPerPage = this.rowsPerPage;
         var numberOfAllItems = data_source_1.DataSource.getNumberOfRows();
         this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
     };
     /**
-     * Updates the page number array
+     * Updates the page number array, according to the current page number.
+     * It uses a 5 element range for page number display.
      */
     Pagination.prototype.updateNumberOfPagesArray = function (currentLink, numberOfButtons) {
-        console.log("nummber");
         if (this.numberOfPagesArray.length != 0) {
             this.numberOfPagesArray = [];
         }
@@ -59,11 +63,13 @@ var Pagination = (function () {
             }
         }
     };
-    Pagination.prototype.createPager = function (page) {
-        console.log("create");
+    /**
+     * Creates the pager with page numbers, and First, Previous, Next and Last buttons
+     * with the current page and link properties.
+     * @param currentPage: the needed page.
+     */
+    Pagination.prototype.createPager = function (currentPage) {
         var numberOfPagesToDisplay = this.numberOfRowsOfTableToDisplay;
-        var navigationHtml = '';
-        var currentPage = page;
         // Just on the last but one page has to change the current link
         if (numberOfPagesToDisplay >= 1) {
             this.currentLink = 1;
@@ -74,48 +80,14 @@ var Pagination = (function () {
         if (currentPage > 1) {
             this.currentLink = currentPage;
         }
-        /*
-        // If it is not the first page, the Start and Previous button has to be displayed
-        if (this.currentLink != 1) {
-            // navigationHtml += "<a class='nextbutton' href=\"javascript:first(); \">« Start&nbsp;</a>&nbsp;<a class='nextbutton' href=\"javascript:previous();\">« Prev&nbsp;</a>&nbsp;";
-            // navigationHtml += "<button (click)=\"first()\">« Start&nbsp;</button>&nbsp;<button (click)=\"previous();\">« Prev&nbsp;</button>&nbsp;";
-        }
-        if (this.currentLink == this.numberOfPages - 1) {
-            this.currentLink = this.currentLink - 3;
-        }
-        else if (this.currentLink == this.numberOfPages) {
-            this.currentLink = this.currentLink - 4;
-        }
-        else if (this.currentLink > 2) {
-            this.currentLink = this.currentLink - 2;
-        }
-        else {
-            this.currentLink = 1;
-        }*/
-        this.updateNumberOfPagesArray(this.currentLink, 6);
-        /*var pages = numberOfPagesToDisplay;
-        while (pages != 0) {
-            if (this.numberOfPages < this.currentLink) {
-                break;
-            }
-            if (this.currentLink >= 1) {
-                // navigationHtml += "<a class='" + ((currentLink == currentPage) ? "currentPageButton" : "numericButton") + "' href=\"javascript:showPage(" + currentLink + ")\" longdesc='" + currentLink + "'>" + (currentLink) + "</a>&nbsp;";
-                // navigationHtml += "<button (click)=\"showPage(" + this.currentLink + ")\" >" + (this.currentLink) + "</button>&nbsp;";
-                // navigationHtml += "<button  (click)=\"showPage(" + this.currentLink + ")\" > " + this.currentLink + " </button>&nbsp";
-                this.currentLink++;
-                pages--;
-            }
-        }
-        if (this.numberOfPages > currentPage) {
-            // navigationHtml += "<a id=\"nextBtn\" class='nextbutton' href=\"#\" \">Next »</a>&nbsp;<a class='nextbutton' href=\"javascript:last(" + numberOfPages + ");\">Last »</a>";
-            // navigationHtml += "<button class='nextbutton' (click)=\"next()\" \">Next »</button>&nbsp;<button class='nextbutton' (click)=\"last(" + this.numberOfPages + ");\">Last »</button>";
-        }
-
-        // $('#page_navigation').html(navigationHtml);
-        // $('#page_nav_nextLast').html(navigationHtml);*/
+        this.updateNumberOfPagesArray(this.currentLink, 5);
     };
+    /**
+     * Hides the unwanted rows, and shows the current ones that need to be displayed.
+     * @param page: needed page.
+     * @param pageS: how many rows have to be displayed in the grid.
+     */
     Pagination.prototype.showPage = function (page, pageS) {
-        console.log("show");
         $("#paginate tr").hide();
         $("#current_page").val(page);
         $("#paginate tr").each(function (n) {
@@ -124,27 +96,25 @@ var Pagination = (function () {
         });
         var pager = this.createPager(page);
     };
-    Pagination.prototype.next = function () {
+    Pagination.prototype.nextPage = function () {
         var newPage = parseInt($('#current_page').val()) + 1;
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
-    Pagination.prototype.last = function (numberOfPages) {
-        var newPage = numberOfPages;
+    Pagination.prototype.lastPage = function () {
+        var newPage = this.numberOfPages;
         $('#current_page').val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
-    Pagination.prototype.first = function () {
+    Pagination.prototype.firstPage = function () {
         var newPage = "1";
         $('#current_page').val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
-    Pagination.prototype.previous = function () {
+    Pagination.prototype.previousPage = function () {
         var newPage = parseInt($('#current_page').val()) - 1;
         $('#current_page').val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
-    Pagination.rowsPerPage = 6;
-    Pagination.currentLinkCurrentPage = 1;
     Pagination = __decorate([
         core_1.Component({
             selector: 'pagination',

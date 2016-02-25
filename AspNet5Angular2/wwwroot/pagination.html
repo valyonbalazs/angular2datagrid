@@ -1,17 +1,17 @@
 ﻿<input type="hidden" id="current_page" />
 <input type="hidden" id="show_per_page" />
 <div id="page_navigation" >
-    <div id="page_nav_startPrev">
-        <button (click)="Start()">Start</button>&nbsp;
-        <button (click)="First(3)">First</button>
+    <div class="col-lg-2 col-md-3 col-xs-3" id="page_nav_startPrev">
+        <button (click)="firstPage()">First</button>&nbsp;
+        <button (click)="previousPage()">Prev</button>
     </div>
 
-    <div id="page_nav_pageNumbers">
+    <div class="col-lg-3 col-md-5 col-xs-6" id="page_nav_pageNumbers">
         <button *ngFor="#item of numberOfPagesArray" (click)="showPage(item, numberOfRowsOfTableToDisplay)"> {{ item }} </button>&nbsp;
     </div>
 
-    <div id="page_nav_nextLast">
-        <button (click)="next()">Next</button>&nbsp;
-        <button (click)="Last(3)">Last</button>
+    <div class="col-lg-2 col-md-3 col-xs-3" id="page_nav_nextLast">
+        <button (click)="nextPage()">Next</button>&nbsp;
+        <button (click)="lastPage()">Last</button>
     </div>
 </div>
