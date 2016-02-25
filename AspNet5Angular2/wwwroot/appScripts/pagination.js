@@ -9,28 +9,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
+var data_source_1 = require('./data-source');
 var Pagination = (function () {
     function Pagination() {
+        this.numberOfRowsOfTableToDisplay = 8;
         this.currentLink = 0;
         this.numberOfPages = 0;
-        this.numberOfPagesArray = [1, 2, 3];
-        /*Pagination.pageSize = pageS;
-        Pagination.rowsPerPage = rowsPerP;*/
-        this.showPage(1);
+        this.numberOfPagesArray = [];
+        this.initializer();
+        this.showPage(1, this.numberOfRowsOfTableToDisplay);
     }
-    Pagination.prototype.createPager = function (page) {
+    Pagination.prototype.initializer = function () {
         var showRowsPerPage = Pagination.rowsPerPage;
-        // var numberOfAllItems = $('#paginate tr').size();
-        var numberOfAllItems = $('#paginate tr').length;
+        var numberOfAllItems = data_source_1.DataSource.getNumberOfRows();
         this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
-        // this.numberOfPagesArray = null;
-        // this.numberOfPagesArray = [];
-        /*for (var i = 1; i < this.numberOfPages + 1; i++) {
-            Pagination.numberOfPagesArray.push(i);
+    };
+    Pagination.prototype.updateNumberOfPagesArray = function () {
+        if (this.numberOfPagesArray.length != 0) {
+            this.numberOfPagesArray.forEach(function (n, i, a) { return a.pop(); });
+        }
+        for (var i = 1; i < this.numberOfPages + 1; i++) {
+            this.numberOfPagesArray.push(i);
             console.log(i);
-        }*/
+        }
+    };
+    Pagination.prototype.createPager = function (page) {
+        this.updateNumberOfPagesArray();
         console.log(this);
-        var numberOfPagesToDisplay = Pagination.pageSize;
+        var numberOfPagesToDisplay = this.numberOfRowsOfTableToDisplay;
         var navigationHtml = '';
         var currentPage = page;
         this.currentLink = (numberOfPagesToDisplay >= currentPage ? 1 : numberOfPagesToDisplay + 1);
@@ -72,36 +78,35 @@ var Pagination = (function () {
         // $('#page_navigation').html(navigationHtml);
         // $('#page_nav_nextLast').html(navigationHtml);
     };
-    Pagination.prototype.showPage = function (page) {
+    Pagination.prototype.showPage = function (page, pageS) {
         console.log("megnyomtam");
         $("#paginate tr").hide();
         $("#current_page").val(page);
         $("#paginate tr").each(function (n) {
-            if (n >= Pagination.pageSize * (page - 1) && n < Pagination.pageSize * page)
+            if (n >= pageS * (page - 1) && n < pageS * page)
                 $(this).show();
         });
         var pager = this.createPager(page);
     };
     Pagination.prototype.next = function () {
         var newPage = parseInt($('#current_page').val()) + 1;
-        this.showPage(newPage);
+        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
     Pagination.prototype.last = function (numberOfPages) {
         var newPage = numberOfPages;
         $('#current_page').val(newPage);
-        this.showPage(newPage);
+        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
     Pagination.prototype.first = function () {
         var newPage = "1";
         $('#current_page').val(newPage);
-        this.showPage(newPage);
+        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
     Pagination.prototype.previous = function () {
         var newPage = parseInt($('#current_page').val()) - 1;
         $('#current_page').val(newPage);
-        this.showPage(newPage);
+        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
-    Pagination.pageSize = 5;
     Pagination.rowsPerPage = 6;
     Pagination.currentLinkCurrentPage = 1;
     Pagination = __decorate([

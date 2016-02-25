@@ -2,43 +2,52 @@
 
 import {Component, Input, OnInit} from 'angular2/core';
 import {Grid} from './grid';
+import {DataSource} from './data-source';
 
 @Component({
     selector: 'pagination',
     templateUrl: './pagination.html' 
-    // template: '<input type="hidden" id="current_page" />< input type="hidden" id="show_per_page" /><div id="page_navigation"></div>'
 })
 
 export class Pagination {
 
-    public static pageSize: number = 5;
+    private numberOfRowsOfTableToDisplay: number = 8;
     public static rowsPerPage: number = 6;
     public static currentLinkCurrentPage: number = 1;
     public currentLink: number = 0;
     public numberOfPages: number = 0;
-    public numberOfPagesArray: Array<number> = [1,2,3];
+    public numberOfPagesArray: Array<number> = [];
 
-    constructor() {
-        /*Pagination.pageSize = pageS;
-        Pagination.rowsPerPage = rowsPerP;*/
-        this.showPage(1);
+    constructor(numberOfRowsToDisplay: number) {
+        this.numberOfRowsOfTableToDisplay = numberOfRowsToDisplay;
+        this.initializer();
+        this.showPage(1, this.numberOfRowsOfTableToDisplay);
+    }
+
+    private initializer() {
+        let showRowsPerPage = Pagination.rowsPerPage;
+        let numberOfAllItems = DataSource.getNumberOfRows();
+        this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
+    }
+
+    private updateNumberOfPagesArray() {
+
+        if (this.numberOfPagesArray.length != 0) {
+            this.numberOfPagesArray.forEach((n, i, a) => a.pop());
+        }
+
+        for (var i = 1; i < this.numberOfPages + 1; i++) {
+            this.numberOfPagesArray.push(i);
+            console.log(i);
+        }
     }
 
     public createPager(page: number) {
 
-        var showRowsPerPage = Pagination.rowsPerPage;
-        // var numberOfAllItems = $('#paginate tr').size();
-        var numberOfAllItems = $('#paginate tr').length;
-        this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
-        // this.numberOfPagesArray = null;
-        // this.numberOfPagesArray = [];
-        /*for (var i = 1; i < this.numberOfPages + 1; i++) {
-            Pagination.numberOfPagesArray.push(i);
-            console.log(i);
-        }*/
-        console.log(this);
+        this.updateNumberOfPagesArray();
 
-        var numberOfPagesToDisplay = Pagination.pageSize;
+        console.log(this);
+        var numberOfPagesToDisplay = this.numberOfRowsOfTableToDisplay;
         var navigationHtml = '';
         var currentPage = page;
         this.currentLink = (numberOfPagesToDisplay >= currentPage ? 1 : numberOfPagesToDisplay + 1);
@@ -86,13 +95,13 @@ export class Pagination {
         // $('#page_nav_nextLast').html(navigationHtml);
     }
 
-    public showPage(page) {
+    public showPage(page, pageS) {
         console.log("megnyomtam");
         $("#paginate tr").hide();
         $("#current_page").val(page);
 
         $("#paginate tr").each(function (n) {
-            if (n >= Pagination.pageSize * (page - 1) && n < Pagination.pageSize * page)
+            if (n >= pageS * (page - 1) && n < pageS * page)
                 $(this).show();
         });
         var pager = this.createPager(page);
@@ -100,24 +109,24 @@ export class Pagination {
 
     public next() {
         var newPage = parseInt($('#current_page').val()) + 1;
-        this.showPage(newPage);
+        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     }
 
     public last(numberOfPages) {
         var newPage = numberOfPages;
         $('#current_page').val(newPage);
-        this.showPage(newPage);
+        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     }
 
     public first() {
         var newPage = "1";
         $('#current_page').val(newPage);
-        this.showPage(newPage);
+        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     }
 
     public previous() {
         var newPage = parseInt($('#current_page').val()) - 1;
         $('#current_page').val(newPage);
-        this.showPage(newPage)
+        this.showPage(newPage, this.numberOfRowsOfTableToDisplay)
     }
 }
