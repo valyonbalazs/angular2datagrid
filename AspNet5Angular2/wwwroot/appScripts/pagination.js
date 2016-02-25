@@ -13,9 +13,10 @@ var data_source_1 = require('./data-source');
 var Pagination = (function () {
     function Pagination() {
         this.numberOfRowsOfTableToDisplay = 8;
-        this.currentLink = 0;
+        this.currentLink = 1;
         this.numberOfPages = 0;
         this.numberOfPagesArray = [];
+        this.numberOfRowsOfTableToDisplay = 6;
         this.initializer();
         this.showPage(1, this.numberOfRowsOfTableToDisplay);
     }
@@ -24,31 +25,62 @@ var Pagination = (function () {
         var numberOfAllItems = data_source_1.DataSource.getNumberOfRows();
         this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
     };
-    Pagination.prototype.updateNumberOfPagesArray = function () {
+    /**
+     * Updates the page number array
+     */
+    Pagination.prototype.updateNumberOfPagesArray = function (currentLink, numberOfButtons) {
+        console.log("nummber");
         if (this.numberOfPagesArray.length != 0) {
-            this.numberOfPagesArray.forEach(function (n, i, a) { return a.pop(); });
+            this.numberOfPagesArray = [];
         }
-        for (var i = 1; i < this.numberOfPages + 1; i++) {
-            this.numberOfPagesArray.push(i);
-            console.log(i);
+        if (currentLink < 5) {
+            for (var i = 1; i < 5 + 1; i++) {
+                this.numberOfPagesArray.push(i);
+            }
+        }
+        else {
+            if ((currentLink + 2) < this.numberOfPages) {
+                for (var j = (currentLink - 2); j < (currentLink + 3); j++) {
+                    this.numberOfPagesArray.push(j);
+                }
+            }
+            else {
+                var diffCurrentLinkNumberOfPages = this.numberOfPages - currentLink;
+                if (diffCurrentLinkNumberOfPages == 0) {
+                    for (var k = (currentLink - 4); k < this.numberOfPages + 1; k++) {
+                        this.numberOfPagesArray.push(k);
+                    }
+                }
+                else {
+                    for (var z = (currentLink - 3); z < this.numberOfPages + 1; z++) {
+                        this.numberOfPagesArray.push(z);
+                    }
+                }
+            }
         }
     };
     Pagination.prototype.createPager = function (page) {
-        this.updateNumberOfPagesArray();
-        console.log(this);
+        console.log("create");
         var numberOfPagesToDisplay = this.numberOfRowsOfTableToDisplay;
         var navigationHtml = '';
         var currentPage = page;
-        this.currentLink = (numberOfPagesToDisplay >= currentPage ? 1 : numberOfPagesToDisplay + 1);
+        // Just on the last but one page has to change the current link
+        if (numberOfPagesToDisplay >= 1) {
+            this.currentLink = 1;
+        }
+        else {
+            this.currentLink = numberOfPagesToDisplay + 1;
+        }
         if (currentPage > 1) {
             this.currentLink = currentPage;
         }
+        /*
+        // If it is not the first page, the Start and Previous button has to be displayed
         if (this.currentLink != 1) {
             // navigationHtml += "<a class='nextbutton' href=\"javascript:first(); \">« Start&nbsp;</a>&nbsp;<a class='nextbutton' href=\"javascript:previous();\">« Prev&nbsp;</a>&nbsp;";
-            navigationHtml += "<button (click)=\"first()\">« Start&nbsp;</button>&nbsp;<button (click)=\"previous();\">« Prev&nbsp;</button>&nbsp;";
+            // navigationHtml += "<button (click)=\"first()\">« Start&nbsp;</button>&nbsp;<button (click)=\"previous();\">« Prev&nbsp;</button>&nbsp;";
         }
         if (this.currentLink == this.numberOfPages - 1) {
-            // TODO: numberofpagestodisplay-től függ, paraméterezhetővé kéne tenni
             this.currentLink = this.currentLink - 3;
         }
         else if (this.currentLink == this.numberOfPages) {
@@ -59,8 +91,9 @@ var Pagination = (function () {
         }
         else {
             this.currentLink = 1;
-        }
-        var pages = numberOfPagesToDisplay;
+        }*/
+        this.updateNumberOfPagesArray(this.currentLink, 6);
+        /*var pages = numberOfPagesToDisplay;
         while (pages != 0) {
             if (this.numberOfPages < this.currentLink) {
                 break;
@@ -74,12 +107,15 @@ var Pagination = (function () {
             }
         }
         if (this.numberOfPages > currentPage) {
+            // navigationHtml += "<a id=\"nextBtn\" class='nextbutton' href=\"#\" \">Next »</a>&nbsp;<a class='nextbutton' href=\"javascript:last(" + numberOfPages + ");\">Last »</a>";
+            // navigationHtml += "<button class='nextbutton' (click)=\"next()\" \">Next »</button>&nbsp;<button class='nextbutton' (click)=\"last(" + this.numberOfPages + ");\">Last »</button>";
         }
+
         // $('#page_navigation').html(navigationHtml);
-        // $('#page_nav_nextLast').html(navigationHtml);
+        // $('#page_nav_nextLast').html(navigationHtml);*/
     };
     Pagination.prototype.showPage = function (page, pageS) {
-        console.log("megnyomtam");
+        console.log("show");
         $("#paginate tr").hide();
         $("#current_page").val(page);
         $("#paginate tr").each(function (n) {

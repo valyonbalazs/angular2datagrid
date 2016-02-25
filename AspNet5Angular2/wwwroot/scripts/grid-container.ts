@@ -18,7 +18,7 @@ export class GridContainer {
     constructor() {
         this.rows = DataSource.getRows();
         this.columns = DataSource.getColumns();
-        setTimeout(function () { new Pagination(); }.bind(this), 50);
+        setTimeout(function () { new Pagination(); }.bind(this), 150);
     }
 }
 
