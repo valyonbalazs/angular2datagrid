@@ -2,7 +2,7 @@
 import {Grid} from './grid';
 import {Pagination} from './pagination';
 import {Column} from './column';
-import {DataSource} from './data-source';
+import {DataContainer} from './data-container';
 
 @Component({
     selector: 'grid-container',
@@ -12,13 +12,21 @@ import {DataSource} from './data-source';
 
 export class GridContainer {
 
-    rows: Array<any>;
-    columns: Array<Column>;
+    private rows: Array<any>;
+    private columns: Array<Column>;
 
     constructor() {
-        this.rows = DataSource.getRows();
-        this.columns = DataSource.getColumns();
+        this.rows = DataContainer.getRows();
+        this.columns = DataContainer.getColumns();
         setTimeout(function () { new Pagination(); }.bind(this), 50);
+    }
+
+    public getRows() : Array<any> {
+        return this.rows;
+    }
+
+    public getColumns() : Array<Column> {
+        return this.columns;
     }
 }
 

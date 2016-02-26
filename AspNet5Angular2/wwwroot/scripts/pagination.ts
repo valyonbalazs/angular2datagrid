@@ -2,7 +2,7 @@
 
 import {Component, Input, OnInit} from 'angular2/core';
 import {Grid} from './grid';
-import {DataSource} from './data-source';
+import {DataContainer} from './data-container';
 
 @Component({
     selector: 'pagination',
@@ -28,7 +28,7 @@ export class Pagination {
      */
     private initializer() {
         let showRowsPerPage = this.rowsPerPage;
-        let numberOfAllItems = DataSource.getNumberOfRows();
+        let numberOfAllItems = DataContainer.getNumberOfRows();
         this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
     }
 

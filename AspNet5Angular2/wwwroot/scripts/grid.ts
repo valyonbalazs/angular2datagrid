@@ -3,8 +3,6 @@
 import {Component, Input, OnInit} from 'angular2/core';
 import {Column} from './column';
 import {Sorter} from './sorter';
-import {DataSource} from './data-source';
-import {Pagination} from './pagination';
 
 @Component({
     selector: 'grid',

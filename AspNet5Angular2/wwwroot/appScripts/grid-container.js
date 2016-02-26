@@ -10,13 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('angular2/core');
 var grid_1 = require('./grid');
 var pagination_1 = require('./pagination');
-var data_source_1 = require('./data-source');
+var data_container_1 = require('./data-container');
 var GridContainer = (function () {
     function GridContainer() {
-        this.rows = data_source_1.DataSource.getRows();
-        this.columns = data_source_1.DataSource.getColumns();
+        this.rows = data_container_1.DataContainer.getRows();
+        this.columns = data_container_1.DataContainer.getColumns();
         setTimeout(function () { new pagination_1.Pagination(); }.bind(this), 50);
     }
+    GridContainer.prototype.getRows = function () {
+        return this.rows;
+    };
+    GridContainer.prototype.getColumns = function () {
+        return this.columns;
+    };
     GridContainer = __decorate([
         core_1.Component({
             selector: 'grid-container',

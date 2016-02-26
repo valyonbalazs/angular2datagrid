@@ -3,37 +3,37 @@
 /** 
  * Singleton datasource object for one grid
  */
-export class DataSource {
+export class DataContainer {
     
     private static rows: Array<any>;
     private static columns: Array<Column>;
-    private static instance: DataSource = new DataSource();
+    private static instance: DataContainer = new DataContainer();
 
     constructor() {
-        if (DataSource.instance) {
+        if (DataContainer.instance) {
             throw new Error("Error instantiation failed! Singleton! Already exists!");
         }
-        DataSource.instance = this;
+        DataContainer.instance = this;
     }
 
-    public static getRows() : Array<any> {
-        return DataSource.rows;
+    public static getRows(): Array<any> {
+        return DataContainer.rows;
     }
 
     public static getColumns() : Array<Column> {
-        return DataSource.columns;
+        return DataContainer.columns;
     }
 
     public static setRows(rows: Array<any>) {
-        DataSource.rows = rows;
+        DataContainer.rows = rows;
     }
 
     public static setColumns(cols: Array<any>) {
-        DataSource.columns = cols;
+        DataContainer.columns = cols;
     }
 
     public static getNumberOfRows(): number {
-        return DataSource.rows.length;
+        return DataContainer.rows.length;
     }
 }
 
