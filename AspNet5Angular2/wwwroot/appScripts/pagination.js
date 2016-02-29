@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
-var data_source_1 = require('./data-source');
+var data_container_1 = require('./data-container');
 var Pagination = (function () {
     function Pagination() {
         this.numberOfRowsOfTableToDisplay = 8;
@@ -26,7 +26,7 @@ var Pagination = (function () {
      */
     Pagination.prototype.initializer = function () {
         var showRowsPerPage = this.rowsPerPage;
-        var numberOfAllItems = data_source_1.DataSource.getNumberOfRows();
+        var numberOfAllItems = data_container_1.DataContainer.getNumberOfRows();
         this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
     };
     /**

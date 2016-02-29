@@ -75,9 +75,9 @@ var TestData = (function () {
             { firstName: 'Tim', lastName: 'Smith', age: 62 }
         ];
         var cols = [
-            new column_1.Column('firstName'),
-            new column_1.Column('lastName'),
-            new column_1.Column('age')
+            new column_1.Column('First Name', 'firstName'),
+            new column_1.Column('Last Name', 'lastName'),
+            new column_1.Column('Age', 'age')
         ];
         this.Rows = rows;
         this.Columns = cols;

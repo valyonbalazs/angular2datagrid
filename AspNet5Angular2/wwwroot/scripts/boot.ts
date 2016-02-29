@@ -8,5 +8,7 @@ let testData = new TestData();
 DataContainer.setRows(testData.getRows());
 DataContainer.setColumns(testData.getColumns());
 
+console.log("vmi");
+
 bootstrap(GridContainer);
 

@@ -1,12 +1,12 @@
 ﻿<table  class="table table-striped">
     <thead>
         <tr>
-            <td *ngFor="#col of columns"> {{col.name}} <a (click)="sort(col.name)"> S </a></td>
+            <td *ngFor="#col of columns"> {{col.displayedName}} <a (click)="sort(col.displayedName)"> ^ </a></td>
         </tr>
     </thead>
     <tbody id="paginate">
         <tr *ngFor="#row of rows">
-            <td *ngFor="#col of columns">{{row[col.name]}}</td>
+            <td *ngFor="#col of columns">{{row[col.dataBindingName]}}</td>
         </tr>
     </tbody>
 </table>

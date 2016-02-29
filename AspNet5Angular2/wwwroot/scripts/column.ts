@@ -1,8 +1,11 @@
 ﻿export class Column {
 
-    public name: string;
+    public displayedName: string;
+    public dataBindingName: string;
 
-    constructor(name: string) {
-        this.name = name;
+    constructor(name: string, binding: string) {
+        this.displayedName = name;
+        this.dataBindingName = binding;
+
     }
 }

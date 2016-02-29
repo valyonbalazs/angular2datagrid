@@ -85,9 +85,9 @@ export class TestData {
         ];
 
         let cols = [
-            new Column('firstName'),
-            new Column('lastName'),
-            new Column('age')
+            new Column('First Name', 'firstName'),
+            new Column('Last Name', 'lastName'),
+            new Column('Age', 'age')
         ];
 
         this.Rows = rows;
