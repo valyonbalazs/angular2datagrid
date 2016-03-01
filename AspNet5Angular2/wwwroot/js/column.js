@@ -3,6 +3,12 @@ var Column = (function () {
         this.displayedName = name;
         this.dataBindingName = binding;
     }
+    Column.prototype.getDisplayedName = function () {
+        return this.displayedName;
+    };
+    Column.prototype.getDataBindingName = function () {
+        return this.dataBindingName;
+    };
     return Column;
 })();
 exports.Column = Column;

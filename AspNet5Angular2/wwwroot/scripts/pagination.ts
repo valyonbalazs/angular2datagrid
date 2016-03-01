@@ -6,7 +6,7 @@ import {DataContainer} from './data-container';
 
 @Component({
     selector: 'pagination',
-    templateUrl: './pagination.html' 
+    templateUrl: '../html/pagination.html' 
 })
 
 export class Pagination {
@@ -36,7 +36,7 @@ export class Pagination {
      * Updates the page number array, according to the current page number.
      * It uses a 5 element range for page number display.
      */
-    public updateNumberOfPagesArray(currentLink: number, numberOfButtons: number) {
+    private updateNumberOfPagesArray(currentLink: number, numberOfButtons: number) {
 
         if (this.numberOfPagesArray.length != 0) {
             this.numberOfPagesArray = [];
@@ -73,7 +73,7 @@ export class Pagination {
      * with the current page and link properties.
      * @param currentPage: the needed page.
      */
-    public createPager(currentPage: number) {
+    private createPager(currentPage: number) {
 
         let numberOfPagesToDisplay = this.numberOfRowsOfTableToDisplay;
 

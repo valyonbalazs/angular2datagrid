@@ -6,4 +6,12 @@ grid-demo {
     grid {
         
     }    
+
+    pagination {
+
+        .page_navigation {
+            display: flexbox;
+            align-items:center;
+        }
+    }
 }

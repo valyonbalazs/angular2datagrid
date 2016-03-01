@@ -32,7 +32,7 @@ var Grid = (function () {
         core_1.Component({
             selector: 'grid',
             inputs: ['rows: rows', 'columns: columns'],
-            templateUrl: './grid.html'
+            templateUrl: '../html/grid.html'
         }), 
         __metadata('design:paramtypes', [])
     ], Grid);

@@ -118,7 +118,7 @@ var Pagination = (function () {
     Pagination = __decorate([
         core_1.Component({
             selector: 'pagination',
-            templateUrl: './pagination.html'
+            templateUrl: '../html/pagination.html'
         }), 
         __metadata('design:paramtypes', [])
     ], Pagination);

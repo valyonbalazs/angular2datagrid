@@ -9,17 +9,17 @@
     <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="../sass/datagrid.min.css" />
     <link rel="stylesheet" href="css/pager.css" />
-    <script src="js/es6-shim.min.js"></script>
-    <script src="js/system-polyfills.js"></script>
-    <script src="js/angular2-polyfills.js"></script>
-    <script src="js/system.js"></script>
-    <script src="js/rx.js"></script>
-    <script src="js/angular2.dev.js"></script>
+    <script src="jslib/es6-shim.min.js"></script>
+    <script src="jslib/system-polyfills.js"></script>
+    <script src="jslib/angular2-polyfills.js"></script>
+    <script src="jslib/system.js"></script>
+    <script src="jslib/rx.js"></script>
+    <script src="jslib/angular2.dev.js"></script>
     <!-- 2. Configure SystemJS -->
     <script>
         System.config({
             packages: {
-                appScripts: {
+                js: {
                     defaultExtension: 'js'
                 }
             }
@@ -27,7 +27,7 @@
     </script>
     <script>
 
-        System.import('appScripts/boot').then(null, console.error.bind(console));
+        System.import('js/boot').then(null, console.error.bind(console));
         
 
     </script>
@@ -37,7 +37,7 @@
     <grid-container class="col-lg-6 col-md-6 col-xs-12"></grid-container>
    
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="jslib/jquery.min.js"></script>
+    <script src="jslib/bootstrap.min.js"></script>
 </body>
 </html>
