@@ -10,8 +10,8 @@
 /// <reference path="../wwwroot/scripts/data-container.ts" />
 /// <chutzpah_reference path="../wwwroot/js/data-container.js" />
 
+var DataContainer = require(['data-container']);
 
-import DataContainer = require('data-container');
 
 describe('Load data', function () {
     it('Load rows', function () {
@@ -22,6 +22,10 @@ describe('Load data', function () {
         var rows = [
             { firstName: 'Joe', lastName: 'Jackson', age: 1 },
             { firstName: 'Peter', lastName: 'Smith', age: 2 }];
+
+      
+        //DataContainer.setRows(rows);
+        //expect(DataContainer.getNumberOfRows()).to.be(2);
 
     });
 });
