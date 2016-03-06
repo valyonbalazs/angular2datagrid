@@ -1,0 +1,29 @@
+﻿{
+  "Framework": "qunit",
+  "TestHarnessReferenceMode": "AMD",
+  "TestHarnessLocationMode": "SettingsFileAdjacent",
+  "TypeScriptModuleKind": "AMD",
+  "References": [
+    { "Path": "require.js" },
+    { "Path": "../../node_modules/qunit/node_modules/qunitjs/qunit/qunit.js" },
+    {
+      "Path": "./typings/require.d.ts",
+      "IncludeInTestHarness": "false"
+    },
+    {
+      "Path": "./typings/qunit.d.ts",
+      "IncludeInTestHarness": "false"
+    }
+  ],
+  "Tests": [
+    {
+      "Includes": [ "**.ts" ],
+      "Excludes": [ "**.d.ts" ]
+    }
+  ],
+  "Compile": {
+    "Mode": "External",
+    "Extensions": [ ".ts" ],
+    "ExtensionsWithNoOutput": [ ".d.ts" ]
+  }
+}
