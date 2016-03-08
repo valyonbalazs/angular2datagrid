@@ -1,10 +1,8 @@
 ﻿{
   "Framework": "qunit",
-  "TestHarnessReferenceMode": "AMD",
+  "TestHarnessReferenceMode": "Normal",
   "TestHarnessLocationMode": "TestFileAdjacent",
-  "TypeScriptModuleKind": "Normal",
-  "SourceDirectory": "./",
-  "OutDirectory": "../../js/test/",
+  "TypeScriptModuleKind": "CommonJs",
   "References": [
     { "Path": "require.js" },
     { "Path": "qunit.js" },
@@ -15,12 +13,21 @@
     {
       "Path": "./typings/qunit.d.ts",
       "IncludeInTestHarness": "false"
+    },
+    {
+      "Includes": "*/src/*.ts",
+      "Excludes": "*/src/*.d.ts"
+    },
+    {
+      "Includes": "../src/*.ts",
+      "Excludes": "../src/*.d.ts"
     }
   ],
   "Tests": [
+    {"Path": "./**"},
     {
-      "Includes": [ "**.ts" ],
-      "Excludes": [ "**.d.ts" ]
+      "Includes": [ "./", "./**.ts" ],
+      "Excludes": [ "./typings/**.d.ts" ]
     }
   ],
   "Compile": {

@@ -8,6 +8,6 @@ test("Column basic test", function () {
     var bindName = "firstName";
     var c = new column.Column(displayName, bindName);
     equal(c.getDisplayedName(), displayName);
-    equal(c.getDataBindingName(), bindName); 
+    equal(c.getDataBindingName(), bindName);
 
 });
