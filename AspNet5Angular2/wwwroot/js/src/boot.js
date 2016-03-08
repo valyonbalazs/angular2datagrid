@@ -1,3 +1,4 @@
+///<reference path="../../../node_modules/angular2/typings/browser.d.ts"/>
 "use strict";
 var browser_1 = require('angular2/platform/browser');
 var grid_container_1 = require('./grid-container');

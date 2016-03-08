@@ -11,6 +11,16 @@
     "sourceMap": true,
     "target": "es5"
   },
+  "files": [
+    "boot.ts",
+    "column.ts",
+    "data-container.ts",
+    "grid.ts",
+    "grid-container.ts",
+    "pagination.ts",
+    "sorter.ts",
+    "test-data.ts"
+  ],
   "exclude": [
     "node_modules",
     "typings"

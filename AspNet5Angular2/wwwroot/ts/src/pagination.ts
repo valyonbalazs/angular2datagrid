@@ -129,4 +129,4 @@ export class Pagination {
         $('#current_page').val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay)
     }
-}
+} 

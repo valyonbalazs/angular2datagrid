@@ -3,7 +3,7 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "commonjs",
+    "module": "amd",
     "noEmitOnError": true,
     "noImplicitAny": false,
     "outDir": "../../js/",
@@ -11,6 +11,10 @@
     "sourceMap": true,
     "target": "es5"
   },
+  "files": [
+    "test-column.ts",
+    "test-datacontainer.ts"
+  ],
   "exclude": [
     "node_modules",
     "typings"
