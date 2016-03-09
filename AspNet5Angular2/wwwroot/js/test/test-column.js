@@ -1,4 +1,7 @@
 /// <reference path="./typings/qunit.d.ts" />
+
+// from: https://chutzpah.codeplex.com/SourceControl/latest#Samples/RequireJS/TypeScript/tests/base/base.qunit.test.ts 
+
 "use strict";
 var column = require('../src/column');
 QUnit.module('../src/column');
