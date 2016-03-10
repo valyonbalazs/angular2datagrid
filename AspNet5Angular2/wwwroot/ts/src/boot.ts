@@ -6,9 +6,10 @@ import {DataContainer} from './data-container';
 import {Column} from './column';
 import {TestData} from './test-data';
 import {GridConfig} from './grid-configuration';
+import {PaginationConfig} from './pagination-config';
 
 let testData = new TestData();
 DataContainer.setRows(testData.getRows());
 DataContainer.setColumns(testData.getColumns());
 
-bootstrap(GridContainer, [GridConfig]); 
+bootstrap(GridContainer, [GridConfig, PaginationConfig]); 

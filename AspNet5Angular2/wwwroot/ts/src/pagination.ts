@@ -3,9 +3,11 @@
 import {Component, Input, OnInit} from 'angular2/core';
 import {Grid} from './grid';
 import {DataContainer} from './data-container';
+import {PaginationConfig} from './pagination-config';
 
 @Component({
     selector: 'pagination',
+
     templateUrl: '../html/pagination.html' 
 })
 
@@ -17,8 +19,8 @@ export class Pagination {
     private numberOfPages: number = 0;
     private numberOfPagesArray: Array<number> = [];
 
-    constructor() {
-        this.numberOfRowsOfTableToDisplay = 6;
+    constructor(paginConfig: PaginationConfig) {
+        this.numberOfRowsOfTableToDisplay = paginConfig.GetNumberOfDisplayedRows();
         this.initializer();
         this.showPage(1, this.numberOfRowsOfTableToDisplay);
     }
@@ -98,9 +100,9 @@ export class Pagination {
      */
     public showPage(page, pageS) {
 
-        $("#paginate tr").hide();
+        $("#gridTbody tr").hide();
         $("#current_page").val(page);
-        $("#paginate tr").each(function (n) {
+        $("#gridTbody tr").each(function (n) {
             if (n >= pageS * (page - 1) && n < pageS * page)
                 $(this).show();
         });

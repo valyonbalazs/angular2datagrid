@@ -13,13 +13,14 @@ var grid_1 = require('./grid');
 var pagination_1 = require('./pagination');
 var data_container_1 = require('./data-container');
 var grid_configuration_1 = require('./grid-configuration');
+var pagination_config_1 = require('./pagination-config');
 var GridContainer = (function () {
     function GridContainer(gridConfig) {
         this.gridConfig = null;
-        this.gridConfig = gridConfig;
         this.rows = data_container_1.DataContainer.getRows();
         this.columns = data_container_1.DataContainer.getColumns();
-        this.ProcessGridConfig(this);
+        this.gridConfig = gridConfig;
+        this.ProcessGridConfig();
     }
     GridContainer.prototype.getRows = function () {
         return this.rows;
@@ -27,10 +28,13 @@ var GridContainer = (function () {
     GridContainer.prototype.getColumns = function () {
         return this.columns;
     };
-    GridContainer.prototype.ProcessGridConfig = function (context) {
-        var thisContext = context;
+    GridContainer.prototype.ProcessGridConfig = function () {
         if (this.gridConfig.GetIsPaginationEnabled() == true) {
-            setTimeout(function () { new pagination_1.Pagination(); }.bind(thisContext), 50);
+            setTimeout(function () {
+                var paginConf = new pagination_config_1.PaginationConfig();
+                paginConf.SetNumberOfDisplayedRows(this.gridConfig.GetDisplayedRowsNumberWithPagination());
+                new pagination_1.Pagination(paginConf);
+            }.bind(this), 50);
         }
     };
     GridContainer = __decorate([

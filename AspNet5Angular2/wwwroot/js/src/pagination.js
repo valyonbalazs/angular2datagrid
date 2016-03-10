@@ -11,14 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var data_container_1 = require('./data-container');
+var pagination_config_1 = require('./pagination-config');
 var Pagination = (function () {
-    function Pagination() {
+    function Pagination(paginConfig) {
         this.numberOfRowsOfTableToDisplay = 8;
         this.rowsPerPage = 6;
         this.currentLink = 1;
         this.numberOfPages = 0;
         this.numberOfPagesArray = [];
-        this.numberOfRowsOfTableToDisplay = 6;
+        this.numberOfRowsOfTableToDisplay = paginConfig.GetNumberOfDisplayedRows();
         this.initializer();
         this.showPage(1, this.numberOfRowsOfTableToDisplay);
     }
@@ -89,9 +90,9 @@ var Pagination = (function () {
      * @param pageS: how many rows have to be displayed in the grid.
      */
     Pagination.prototype.showPage = function (page, pageS) {
-        $("#paginate tr").hide();
+        $("#gridTbody tr").hide();
         $("#current_page").val(page);
-        $("#paginate tr").each(function (n) {
+        $("#gridTbody tr").each(function (n) {
             if (n >= pageS * (page - 1) && n < pageS * page)
                 $(this).show();
         });
@@ -121,7 +122,7 @@ var Pagination = (function () {
             selector: 'pagination',
             templateUrl: '../html/pagination.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [pagination_config_1.PaginationConfig])
     ], Pagination);
     return Pagination;
 }());

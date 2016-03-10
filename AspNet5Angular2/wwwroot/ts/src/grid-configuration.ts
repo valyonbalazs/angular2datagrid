@@ -1,18 +1,21 @@
-﻿import {GridConfigJson} from './grid-config-interface';
-
-export class GridConfig {
+﻿export class GridConfig {
 
     // Default values
     private isPaginationEnabled: boolean = false;
+    private displayedRowsNumberWithPagination: number = 6;
 
     constructor() {
         // If some default properties need to be changed, do it in here
-
+        this.isPaginationEnabled = true;
+        this.displayedRowsNumberWithPagination = 8;
     }
 
-    public GetIsPaginationEnabled() {
+    public GetIsPaginationEnabled() : boolean {
         return this.isPaginationEnabled; 
     }
 
+    public GetDisplayedRowsNumberWithPagination() : number {
+        return this.displayedRowsNumberWithPagination;
+    }
 
 }

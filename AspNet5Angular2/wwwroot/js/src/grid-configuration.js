@@ -1,12 +1,18 @@
 "use strict";
 var GridConfig = (function () {
     function GridConfig() {
-        // If some default properties need to be changed, do it in here
         // Default values
         this.isPaginationEnabled = false;
+        this.displayedRowsNumberWithPagination = 6;
+        // If some default properties need to be changed, do it in here
+        this.isPaginationEnabled = true;
+        this.displayedRowsNumberWithPagination = 8;
     }
     GridConfig.prototype.GetIsPaginationEnabled = function () {
         return this.isPaginationEnabled;
+    };
+    GridConfig.prototype.GetDisplayedRowsNumberWithPagination = function () {
+        return this.displayedRowsNumberWithPagination;
     };
     return GridConfig;
 }());

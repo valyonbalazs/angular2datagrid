@@ -4,6 +4,7 @@ import {Pagination} from './pagination';
 import {Column} from './column';
 import {DataContainer} from './data-container';
 import {GridConfig} from './grid-configuration';
+import {PaginationConfig} from './pagination-config';
 
 @Component({
     selector: 'grid-container',
@@ -18,13 +19,11 @@ export class GridContainer {
     private gridConfig: GridConfig = null;
 
     constructor(gridConfig: GridConfig) {
-
-        this.gridConfig = gridConfig;
-
         this.rows = DataContainer.getRows();
         this.columns = DataContainer.getColumns();
 
-        this.ProcessGridConfig(this);
+        this.gridConfig = gridConfig;
+        this.ProcessGridConfig();
     }
 
     public getRows() : Array<any> {
@@ -35,10 +34,16 @@ export class GridContainer {
         return this.columns;
     } 
 
-    private ProcessGridConfig(context: any) {
-        let thisContext = context;
+    private ProcessGridConfig() {
         if (this.gridConfig.GetIsPaginationEnabled() == true) {
-            setTimeout(function () { new Pagination(); }.bind(thisContext), 50);
+
+            setTimeout(function () {
+
+                let paginConf = new PaginationConfig();
+                paginConf.SetNumberOfDisplayedRows(this.gridConfig.GetDisplayedRowsNumberWithPagination());
+                new Pagination(paginConf);
+
+            }.bind(this), 50);
         }
     }
 
