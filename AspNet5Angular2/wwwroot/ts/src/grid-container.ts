@@ -1,24 +1,29 @@
-﻿import {Component, View} from 'angular2/core';
+﻿import {Component, View, Inject} from 'angular2/core';
 import {Grid} from './grid';
 import {Pagination} from './pagination';
 import {Column} from './column';
 import {DataContainer} from './data-container';
+import {GridConfig} from './grid-configuration';
 
 @Component({
     selector: 'grid-container',
     directives: [Grid, Pagination],
-    template: '<grid id="gridId" name="gridName" [rows]="rows" [columns]="columns"></grid><pagination></pagination>'
+    templateUrl: '../html/grid-container.html'
 })
 
 export class GridContainer {
 
     private rows: Array<any>;
     private columns: Array<Column>;
+    private gridConfig: GridConfig = null;
 
-    constructor() {
+    constructor(gridConfig: GridConfig) {
+        this.gridConfig = gridConfig;
+
         this.rows = DataContainer.getRows();
         this.columns = DataContainer.getColumns();
-        setTimeout(function () { new Pagination(); }.bind(this), 50);
+
+        this.ProcessGridConfig(this);
     }
 
     public getRows() : Array<any> {
@@ -27,7 +32,15 @@ export class GridContainer {
 
     public getColumns() : Array<Column> {
         return this.columns;
+    } 
+
+    private ProcessGridConfig(context: any) {
+        let thisContext = context;
+        if (this.gridConfig.GetIsPaginationEnabled() == true) {
+            setTimeout(function () { new Pagination(); }.bind(thisContext), 50);
+        }
     }
+
 } 
 
 

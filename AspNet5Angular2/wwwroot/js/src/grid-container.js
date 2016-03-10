@@ -12,11 +12,14 @@ var core_1 = require('angular2/core');
 var grid_1 = require('./grid');
 var pagination_1 = require('./pagination');
 var data_container_1 = require('./data-container');
+var grid_configuration_1 = require('./grid-configuration');
 var GridContainer = (function () {
-    function GridContainer() {
+    function GridContainer(gridConfig) {
+        this.gridConfig = null;
+        this.gridConfig = gridConfig;
         this.rows = data_container_1.DataContainer.getRows();
         this.columns = data_container_1.DataContainer.getColumns();
-        setTimeout(function () { new pagination_1.Pagination(); }.bind(this), 50);
+        this.ProcessGridConfig(this);
     }
     GridContainer.prototype.getRows = function () {
         return this.rows;
@@ -24,13 +27,19 @@ var GridContainer = (function () {
     GridContainer.prototype.getColumns = function () {
         return this.columns;
     };
+    GridContainer.prototype.ProcessGridConfig = function (context) {
+        var thisContext = context;
+        if (this.gridConfig.GetIsPaginationEnabled() == true) {
+            setTimeout(function () { new pagination_1.Pagination(); }.bind(thisContext), 50);
+        }
+    };
     GridContainer = __decorate([
         core_1.Component({
             selector: 'grid-container',
             directives: [grid_1.Grid, pagination_1.Pagination],
-            template: '<grid id="gridId" name="gridName" [rows]="rows" [columns]="columns"></grid><pagination></pagination>'
+            templateUrl: '../html/grid-container.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [grid_configuration_1.GridConfig])
     ], GridContainer);
     return GridContainer;
 }());
