@@ -1,11 +1,10 @@
 "use strict";
 var GridConfig = (function () {
     function GridConfig() {
-        this.isPaginationEnabled = true;
+        // If some default properties need to be changed, do it in here
+        // Default values
+        this.isPaginationEnabled = false;
     }
-    GridConfig.prototype.SetIsPaginationEnabled = function (isEnabled) {
-        this.isPaginationEnabled = isEnabled;
-    };
     GridConfig.prototype.GetIsPaginationEnabled = function () {
         return this.isPaginationEnabled;
     };

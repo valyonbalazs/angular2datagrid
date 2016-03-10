@@ -18,6 +18,7 @@ export class GridContainer {
     private gridConfig: GridConfig = null;
 
     constructor(gridConfig: GridConfig) {
+
         this.gridConfig = gridConfig;
 
         this.rows = DataContainer.getRows();
