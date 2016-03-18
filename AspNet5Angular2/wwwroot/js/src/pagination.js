@@ -90,17 +90,26 @@ var Pagination = (function () {
         this.updateNumberOfPagesArray(this.currentLink, 5);
     };
     /**
-     * Hides the unwanted rows, and shows the current ones that need to be displayed.
-     * @param page: needed page.
-     * @param pageS: how many rows have to be displayed in the grid.
+     * Main coordinator method of the pagination, what and how to display.
+     * @param pageNumber: needed page.
+     * @param displayNumberOfRows: how many rows have to be displayed in the grid.
      */
-    Pagination.prototype.showPage = function (page, pageS) {
+    Pagination.prototype.showPage = function (pageNumber, displayNumberOfRows) {
+        this.modifyTbodyRowsAccordingToPageNumber(pageNumber, displayNumberOfRows);
+        this.modifyPageNumbersClass(pageNumber);
+        this.modifyFirstAndPrevPageButtons(pageNumber);
+        this.modifyLastPageNumber(pageNumber);
+        this.createPager(pageNumber);
+    };
+    Pagination.prototype.modifyTbodyRowsAccordingToPageNumber = function (page, rows) {
         $("#gridTbody tr").hide();
         $("#current_page").val(page);
         $("#gridTbody tr").each(function (n) {
-            if (n >= pageS * (page - 1) && n < pageS * page)
+            if (n >= rows * (page - 1) && n < rows * page)
                 $(this).show();
         });
+    };
+    Pagination.prototype.modifyPageNumbersClass = function (page) {
         // Adding and removing class for actual page number SASS styling
         $(".paginationPageNumbers").each(function (n, s) {
             var valueOfAElement = s.textContent;
@@ -121,6 +130,8 @@ var Pagination = (function () {
                 $(this).addClass("paginationPageNumbersSelected");
             }
         });
+    };
+    Pagination.prototype.modifyFirstAndPrevPageButtons = function (page) {
         if (page == 1) {
             $("#paginationFirstPageButton").hide();
             $("#paginationPrevPageButton").hide();
@@ -129,6 +140,8 @@ var Pagination = (function () {
             $("#paginationFirstPageButton").show();
             $("#paginationPrevPageButton").show();
         }
+    };
+    Pagination.prototype.modifyLastPageNumber = function (page) {
         // The not link last page number is displayed if its not the last
         var lastPageNumber = $("#lastPageNumber").text();
         lastPageNumber = lastPageNumber.replace(/\D/g, '');
@@ -144,7 +157,6 @@ var Pagination = (function () {
             $("#paginationLastPageButton").css("display", "inline");
             $("#paginationNextPageButton").css("display", "inline");
         }
-        var pager = this.createPager(page);
     };
     Pagination.prototype.nextPage = function () {
         var newPage = parseInt($('#current_page').val()) + 1;
