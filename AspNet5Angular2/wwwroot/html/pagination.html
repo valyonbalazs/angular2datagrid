@@ -1,8 +1,8 @@
 ﻿<input type="hidden" id="current_page"/>
 <div id="page_navigation" >
     <div class="col-lg-2 col-md-2 col-xs-3" id="page_nav_startPrev">
-        <a (click)="firstPage()">First</a>&nbsp;
-        <a (click)="previousPage()">&#60;&#60;Prev</a>
+        <a id="paginationFirstPageButton" (click)="firstPage()">First</a>&nbsp;
+        <a id="paginationPrevPageButton" (click)="previousPage()">&#60;&#60;Prev</a>
     </div>
 
     <div class="col-lg-2 col-md-2 col-xs-6" id="page_nav_pageNumbers">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="col-lg-2 col-md-2 col-xs-3" id="page_nav_nextLast">
-        <a (click)="nextPage()">Next&#62;&#62;</a>&nbsp;
-        <a (click)="lastPage()">Last</a>
+        <a id="paginationNextPageButton" (click)="nextPage()">Next&#62;&#62;</a>&nbsp;
+        <a id="paginationLastPageButton" (click)="lastPage()">Last</a>
     </div>
 </div>

@@ -20,12 +20,8 @@ export class Pagination {
     private numberOfPagesArray: Array<number> = [];
 
     constructor() {
-        //this.numberOfRowsOfTableToDisplay = GridConfig.GetDisplayedRowsNumberWithPagination();
-        //this.initializer();
-        //this.showPage(1, this.numberOfRowsOfTableToDisplay);
-        //console.log(this);
-    }
 
+    }
 
     /**
      * Basic component initalization: number of rows, number of all items, number of pages.
@@ -128,6 +124,7 @@ export class Pagination {
                     if (previousPageNumber != null || previousPageNumber != undefined) {
                         previousPageNumber.removeClass();
                         previousPageNumber.addClass("paginationPageNumbers");
+                    } else {
                     }
                 } catch (e) {
                     console.log(e);
@@ -138,16 +135,28 @@ export class Pagination {
             }
         });
 
+        if (page == 1) {
+            $("#paginationFirstPageButton").hide();
+            $("#paginationPrevPageButton").hide();
+        } else {
+            $("#paginationFirstPageButton").show();
+            $("#paginationPrevPageButton").show();
+        }
+
         // The not link last page number is displayed if its not the last
         let lastPageNumber = $("#lastPageNumber").text();
         lastPageNumber = lastPageNumber.replace(/\D/g, '');
         if (lastPageNumber == page) {
             $("#lastPageNumber").text(" ..." + this.numberOfPages);
-            $("#lastPageNumber").css("display", "none");
+            $("#lastPageNumber").hide();
+            $("#paginationNextPageButton").hide();
+            $("#paginationLastPageButton").hide();
         }
         else {
             $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "inline");
+            $("#paginationLastPageButton").css("display", "inline");
+            $("#paginationNextPageButton").css("display", "inline");
         }
 
         let pager = this.createPager(page);
@@ -155,7 +164,9 @@ export class Pagination {
 
     public nextPage() {
         let newPage = parseInt($('#current_page').val()) + 1;
-        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
+        if (newPage <= this.numberOfPages) {
+            this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
+        }
     }
 
     public lastPage() {
@@ -165,15 +176,19 @@ export class Pagination {
     }
 
     public firstPage() {
-        let newPage = "1";
+        let newPage = 1;
         $('#current_page').val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     }
 
     public previousPage() {
         let newPage = parseInt($('#current_page').val()) - 1;
-        $('#current_page').val(newPage);
-        this.showPage(newPage, this.numberOfRowsOfTableToDisplay)
+        if (newPage < 1) {
+            // DO NOTHING
+        } else {
+            $('#current_page').val(newPage);
+            this.showPage(newPage, this.numberOfRowsOfTableToDisplay)
+        }
     }
 
     ngOnInit() {

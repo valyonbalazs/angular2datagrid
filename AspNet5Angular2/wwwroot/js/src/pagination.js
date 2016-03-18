@@ -17,10 +17,6 @@ var Pagination = (function () {
         this.currentLink = 1;
         this.numberOfPages = 0;
         this.numberOfPagesArray = [];
-        //this.numberOfRowsOfTableToDisplay = GridConfig.GetDisplayedRowsNumberWithPagination();
-        //this.initializer();
-        //this.showPage(1, this.numberOfRowsOfTableToDisplay);
-        //console.log(this);
     }
     /**
      * Basic component initalization: number of rows, number of all items, number of pages.
@@ -115,6 +111,8 @@ var Pagination = (function () {
                         previousPageNumber.removeClass();
                         previousPageNumber.addClass("paginationPageNumbers");
                     }
+                    else {
+                    }
                 }
                 catch (e) {
                     console.log(e);
@@ -123,22 +121,36 @@ var Pagination = (function () {
                 $(this).addClass("paginationPageNumbersSelected");
             }
         });
+        if (page == 1) {
+            $("#paginationFirstPageButton").hide();
+            $("#paginationPrevPageButton").hide();
+        }
+        else {
+            $("#paginationFirstPageButton").show();
+            $("#paginationPrevPageButton").show();
+        }
         // The not link last page number is displayed if its not the last
         var lastPageNumber = $("#lastPageNumber").text();
         lastPageNumber = lastPageNumber.replace(/\D/g, '');
         if (lastPageNumber == page) {
             $("#lastPageNumber").text(" ..." + this.numberOfPages);
-            $("#lastPageNumber").css("display", "none");
+            $("#lastPageNumber").hide();
+            $("#paginationNextPageButton").hide();
+            $("#paginationLastPageButton").hide();
         }
         else {
             $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "inline");
+            $("#paginationLastPageButton").css("display", "inline");
+            $("#paginationNextPageButton").css("display", "inline");
         }
         var pager = this.createPager(page);
     };
     Pagination.prototype.nextPage = function () {
         var newPage = parseInt($('#current_page').val()) + 1;
-        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
+        if (newPage <= this.numberOfPages) {
+            this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
+        }
     };
     Pagination.prototype.lastPage = function () {
         var newPage = this.numberOfPages;
@@ -146,14 +158,18 @@ var Pagination = (function () {
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
     Pagination.prototype.firstPage = function () {
-        var newPage = "1";
+        var newPage = 1;
         $('#current_page').val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
     Pagination.prototype.previousPage = function () {
         var newPage = parseInt($('#current_page').val()) - 1;
-        $('#current_page').val(newPage);
-        this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
+        if (newPage < 1) {
+        }
+        else {
+            $('#current_page').val(newPage);
+            this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
+        }
     };
     Pagination.prototype.ngOnInit = function () {
         console.log("\nletrejott PAGINATION");
