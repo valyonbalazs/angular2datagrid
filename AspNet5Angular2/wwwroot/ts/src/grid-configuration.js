@@ -1,14 +1,24 @@
-"use strict";
 var GridConfig = (function () {
     function GridConfig() {
-        this.isPaginationEnabled = true;
+        // Singleton
+        if (GridConfig.instance) {
+            throw new Error("Error instantiation failed! Singleton! Already exists!");
+        }
+        GridConfig.instance = this;
+        // If some default properties need to be changed, do it in here
+        GridConfig.isPaginationEnabled = true;
+        GridConfig.displayedRowsNumberWithPagination = 5;
     }
-    GridConfig.prototype.SetIsPaginationEnabled = function (isEnabled) {
-        this.isPaginationEnabled = isEnabled;
+    GridConfig.GetIsPaginationEnabled = function () {
+        return GridConfig.isPaginationEnabled;
     };
-    GridConfig.prototype.GetIsPaginationEnabled = function () {
-        return this.isPaginationEnabled;
+    GridConfig.GetDisplayedRowsNumberWithPagination = function () {
+        return GridConfig.displayedRowsNumberWithPagination;
     };
+    GridConfig.instance = new GridConfig();
+    // Default values
+    GridConfig.isPaginationEnabled = false;
+    GridConfig.displayedRowsNumberWithPagination = 6;
     return GridConfig;
-}());
+})();
 exports.GridConfig = GridConfig;

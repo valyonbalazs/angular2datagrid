@@ -19,7 +19,7 @@ export class Grid implements OnInit {
     @Input() id: string;
 
     ngOnInit() {
-        console.log("Grid was created with name: " + this.name + " and id: " + this.id);
+        console.log("\nletrejott GRID");
     }
 
     public sort(key) {

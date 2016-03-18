@@ -1,4 +1,3 @@
-"use strict";
 var PaginationConfig = (function () {
     function PaginationConfig() {
         this.numberOfDisplayedRows = 8;
@@ -10,6 +9,6 @@ var PaginationConfig = (function () {
         return this.numberOfDisplayedRows;
     };
     return PaginationConfig;
-}());
+})();
 exports.PaginationConfig = PaginationConfig;
 //# sourceMappingURL=pagination-config.js.map

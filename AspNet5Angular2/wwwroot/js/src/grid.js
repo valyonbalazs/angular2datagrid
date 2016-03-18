@@ -1,5 +1,4 @@
 /// <reference path="typings/jquery/jquery.d.ts" />
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -16,7 +15,7 @@ var Grid = (function () {
         this.sorter = new sorter_1.Sorter();
     }
     Grid.prototype.ngOnInit = function () {
-        console.log("Grid was created with name: " + this.name + " and id: " + this.id);
+        console.log("\nletrejott GRID");
     };
     Grid.prototype.sort = function (key) {
         this.sorter.sort(key, this.rows);
@@ -38,6 +37,6 @@ var Grid = (function () {
         __metadata('design:paramtypes', [])
     ], Grid);
     return Grid;
-}());
+})();
 exports.Grid = Grid;
 //# sourceMappingURL=grid.js.map

@@ -4,6 +4,7 @@ import {Component, Input, OnInit} from 'angular2/core';
 import {Grid} from './grid';
 import {DataContainer} from './data-container';
 import {PaginationConfig} from './pagination-config';
+import {GridConfig} from './grid-configuration';
 
 @Component({
     selector: 'pagination',
@@ -14,16 +15,17 @@ import {PaginationConfig} from './pagination-config';
 export class Pagination {
 
     private numberOfRowsOfTableToDisplay: number = 8;
-    private rowsPerPage: number = 6;
     private currentLink: number = 1;
     private numberOfPages: number = 0;
     private numberOfPagesArray: Array<number> = [];
 
-    constructor(paginConfig: PaginationConfig) {
-        this.numberOfRowsOfTableToDisplay = paginConfig.GetNumberOfDisplayedRows();
-        this.initializer();
-        this.showPage(1, this.numberOfRowsOfTableToDisplay);
+    constructor() {
+        //this.numberOfRowsOfTableToDisplay = GridConfig.GetDisplayedRowsNumberWithPagination();
+        //this.initializer();
+        //this.showPage(1, this.numberOfRowsOfTableToDisplay);
+        //console.log(this);
     }
+
 
     /**
      * Basic component initalization: number of rows, number of all items, number of pages.
@@ -110,7 +112,6 @@ export class Pagination {
      * @param pageS: how many rows have to be displayed in the grid.
      */
     public showPage(page, pageS) {
-
         $("#gridTbody tr").hide();
         $("#current_page").val(page);
         $("#gridTbody tr").each(function (n) {
@@ -141,11 +142,11 @@ export class Pagination {
         let lastPageNumber = $("#lastPageNumber").text();
         lastPageNumber = lastPageNumber.replace(/\D/g, '');
         if (lastPageNumber == page) {
-            $("#lastPageNumber").text(" ..." + pageS);
+            $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "none");
         }
         else {
-            $("#lastPageNumber").text(" ..." + pageS);
+            $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "inline");
         }
 
@@ -173,5 +174,14 @@ export class Pagination {
         let newPage = parseInt($('#current_page').val()) - 1;
         $('#current_page').val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay)
+    }
+
+    ngOnInit() {
+        console.log("\nletrejott PAGINATION");
+        this.numberOfRowsOfTableToDisplay = GridConfig.GetDisplayedRowsNumberWithPagination();
+        setTimeout(function () {
+            this.initializer();
+            this.showPage(1, this.numberOfRowsOfTableToDisplay);
+        }.bind(this), 30);
     }
 } 

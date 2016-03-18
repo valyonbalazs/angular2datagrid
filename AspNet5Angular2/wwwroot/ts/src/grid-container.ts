@@ -1,10 +1,9 @@
-﻿import {Component, View, Inject} from 'angular2/core';
+﻿import {Component, View, Inject, OnInit} from 'angular2/core';
 import {Grid} from './grid';
 import {Pagination} from './pagination';
 import {Column} from './column';
 import {DataContainer} from './data-container';
 import {GridConfig} from './grid-configuration';
-import {PaginationConfig} from './pagination-config';
 
 @Component({
     selector: 'grid-container',
@@ -16,14 +15,12 @@ export class GridContainer {
 
     private rows: Array<any>;
     private columns: Array<Column>;
-    private gridConfig: GridConfig = null;
+    private isPaginationEnabled: boolean = GridConfig.GetIsPaginationEnabled();
 
-    constructor(gridConfig: GridConfig) {
+    constructor() {
         this.rows = DataContainer.getRows();
         this.columns = DataContainer.getColumns();
-
-        this.gridConfig = gridConfig;
-        this.ProcessGridConfig();
+        // this.ProcessGridConfiguration();
     }
 
     public getRows() : Array<any> {
@@ -32,21 +29,20 @@ export class GridContainer {
 
     public getColumns() : Array<Column> {
         return this.columns;
-    } 
-
-    private ProcessGridConfig() {
-        if (this.gridConfig.GetIsPaginationEnabled() == true) {
-
-            setTimeout(function () {
-
-                let paginConf = new PaginationConfig();
-                paginConf.SetNumberOfDisplayedRows(this.gridConfig.GetDisplayedRowsNumberWithPagination());
-                new Pagination(paginConf);
-
-            }.bind(this), 50);
-        }
     }
 
+    public GetIsPaginationEnabled() {
+        return this.isPaginationEnabled;
+    }
+    
+    public ProcessGridConfiguration() {
+        this.isPaginationEnabled = GridConfig.GetIsPaginationEnabled();
+        console.log(this.isPaginationEnabled);
+    }     
+
+    ngOnInit() {
+        console.log("\nletrejott GRIDCONTAINER");
+    }
 } 
 
 

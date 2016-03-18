@@ -10,17 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var data_container_1 = require('./data-container');
-var pagination_config_1 = require('./pagination-config');
+var grid_configuration_1 = require('./grid-configuration');
 var Pagination = (function () {
-    function Pagination(paginConfig) {
+    function Pagination() {
         this.numberOfRowsOfTableToDisplay = 8;
-        this.rowsPerPage = 6;
         this.currentLink = 1;
         this.numberOfPages = 0;
         this.numberOfPagesArray = [];
-        this.numberOfRowsOfTableToDisplay = paginConfig.GetNumberOfDisplayedRows();
-        this.initializer();
-        this.showPage(1, this.numberOfRowsOfTableToDisplay);
+        //this.numberOfRowsOfTableToDisplay = GridConfig.GetDisplayedRowsNumberWithPagination();
+        //this.initializer();
+        //this.showPage(1, this.numberOfRowsOfTableToDisplay);
+        //console.log(this);
     }
     /**
      * Basic component initalization: number of rows, number of all items, number of pages.
@@ -127,11 +127,11 @@ var Pagination = (function () {
         var lastPageNumber = $("#lastPageNumber").text();
         lastPageNumber = lastPageNumber.replace(/\D/g, '');
         if (lastPageNumber == page) {
-            $("#lastPageNumber").text(" ..." + pageS);
+            $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "none");
         }
         else {
-            $("#lastPageNumber").text(" ..." + pageS);
+            $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "inline");
         }
         var pager = this.createPager(page);
@@ -155,12 +155,20 @@ var Pagination = (function () {
         $('#current_page').val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
+    Pagination.prototype.ngOnInit = function () {
+        console.log("\nletrejott PAGINATION");
+        this.numberOfRowsOfTableToDisplay = grid_configuration_1.GridConfig.GetDisplayedRowsNumberWithPagination();
+        setTimeout(function () {
+            this.initializer();
+            this.showPage(1, this.numberOfRowsOfTableToDisplay);
+        }.bind(this), 30);
+    };
     Pagination = __decorate([
         core_1.Component({
             selector: 'pagination',
             templateUrl: '../html/pagination.html'
         }), 
-        __metadata('design:paramtypes', [pagination_config_1.PaginationConfig])
+        __metadata('design:paramtypes', [])
     ], Pagination);
     return Pagination;
 })();

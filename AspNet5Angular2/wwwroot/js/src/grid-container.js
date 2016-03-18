@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13,14 +12,12 @@ var grid_1 = require('./grid');
 var pagination_1 = require('./pagination');
 var data_container_1 = require('./data-container');
 var grid_configuration_1 = require('./grid-configuration');
-var pagination_config_1 = require('./pagination-config');
 var GridContainer = (function () {
-    function GridContainer(gridConfig) {
-        this.gridConfig = null;
+    function GridContainer() {
+        this.isPaginationEnabled = grid_configuration_1.GridConfig.GetIsPaginationEnabled();
         this.rows = data_container_1.DataContainer.getRows();
         this.columns = data_container_1.DataContainer.getColumns();
-        this.gridConfig = gridConfig;
-        this.ProcessGridConfig();
+        // this.ProcessGridConfiguration();
     }
     GridContainer.prototype.getRows = function () {
         return this.rows;
@@ -28,14 +25,15 @@ var GridContainer = (function () {
     GridContainer.prototype.getColumns = function () {
         return this.columns;
     };
-    GridContainer.prototype.ProcessGridConfig = function () {
-        if (this.gridConfig.GetIsPaginationEnabled() == true) {
-            setTimeout(function () {
-                var paginConf = new pagination_config_1.PaginationConfig();
-                paginConf.SetNumberOfDisplayedRows(this.gridConfig.GetDisplayedRowsNumberWithPagination());
-                new pagination_1.Pagination(paginConf);
-            }.bind(this), 50);
-        }
+    GridContainer.prototype.GetIsPaginationEnabled = function () {
+        return this.isPaginationEnabled;
+    };
+    GridContainer.prototype.ProcessGridConfiguration = function () {
+        this.isPaginationEnabled = grid_configuration_1.GridConfig.GetIsPaginationEnabled();
+        console.log(this.isPaginationEnabled);
+    };
+    GridContainer.prototype.ngOnInit = function () {
+        console.log("\nletrejott GRIDCONTAINER");
     };
     GridContainer = __decorate([
         core_1.Component({
@@ -43,9 +41,9 @@ var GridContainer = (function () {
             directives: [grid_1.Grid, pagination_1.Pagination],
             templateUrl: '../html/grid-container.html'
         }), 
-        __metadata('design:paramtypes', [grid_configuration_1.GridConfig])
+        __metadata('design:paramtypes', [])
     ], GridContainer);
     return GridContainer;
-}());
+})();
 exports.GridContainer = GridContainer;
 //# sourceMappingURL=grid-container.js.map

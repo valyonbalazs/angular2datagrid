@@ -1,21 +1,27 @@
 ﻿export class GridConfig {
 
+    private static instance: GridConfig = new GridConfig();
     // Default values
-    private isPaginationEnabled: boolean = false;
-    private displayedRowsNumberWithPagination: number = 6;
+    private static isPaginationEnabled: boolean = true;
+    private static displayedRowsNumberWithPagination: number = 6;
 
     constructor() {
-        // If some default properties need to be changed, do it in here
-        this.isPaginationEnabled = true;
-        this.displayedRowsNumberWithPagination = 5;
+        // Singleton
+        if (GridConfig.instance) {
+            throw new Error("Error instantiation failed! Singleton! Already exists!");
+        }
+        GridConfig.instance = this;
     }
 
-    public GetIsPaginationEnabled() : boolean {
-        return this.isPaginationEnabled; 
+    public static GetIsPaginationEnabled() : boolean {
+        return GridConfig.isPaginationEnabled; 
     }
 
-    public GetDisplayedRowsNumberWithPagination() : number {
-        return this.displayedRowsNumberWithPagination;
+    public static GetDisplayedRowsNumberWithPagination() : number {
+        return GridConfig.displayedRowsNumberWithPagination;
     }
 
+    ngOnInit() {
+        console.log("\nletrejott GRIDCONFIG");
+    }
 }

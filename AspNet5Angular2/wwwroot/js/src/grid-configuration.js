@@ -1,18 +1,24 @@
 var GridConfig = (function () {
     function GridConfig() {
-        // Default values
-        this.isPaginationEnabled = false;
-        this.displayedRowsNumberWithPagination = 6;
-        // If some default properties need to be changed, do it in here
-        this.isPaginationEnabled = true;
-        this.displayedRowsNumberWithPagination = 5;
+        // Singleton
+        if (GridConfig.instance) {
+            throw new Error("Error instantiation failed! Singleton! Already exists!");
+        }
+        GridConfig.instance = this;
     }
-    GridConfig.prototype.GetIsPaginationEnabled = function () {
-        return this.isPaginationEnabled;
+    GridConfig.GetIsPaginationEnabled = function () {
+        return GridConfig.isPaginationEnabled;
     };
-    GridConfig.prototype.GetDisplayedRowsNumberWithPagination = function () {
-        return this.displayedRowsNumberWithPagination;
+    GridConfig.GetDisplayedRowsNumberWithPagination = function () {
+        return GridConfig.displayedRowsNumberWithPagination;
     };
+    GridConfig.prototype.ngOnInit = function () {
+        console.log("\nletrejott GRIDCONFIG");
+    };
+    GridConfig.instance = new GridConfig();
+    // Default values
+    GridConfig.isPaginationEnabled = true;
+    GridConfig.displayedRowsNumberWithPagination = 6;
     return GridConfig;
 })();
 exports.GridConfig = GridConfig;
