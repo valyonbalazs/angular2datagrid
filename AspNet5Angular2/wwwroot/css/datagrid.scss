@@ -31,3 +31,12 @@ tbody td {
     width: 19%;  /* 19% is less than (100% / 5 cols) = 20% */
     float: left;
 }
+
+.paginationPageNumbersSelected {
+    color:red;
+}
+
+#lastPageNumber {
+    display:inline;
+}
+

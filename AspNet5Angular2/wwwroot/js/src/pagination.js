@@ -1,5 +1,4 @@
 /// <reference path="typings/jquery/jquery.d.ts" /> 
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -27,7 +26,7 @@ var Pagination = (function () {
      * Basic component initalization: number of rows, number of all items, number of pages.
      */
     Pagination.prototype.initializer = function () {
-        var showRowsPerPage = this.rowsPerPage;
+        var showRowsPerPage = this.numberOfRowsOfTableToDisplay;
         var numberOfAllItems = data_container_1.DataContainer.getNumberOfRows();
         this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
     };
@@ -39,9 +38,19 @@ var Pagination = (function () {
         if (this.numberOfPagesArray.length != 0) {
             this.numberOfPagesArray = [];
         }
+        if (numberOfButtons > this.numberOfPages) {
+            numberOfButtons = this.numberOfPages;
+        }
         if (currentLink < 5) {
-            for (var i = 1; i < 5 + 1; i++) {
-                this.numberOfPagesArray.push(i);
+            if (numberOfButtons < 5) {
+                for (var i = 1; i < numberOfButtons + 1; i++) {
+                    this.numberOfPagesArray.push(i);
+                }
+            }
+            else {
+                for (var i = 1; i < 5 + 1; i++) {
+                    this.numberOfPagesArray.push(i);
+                }
             }
         }
         else {
@@ -96,6 +105,35 @@ var Pagination = (function () {
             if (n >= pageS * (page - 1) && n < pageS * page)
                 $(this).show();
         });
+        // Adding and removing class for actual page number SASS styling
+        $(".paginationPageNumbers").each(function (n, s) {
+            var valueOfAElement = s.textContent;
+            if (valueOfAElement == page) {
+                try {
+                    var previousPageNumber = $(".paginationPageNumbersSelected");
+                    if (previousPageNumber != null || previousPageNumber != undefined) {
+                        previousPageNumber.removeClass();
+                        previousPageNumber.addClass("paginationPageNumbers");
+                    }
+                }
+                catch (e) {
+                    console.log(e);
+                }
+                $(this).removeClass();
+                $(this).addClass("paginationPageNumbersSelected");
+            }
+        });
+        // The not link last page number is displayed if its not the last
+        var lastPageNumber = $("#lastPageNumber").text();
+        lastPageNumber = lastPageNumber.replace(/\D/g, '');
+        if (lastPageNumber == page) {
+            $("#lastPageNumber").text(" ..." + pageS);
+            $("#lastPageNumber").css("display", "none");
+        }
+        else {
+            $("#lastPageNumber").text(" ..." + pageS);
+            $("#lastPageNumber").css("display", "inline");
+        }
         var pager = this.createPager(page);
     };
     Pagination.prototype.nextPage = function () {
@@ -125,6 +163,6 @@ var Pagination = (function () {
         __metadata('design:paramtypes', [pagination_config_1.PaginationConfig])
     ], Pagination);
     return Pagination;
-}());
+})();
 exports.Pagination = Pagination;
 //# sourceMappingURL=pagination.js.map

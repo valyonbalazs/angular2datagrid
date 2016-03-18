@@ -29,7 +29,7 @@ export class Pagination {
      * Basic component initalization: number of rows, number of all items, number of pages.
      */
     private initializer() {
-        let showRowsPerPage = this.rowsPerPage;
+        let showRowsPerPage = this.numberOfRowsOfTableToDisplay;
         let numberOfAllItems = DataContainer.getNumberOfRows();
         this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
     }
@@ -44,9 +44,20 @@ export class Pagination {
             this.numberOfPagesArray = [];
         }
 
+        if (numberOfButtons > this.numberOfPages) {
+            numberOfButtons = this.numberOfPages;
+        }
+
         if (currentLink < 5) {
-            for (let i = 1; i < 5 + 1; i++) {
-                this.numberOfPagesArray.push(i);
+            if (numberOfButtons < 5) {
+                for (let i = 1; i < numberOfButtons + 1; i++) {
+                    this.numberOfPagesArray.push(i);
+                }
+            }
+            else {
+                for (let i = 1; i < 5 + 1; i++) {
+                    this.numberOfPagesArray.push(i);
+                }
             }
         }
         else {
@@ -106,6 +117,38 @@ export class Pagination {
             if (n >= pageS * (page - 1) && n < pageS * page)
                 $(this).show();
         });
+
+        // Adding and removing class for actual page number SASS styling
+        $(".paginationPageNumbers").each(function (n, s) {
+            let valueOfAElement = s.textContent;
+            if (valueOfAElement == page) {
+                try {
+                    let previousPageNumber = $(".paginationPageNumbersSelected");
+                    if (previousPageNumber != null || previousPageNumber != undefined) {
+                        previousPageNumber.removeClass();
+                        previousPageNumber.addClass("paginationPageNumbers");
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+
+                $(this).removeClass();
+                $(this).addClass("paginationPageNumbersSelected");
+            }
+        });
+
+        // The not link last page number is displayed if its not the last
+        let lastPageNumber = $("#lastPageNumber").text();
+        lastPageNumber = lastPageNumber.replace(/\D/g, '');
+        if (lastPageNumber == page) {
+            $("#lastPageNumber").text(" ..." + pageS);
+            $("#lastPageNumber").css("display", "none");
+        }
+        else {
+            $("#lastPageNumber").text(" ..." + pageS);
+            $("#lastPageNumber").css("display", "inline");
+        }
+
         let pager = this.createPager(page);
     }
 

@@ -7,7 +7,7 @@
     constructor() {
         // If some default properties need to be changed, do it in here
         this.isPaginationEnabled = true;
-        this.displayedRowsNumberWithPagination = 8;
+        this.displayedRowsNumberWithPagination = 5;
     }
 
     public GetIsPaginationEnabled() : boolean {

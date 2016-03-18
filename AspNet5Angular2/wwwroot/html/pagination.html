@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-lg-2 col-md-2 col-xs-6" id="page_nav_pageNumbers">
-        <a *ngFor="#item of numberOfPagesArray" (click)="showPage(item, numberOfRowsOfTableToDisplay)"> {{ item }} </a>&nbsp;... {{ numberOfPages }}
+        <a class="paginationPageNumbers" *ngFor="#item of numberOfPagesArray" (click)="showPage(item, numberOfRowsOfTableToDisplay)"> {{ item }} </a><p id="lastPageNumber">&nbsp;... {{ numberOfPages }}</p>
     </div>
 
     <div class="col-lg-2 col-md-2 col-xs-3" id="page_nav_nextLast">
