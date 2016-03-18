@@ -23,6 +23,19 @@ export class Pagination {
 
     }
 
+    /*
+    * Used as a casual constructor
+    *  setTimeout needed to wait the grid rendered into the DOM
+    */ 
+    ngOnInit() {
+        console.log("\nletrejott PAGINATION");
+        this.numberOfRowsOfTableToDisplay = GridConfig.GetDisplayedRowsNumberWithPagination();
+        setTimeout(function () {
+            this.initializer();
+            this.showPage(1, this.numberOfRowsOfTableToDisplay);
+        }.bind(this), 30);
+    }
+
     /**
      * Basic component initalization: number of rows, number of all items, number of pages.
      */
@@ -107,17 +120,18 @@ export class Pagination {
      * @param pageNumber: needed page.
      * @param displayNumberOfRows: how many rows have to be displayed in the grid.
      */
-    public showPage(pageNumber, displayNumberOfRows) {
+    public showPage(pageNumber: number, displayNumberOfRows: number) {
 
         this.modifyTbodyRowsAccordingToPageNumber(pageNumber, displayNumberOfRows);
         this.modifyPageNumbersClass(pageNumber);
         this.modifyFirstAndPrevPageButtons(pageNumber);
         this.modifyLastPageNumber(pageNumber);
+        this.modifyLastAndNextPageButtons(pageNumber);
         this.createPager(pageNumber);
 
     }
 
-    private modifyTbodyRowsAccordingToPageNumber(page: any, rows: any) {
+    private modifyTbodyRowsAccordingToPageNumber(page: number, rows: number) {
         $("#gridTbody tr").hide();
         $("#current_page").val(page);
         $("#gridTbody tr").each(function (n) {
@@ -126,11 +140,11 @@ export class Pagination {
         });
     }
 
-    private modifyPageNumbersClass(page: any) {
+    private modifyPageNumbersClass(page: number) {
         // Adding and removing class for actual page number SASS styling
         $(".paginationPageNumbers").each(function (n, s) {
             let valueOfAElement = s.textContent;
-            if (valueOfAElement == page) {
+            if (parseInt(valueOfAElement) == page) {
                 try {
                     let previousPageNumber = $(".paginationPageNumbersSelected");
                     if (previousPageNumber != null || previousPageNumber != undefined) {
@@ -148,7 +162,7 @@ export class Pagination {
         });
     }
 
-    private modifyFirstAndPrevPageButtons(page: any) {
+    private modifyFirstAndPrevPageButtons(page: number) {
         if (page == 1) {
             $("#paginationFirstPageButton").hide();
             $("#paginationPrevPageButton").hide();
@@ -158,19 +172,30 @@ export class Pagination {
         }
     }
 
-    private modifyLastPageNumber(page: any) {
+    private modifyLastPageNumber(page: number) {
         // The not link last page number is displayed if its not the last
         let lastPageNumber = $("#lastPageNumber").text();
         lastPageNumber = lastPageNumber.replace(/\D/g, '');
-        if (lastPageNumber == page) {
+        if (parseInt(lastPageNumber) == page) {
             $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").hide();
-            $("#paginationNextPageButton").hide();
-            $("#paginationLastPageButton").hide();
+
         }
         else {
             $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "inline");
+
+        }
+    }
+
+    private modifyLastAndNextPageButtons(page: number) {
+        let lastPageNumber = $("#lastPageNumber").text();
+        lastPageNumber = lastPageNumber.replace(/\D/g, '');
+        if (parseInt(lastPageNumber) == page) {
+            $("#paginationNextPageButton").hide();
+            $("#paginationLastPageButton").hide();
+        }
+        else {
             $("#paginationLastPageButton").css("display", "inline");
             $("#paginationNextPageButton").css("display", "inline");
         }
@@ -197,20 +222,9 @@ export class Pagination {
 
     public previousPage() {
         let newPage = parseInt($('#current_page').val()) - 1;
-        if (newPage < 1) {
-            // DO NOTHING
-        } else {
+        if (newPage >= 1) {
             $('#current_page').val(newPage);
             this.showPage(newPage, this.numberOfRowsOfTableToDisplay)
         }
-    }
-
-    ngOnInit() {
-        console.log("\nletrejott PAGINATION");
-        this.numberOfRowsOfTableToDisplay = GridConfig.GetDisplayedRowsNumberWithPagination();
-        setTimeout(function () {
-            this.initializer();
-            this.showPage(1, this.numberOfRowsOfTableToDisplay);
-        }.bind(this), 30);
     }
 } 

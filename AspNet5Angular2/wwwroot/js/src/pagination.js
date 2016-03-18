@@ -18,6 +18,18 @@ var Pagination = (function () {
         this.numberOfPages = 0;
         this.numberOfPagesArray = [];
     }
+    /*
+    * Used as a casual constructor
+    *  setTimeout needed to wait the grid rendered into the DOM
+    */
+    Pagination.prototype.ngOnInit = function () {
+        console.log("\nletrejott PAGINATION");
+        this.numberOfRowsOfTableToDisplay = grid_configuration_1.GridConfig.GetDisplayedRowsNumberWithPagination();
+        setTimeout(function () {
+            this.initializer();
+            this.showPage(1, this.numberOfRowsOfTableToDisplay);
+        }.bind(this), 30);
+    };
     /**
      * Basic component initalization: number of rows, number of all items, number of pages.
      */
@@ -99,6 +111,7 @@ var Pagination = (function () {
         this.modifyPageNumbersClass(pageNumber);
         this.modifyFirstAndPrevPageButtons(pageNumber);
         this.modifyLastPageNumber(pageNumber);
+        this.modifyLastAndNextPageButtons(pageNumber);
         this.createPager(pageNumber);
     };
     Pagination.prototype.modifyTbodyRowsAccordingToPageNumber = function (page, rows) {
@@ -113,7 +126,7 @@ var Pagination = (function () {
         // Adding and removing class for actual page number SASS styling
         $(".paginationPageNumbers").each(function (n, s) {
             var valueOfAElement = s.textContent;
-            if (valueOfAElement == page) {
+            if (parseInt(valueOfAElement) == page) {
                 try {
                     var previousPageNumber = $(".paginationPageNumbersSelected");
                     if (previousPageNumber != null || previousPageNumber != undefined) {
@@ -145,15 +158,23 @@ var Pagination = (function () {
         // The not link last page number is displayed if its not the last
         var lastPageNumber = $("#lastPageNumber").text();
         lastPageNumber = lastPageNumber.replace(/\D/g, '');
-        if (lastPageNumber == page) {
+        if (parseInt(lastPageNumber) == page) {
             $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").hide();
-            $("#paginationNextPageButton").hide();
-            $("#paginationLastPageButton").hide();
         }
         else {
             $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "inline");
+        }
+    };
+    Pagination.prototype.modifyLastAndNextPageButtons = function (page) {
+        var lastPageNumber = $("#lastPageNumber").text();
+        lastPageNumber = lastPageNumber.replace(/\D/g, '');
+        if (parseInt(lastPageNumber) == page) {
+            $("#paginationNextPageButton").hide();
+            $("#paginationLastPageButton").hide();
+        }
+        else {
             $("#paginationLastPageButton").css("display", "inline");
             $("#paginationNextPageButton").css("display", "inline");
         }
@@ -176,20 +197,10 @@ var Pagination = (function () {
     };
     Pagination.prototype.previousPage = function () {
         var newPage = parseInt($('#current_page').val()) - 1;
-        if (newPage < 1) {
-        }
-        else {
+        if (newPage >= 1) {
             $('#current_page').val(newPage);
             this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
         }
-    };
-    Pagination.prototype.ngOnInit = function () {
-        console.log("\nletrejott PAGINATION");
-        this.numberOfRowsOfTableToDisplay = grid_configuration_1.GridConfig.GetDisplayedRowsNumberWithPagination();
-        setTimeout(function () {
-            this.initializer();
-            this.showPage(1, this.numberOfRowsOfTableToDisplay);
-        }.bind(this), 30);
     };
     Pagination = __decorate([
         core_1.Component({
