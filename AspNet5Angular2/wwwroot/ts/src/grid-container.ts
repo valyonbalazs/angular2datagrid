@@ -4,10 +4,11 @@ import {Pagination} from './pagination';
 import {Column} from './column';
 import {DataContainer} from './data-container';
 import {GridConfig} from './grid-configuration';
+import {FilterGlobal} from './filter-global';
 
 @Component({
     selector: 'grid-container',
-    directives: [Grid, Pagination],
+    directives: [Grid, Pagination, FilterGlobal],
     templateUrl: '../html/grid-container.html'
 })
 

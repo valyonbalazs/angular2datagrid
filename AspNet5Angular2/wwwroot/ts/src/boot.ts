@@ -8,13 +8,14 @@ import {Column} from './column';
 import {TestData} from './test-data';
 import {Pagination} from './pagination';
 import {PaginationConfig} from './pagination-config';
+import {FilterGlobal} from './filter-global';
 
 
 let testData = new TestData();
 DataContainer.setRows(testData.getRows());
 DataContainer.setColumns(testData.getColumns());
 
-bootstrap(GridContainer, [Pagination])
+bootstrap(GridContainer, [Pagination, FilterGlobal])
     .then(app => {
         console.log(app);
     });

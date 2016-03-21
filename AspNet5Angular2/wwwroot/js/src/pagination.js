@@ -124,14 +124,18 @@ var Pagination = (function () {
     };
     Pagination.prototype.modifyPageNumbersClass = function (page) {
         // Adding and removing class for actual page number SASS styling
+        console.log(page);
+        console.log($(".paginationPageNumbers"));
         $(".paginationPageNumbers").each(function (n, s) {
+            console.log(s);
             var valueOfAElement = s.textContent;
+            console.log(valueOfAElement);
             if (parseInt(valueOfAElement) == page) {
                 try {
                     var previousPageNumber = $(".paginationPageNumbersSelected");
                     if (previousPageNumber != null || previousPageNumber != undefined) {
                         previousPageNumber.removeClass();
-                        previousPageNumber.addClass("paginationPageNumbers");
+                        previousPageNumber.addClass("paginationPageNumbers btn btn-default");
                     }
                     else {
                     }
@@ -140,7 +144,7 @@ var Pagination = (function () {
                     console.log(e);
                 }
                 $(this).removeClass();
-                $(this).addClass("paginationPageNumbersSelected");
+                $(this).addClass("paginationPageNumbersSelected btn btn-warning");
             }
         });
     };

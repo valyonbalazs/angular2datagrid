@@ -1,35 +1,25 @@
 ﻿#gridTable {
     width:100%;
-    border-spacing: 0;
+    display:table;
 }
 
-thead, tbody, tr, th, td {
-    display:block;
-}
-
-thead tr {
-    width: 97%;
-    width: -webkit-calc(100% - 16px);
-    width:    -moz-calc(100% - 16px);
-    width:         calc(100% - 16px);
-}
-
-tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
-
-tbody {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-tbody td {
-    width: 19%;  /* 19% is less than (100% / 5 cols) = 20% */
+#gridTable thead, tbody {
     float: left;
+    width: 100%;
+}
+
+#gridTable tbody {
+    overflow: auto;
+    height: 30vh;
+}
+
+#gridTable tr {
+    width: 100%;
+    display: table;
+}
+
+#gridTable th, td {
+    width: 20vw;
 }
 
 .paginationPageNumbersSelected {

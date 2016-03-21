@@ -142,14 +142,18 @@ export class Pagination {
 
     private modifyPageNumbersClass(page: number) {
         // Adding and removing class for actual page number SASS styling
+        console.log(page);
+        console.log($(".paginationPageNumbers"));
         $(".paginationPageNumbers").each(function (n, s) {
+            console.log(s);
             let valueOfAElement = s.textContent;
+            console.log(valueOfAElement);
             if (parseInt(valueOfAElement) == page) {
                 try {
                     let previousPageNumber = $(".paginationPageNumbersSelected");
                     if (previousPageNumber != null || previousPageNumber != undefined) {
                         previousPageNumber.removeClass();
-                        previousPageNumber.addClass("paginationPageNumbers");
+                        previousPageNumber.addClass("paginationPageNumbers btn btn-default");
                     } else {
                     }
                 } catch (e) {
@@ -157,7 +161,7 @@ export class Pagination {
                 }
 
                 $(this).removeClass();
-                $(this).addClass("paginationPageNumbersSelected");
+                $(this).addClass("paginationPageNumbersSelected btn btn-warning");
             }
         });
     }

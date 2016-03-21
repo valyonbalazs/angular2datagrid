@@ -12,6 +12,7 @@ var grid_1 = require('./grid');
 var pagination_1 = require('./pagination');
 var data_container_1 = require('./data-container');
 var grid_configuration_1 = require('./grid-configuration');
+var filter_global_1 = require('./filter-global');
 var GridContainer = (function () {
     function GridContainer() {
         this.isPaginationEnabled = grid_configuration_1.GridConfig.GetIsPaginationEnabled();
@@ -38,7 +39,7 @@ var GridContainer = (function () {
     GridContainer = __decorate([
         core_1.Component({
             selector: 'grid-container',
-            directives: [grid_1.Grid, pagination_1.Pagination],
+            directives: [grid_1.Grid, pagination_1.Pagination, filter_global_1.FilterGlobal],
             templateUrl: '../html/grid-container.html'
         }), 
         __metadata('design:paramtypes', [])

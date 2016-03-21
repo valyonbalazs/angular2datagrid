@@ -1,16 +1,16 @@
 ﻿<input type="hidden" id="current_page"/>
 <div id="page_navigation" >
     <div class="col-lg-2 col-md-2 col-xs-3" id="page_nav_startPrev">
-        <a id="paginationFirstPageButton" (click)="firstPage()">First</a>&nbsp;
-        <a id="paginationPrevPageButton" (click)="previousPage()">&#60;&#60;Prev</a>
+        <a class="btn btn-default" id="paginationFirstPageButton" (click)="firstPage()">First</a>&nbsp;
+        <a class="btn btn-default" id="paginationPrevPageButton" (click)="previousPage()">&#60;&#60;Prev</a>
     </div>
 
     <div class="col-lg-2 col-md-2 col-xs-6" id="page_nav_pageNumbers">
-        <a class="paginationPageNumbers" *ngFor="#item of numberOfPagesArray" (click)="showPage(item, numberOfRowsOfTableToDisplay)"> {{ item }} </a><p id="lastPageNumber">&nbsp;... {{ numberOfPages }}</p>
+        <a class="paginationPageNumbers btn btn-default" *ngFor="#item of numberOfPagesArray" (click)="showPage(item, numberOfRowsOfTableToDisplay)"> {{ item }} </a><p id="lastPageNumber">&nbsp;... {{ numberOfPages }}</p>
     </div>
 
     <div class="col-lg-2 col-md-2 col-xs-3" id="page_nav_nextLast">
-        <a id="paginationNextPageButton" (click)="nextPage()">Next&#62;&#62;</a>&nbsp;
-        <a id="paginationLastPageButton" (click)="lastPage()">Last</a>
+        <a class="btn btn-default" id="paginationNextPageButton" (click)="nextPage()">Next&#62;&#62;</a>&nbsp;
+        <a class="btn btn-default" id="paginationLastPageButton" (click)="lastPage()">Last</a>
     </div>
 </div>

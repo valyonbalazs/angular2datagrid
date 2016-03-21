@@ -3,7 +3,7 @@
     private static instance: GridConfig = new GridConfig();
     // Default values
     private static isPaginationEnabled: boolean = true;
-    private static displayedRowsNumberWithPagination: number = 6;
+    private static displayedRowsNumberWithPagination: number = 12;
 
     constructor() {
         // Singleton

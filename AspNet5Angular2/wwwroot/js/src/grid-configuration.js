@@ -18,7 +18,7 @@ var GridConfig = (function () {
     GridConfig.instance = new GridConfig();
     // Default values
     GridConfig.isPaginationEnabled = true;
-    GridConfig.displayedRowsNumberWithPagination = 6;
+    GridConfig.displayedRowsNumberWithPagination = 12;
     return GridConfig;
 })();
 exports.GridConfig = GridConfig;

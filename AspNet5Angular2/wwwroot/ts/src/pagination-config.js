@@ -1,11 +1,13 @@
-"use strict";
 var PaginationConfig = (function () {
     function PaginationConfig() {
-        this.numberOfDisplayedRows = 6;
+        this.numberOfDisplayedRows = 8;
     }
     PaginationConfig.prototype.SetNumberOfDisplayedRows = function (rowsNumber) {
         this.numberOfDisplayedRows = rowsNumber;
     };
+    PaginationConfig.prototype.GetNumberOfDisplayedRows = function () {
+        return this.numberOfDisplayedRows;
+    };
     return PaginationConfig;
-}());
+})();
 exports.PaginationConfig = PaginationConfig;
