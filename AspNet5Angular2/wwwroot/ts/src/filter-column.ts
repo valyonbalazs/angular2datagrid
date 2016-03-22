@@ -14,6 +14,8 @@ export class FilterColumn {
     public columns: Array<Column>;
     private numberOfColumns: number = 0;
     private selectOptionsArray: Array<any>;
+    private selectedFilterSelectOption: HTMLElement = null;
+
 
     constructor() {
         this.Initializer();                      
@@ -43,10 +45,14 @@ export class FilterColumn {
                     columnContentArray.push(row[bindingName]);                   
                 }
             }.bind(this));
+            columnContentArray.sort();
             this.selectOptionsArray.push(columnContentArray);
         }
 
         console.log(this.selectOptionsArray);
+    }
 
+    private FilterElementSelected(event: Object) {
+        console.log(event.target.value);
     }
 }

@@ -13,6 +13,7 @@ var data_container_1 = require('./data-container');
 var FilterColumn = (function () {
     function FilterColumn() {
         this.numberOfColumns = 0;
+        this.selectedFilterSelectOption = null;
         this.Initializer();
     }
     FilterColumn.prototype.ngOnInit = function () {
@@ -35,9 +36,13 @@ var FilterColumn = (function () {
                     columnContentArray.push(row[bindingName]);
                 }
             }.bind(this));
+            columnContentArray.sort();
             this.selectOptionsArray.push(columnContentArray);
         }
         console.log(this.selectOptionsArray);
+    };
+    FilterColumn.prototype.FilterElementSelected = function (event) {
+        console.log(event.target.value);
     };
     FilterColumn = __decorate([
         core_1.Component({
