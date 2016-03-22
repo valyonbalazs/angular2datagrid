@@ -1,4 +1,8 @@
-﻿#gridTable {
+﻿#search {
+    float: right;
+}
+
+#gridTable {
     width:100%;
     display:table;
 }
@@ -20,6 +24,11 @@
 
 #gridTable th, td {
     width: 20vw;
+}
+
+#page_navigation {
+    display: flex;
+    justify-content:flex-end;
 }
 
 .paginationPageNumbersSelected {
