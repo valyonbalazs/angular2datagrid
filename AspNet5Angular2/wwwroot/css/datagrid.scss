@@ -27,8 +27,21 @@
 }
 
 #page_navigation {
+    width:auto;
     display: flex;
-    justify-content:flex-end;
+    align-items:baseline;
+}
+
+#paginationShownItemsCount {
+   width: 50%; 
+}
+
+#paginationButtonsContainer { 
+    width:auto;
+    display: flex;
+    align-items:baseline;
+    float:right;
+
 }
 
 .paginationPageNumbersSelected {

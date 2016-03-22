@@ -1,16 +1,20 @@
 ﻿<input type="hidden" id="current_page"/>
 <div id="page_navigation" >
-    <div  id="page_nav_startPrev">
-        <a class="btn btn-default" id="paginationFirstPageButton" (click)="firstPage()">First</a>&nbsp;
-        <a class="btn btn-default" id="paginationPrevPageButton" (click)="previousPage()">&#60;&#60;Prev</a>
+    <div  id="paginationShownItemsCount">
+        <p id="lastPageNumber">{{ currentPage }} page of {{ numberOfPages }}</p>
     </div>
+    <div id="paginationButtonsContainer">
+        <div id="page_nav_startPrev">
+            <a class="btn btn-default" id="paginationFirstPageButton" (click)="firstPage()">First</a>&nbsp;
+            <a class="btn btn-default" id="paginationPrevPageButton" (click)="previousPage()">&#60;&#60;Prev</a>
+        </div>
 
-    <div  id="page_nav_pageNumbers">
-        <a class="paginationPageNumbers btn btn-default" *ngFor="#item of numberOfPagesArray" (click)="showPage(item, numberOfRowsOfTableToDisplay)"> {{ item }} </a><p id="lastPageNumber">&nbsp;... {{ numberOfPages }}</p>
-    </div>
-
-    <div  id="page_nav_nextLast">
-        <a class="btn btn-default" id="paginationNextPageButton" (click)="nextPage()">Next&#62;&#62;</a>&nbsp;
-        <a class="btn btn-default" id="paginationLastPageButton" (click)="lastPage()">Last</a>
+        <div id="page_nav_pageNumbers">
+            <a class="paginationPageNumbers btn btn-default" *ngFor="#item of numberOfPagesArray" (click)="showPage(item, numberOfRowsOfTableToDisplay)"> {{ item }} </a>
+        </div>
+        <div id="page_nav_nextLast">
+            <a class="btn btn-default" id="paginationNextPageButton" (click)="nextPage()">Next&#62;&#62;</a>&nbsp;
+            <a class="btn btn-default" id="paginationLastPageButton" (click)="lastPage()">Last</a>
+        </div>
     </div>
 </div>

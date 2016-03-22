@@ -17,6 +17,7 @@ var Pagination = (function () {
         this.currentLink = 1;
         this.numberOfPages = 0;
         this.numberOfPagesArray = [];
+        this.currentPage = 1;
     }
     /*
     * Used as a casual constructor
@@ -107,6 +108,7 @@ var Pagination = (function () {
      * @param displayNumberOfRows: how many rows have to be displayed in the grid.
      */
     Pagination.prototype.showPage = function (pageNumber, displayNumberOfRows) {
+        this.currentPage = pageNumber;
         this.modifyTbodyRowsAccordingToPageNumber(pageNumber, displayNumberOfRows);
         this.modifyPageNumbersClass(pageNumber);
         this.modifyFirstAndPrevPageButtons(pageNumber);
@@ -158,11 +160,9 @@ var Pagination = (function () {
         var lastPageNumber = $("#lastPageNumber").text();
         lastPageNumber = lastPageNumber.replace(/\D/g, '');
         if (parseInt(lastPageNumber) == page) {
-            $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").hide();
         }
         else {
-            $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "inline");
         }
     };

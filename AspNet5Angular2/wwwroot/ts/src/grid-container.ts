@@ -5,10 +5,11 @@ import {Column} from './column';
 import {DataContainer} from './data-container';
 import {GridConfig} from './grid-configuration';
 import {FilterGlobal} from './filter-global';
+import {FilterColumn} from './filter-column';
 
 @Component({
     selector: 'grid-container',
-    directives: [Grid, Pagination, FilterGlobal],
+    directives: [Grid, Pagination, FilterGlobal, FilterColumn],
     templateUrl: '../html/grid-container.html'
 })
 

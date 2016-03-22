@@ -1,7 +1,7 @@
 ﻿<table id="gridTable"  class="table table-striped">
     <thead>
         <tr>
-            <td *ngFor="#col of columns"><a (click)="sort(col.getDataBindingName())"> {{col.getDisplayedName()}} </a></td>
+            <th *ngFor="#col of columns"><a (click)="sort(col.getDataBindingName())"> {{col.getDisplayedName()}} </a></th>
         </tr>
     </thead>
     <tbody id="gridTbody">

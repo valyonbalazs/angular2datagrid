@@ -9,13 +9,14 @@ import {TestData} from './test-data';
 import {Pagination} from './pagination';
 import {PaginationConfig} from './pagination-config';
 import {FilterGlobal} from './filter-global';
+import {FilterColumn} from './filter-column';
 
 
 let testData = new TestData();
 DataContainer.setRows(testData.getRows());
 DataContainer.setColumns(testData.getColumns());
 
-bootstrap(GridContainer, [Pagination, FilterGlobal])
+bootstrap(GridContainer, [Pagination, FilterGlobal, FilterColumn])
     .then(app => {
         console.log(app);
     });

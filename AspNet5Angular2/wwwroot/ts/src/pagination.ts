@@ -8,7 +8,6 @@ import {GridConfig} from './grid-configuration';
 
 @Component({
     selector: 'pagination',
-
     templateUrl: '../html/pagination.html' 
 })
 
@@ -18,6 +17,7 @@ export class Pagination {
     private currentLink: number = 1;
     private numberOfPages: number = 0;
     private numberOfPagesArray: Array<number> = [];
+    private currentPage: number = 1;
 
     constructor() {
 
@@ -121,7 +121,8 @@ export class Pagination {
      * @param displayNumberOfRows: how many rows have to be displayed in the grid.
      */
     public showPage(pageNumber: number, displayNumberOfRows: number) {
-
+        
+        this.currentPage = pageNumber;
         this.modifyTbodyRowsAccordingToPageNumber(pageNumber, displayNumberOfRows);
         this.modifyPageNumbersClass(pageNumber);
         this.modifyFirstAndPrevPageButtons(pageNumber);
@@ -179,12 +180,10 @@ export class Pagination {
         let lastPageNumber = $("#lastPageNumber").text();
         lastPageNumber = lastPageNumber.replace(/\D/g, '');
         if (parseInt(lastPageNumber) == page) {
-            $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").hide();
 
         }
         else {
-            $("#lastPageNumber").text(" ..." + this.numberOfPages);
             $("#lastPageNumber").css("display", "inline");
 
         }
