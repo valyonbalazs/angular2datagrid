@@ -1,10 +1,28 @@
-﻿#search {
+﻿#filterGlobalSearchContainer{
+    width: 100%;
+    min-height: 3vh;
+}
+
+#search {
     float: right;
 }
 
-#gridTable {
-    width:100%;
+#filterColumnContainer{
+    width: 100%;
     display:table;
+    table-layout:fixed;
+
+}
+
+.filterColumnSelect {
+    display:table-cell;
+    width: 12vw;
+}
+
+#gridTable {
+
+    display:table;
+    table-layout:fixed;
 }
 
 #gridTable thead, tbody {
@@ -18,12 +36,14 @@
 }
 
 #gridTable tr {
-    width: 100%;
+    width:100%;
     display: table;
+    table-layout:fixed;
+    float:left;
 }
 
 #gridTable th, td {
-    width: 20vw;
+    width: 10vw;
 }
 
 #page_navigation {

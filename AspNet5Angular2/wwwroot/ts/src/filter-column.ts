@@ -45,6 +45,7 @@ export class FilterColumn {
                     columnContentArray.push(row[bindingName]);                   
                 }
             }.bind(this));
+            columnContentArray.push("--none--");
             columnContentArray.sort();
             this.selectOptionsArray.push(columnContentArray);
         }
@@ -52,7 +53,20 @@ export class FilterColumn {
         console.log(this.selectOptionsArray);
     }
 
-    private FilterElementSelected(event: Object) {
+    private FilterElementSelected(event) {
         console.log(event.target.value);
+
+        var $rows = $('#gridTbody tr');
+        var value = $.trim(event.target.value).replace(/ +/g, ' ').toLowerCase();
+        $rows.show().filter(function () {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            console.log(text);
+            console.log(text.indexOf(value));
+            return !~text.indexOf(value);
+        }).hide()
+
+        if (event.target.value == "--none--") {
+            document.getElementById("paginationFirstPageButton").click();
+        }
     }
 }
