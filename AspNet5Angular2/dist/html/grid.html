@@ -1,10 +1,10 @@
-<table  class="table table-striped">
+<table id="gridTable"  class="table table-striped table-hover">
     <thead>
         <tr>
-            <td *ngFor="#col of columns"><a (click)="sort(col.getDataBindingName())"> {{col.getDisplayedName()}} </a></td>
+            <th *ngFor="#col of columns"><a (click)="sort(col.getDataBindingName())"> {{col.getDisplayedName()}} </a></th>
         </tr>
     </thead>
-    <tbody id="paginate">
+    <tbody id="gridTbody">
         <tr *ngFor="#row of rows">
             <td *ngFor="#col of columns">{{row[col.getDataBindingName()]}}</td>
         </tr>

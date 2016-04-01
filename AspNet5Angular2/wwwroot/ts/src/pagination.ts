@@ -167,11 +167,15 @@ export class Pagination {
 
     private modifyFirstAndPrevPageButtons(page: number) {
         if (page == 1) {
-            $("#paginationFirstPageButton").hide();
-            $("#paginationPrevPageButton").hide();
+            //$("#paginationFirstPageButton").hide();
+            //$("#paginationPrevPageButton").hide();
+            $("#paginationFirstPageButton").prop('disabled', true);
+            $("#paginationPrevPageButton").prop('disabled', true);
         } else {
-            $("#paginationFirstPageButton").show();
-            $("#paginationPrevPageButton").show();
+            //$("#paginationFirstPageButton").show();
+            //$("#paginationPrevPageButton").show();
+            $("#paginationFirstPageButton").prop('disabled', false);
+            $("#paginationPrevPageButton").prop('disabled', false);
         }
     }
 

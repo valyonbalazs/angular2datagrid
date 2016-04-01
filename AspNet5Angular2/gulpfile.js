@@ -16,14 +16,14 @@ directory.from = {};
 directory.from.root = './wwwroot/';
 directory.from.css = directory.from.root + 'css/';
 directory.from.html = directory.from.root + 'html/';
-directory.from.js = directory.from.root + 'js/';
+directory.from.js = directory.from.root + 'js/src/';
 directory.from.jslib = directory.from.root + 'jslib/';
 
 directory.to = {};
 directory.to.root = './dist/';
 directory.to.css = directory.to.root + 'css/';
 directory.to.html = directory.to.root + 'html/';
-directory.to.js = directory.to.root + 'js/';
+directory.to.js = directory.to.root + 'js/src/';
 directory.to.jslib = directory.to.root + 'jslib/';
 
 var extension = {};
