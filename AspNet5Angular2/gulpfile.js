@@ -7,6 +7,7 @@ var connect = require('gulp-connect');
 var del = require('del');
 var minify = require('gulp-minify');
 var minifyCss = require('gulp-minify-css');
+var angularProtractor = require('gulp-angular-protractor');
 var runSequence = require('run-sequence');
 var size = require('gulp-size');
 var uglify = require('gulp-uglify');
@@ -18,6 +19,7 @@ directory.from.css = directory.from.root + 'css/';
 directory.from.html = directory.from.root + 'html/';
 directory.from.js = directory.from.root + 'js/src/';
 directory.from.jslib = directory.from.root + 'jslib/';
+directory.from.test = directory.from.root + 'ts/test/';
 
 directory.to = {};
 directory.to.root = './dist/';
@@ -25,6 +27,7 @@ directory.to.css = directory.to.root + 'css/';
 directory.to.html = directory.to.root + 'html/';
 directory.to.js = directory.to.root + 'js/src/';
 directory.to.jslib = directory.to.root + 'jslib/';
+directory.to.test = directory.to.root + 'js/test/';
 
 var extension = {};
 // all *.xxx files from a dir: *.xxx
@@ -49,6 +52,7 @@ filesTo.css = directory.to.css + extension.css;
 filesTo.html = directory.to.html + extension.html;
 filesTo.js = directory.to.js + extension.js;
 filesTo.jslib = directory.to.jslib + extension.js;
+filesTo.test = directory.to.test + extension.js;
 
 /*
  * CLEANING DESTINATION FOLDERS
@@ -114,6 +118,16 @@ gulp.task('testDist', function (cb) {
       'connect',
       cb
     );
+});
+
+gulp.task('runProtractorTestsWithSelinium', function () {
+    gulp.src([filesTo.test])
+    .pipe(angularProtractor({
+        configFile: './wwwroot/js/test/configuration.js',
+        args: ['--baseUrl', 'http://localhost:4444/wd/hub'],
+        'autoStartStopServer': true,
+        'debug': true
+    }));
 });
 
 
