@@ -19,7 +19,7 @@ directory.from.css = directory.from.root + 'css/';
 directory.from.html = directory.from.root + 'html/';
 directory.from.js = directory.from.root + 'js/src/';
 directory.from.jslib = directory.from.root + 'jslib/';
-directory.from.test = directory.from.root + 'ts/test/';
+directory.from.test = directory.from.root + 'js/test/';
 
 directory.to = {};
 directory.to.root = './dist/';
@@ -45,6 +45,7 @@ filesFrom.css = directory.from.css + extension.css;
 filesFrom.html = directory.from.html + extension.html;
 filesFrom.js = directory.from.js + extension.js;
 filesFrom.jslib = directory.from.jslib + extension.js;
+filesFrom.test = directory.from.test + extension.js;
 
 var filesTo = {};
 filesTo.rootHtml = directory.to.root + exampleFile;
@@ -62,7 +63,8 @@ gulp.task('clean', function (cb) {
         directory.to.css,
         directory.to.html,
         directory.to.js,
-        directory.to.jslib
+        directory.to.test,
+        directory.to.jslib,
     ], cb);
 });
 
@@ -83,6 +85,11 @@ gulp.task('copy:js', function () {
         .pipe(gulp.dest(directory.to.js))
 });
 
+gulp.task('copy:js-tests', function () {
+    return gulp.src([filesFrom.test])
+        .pipe(gulp.dest(directory.to.test))
+});
+
 gulp.task('copy:jsLib', function () {
     return gulp.src([filesFrom.jslib])
         .pipe(gulp.dest(directory.to.jslib))
@@ -97,6 +104,7 @@ gulp.task('RunAllCopyTasks', function (cb) {
     runSequence(
       'clean',
       'copy:js',
+      'copy:js-tests',
       'copy:jsLib',
       'copy:css',
       'copy:html',
@@ -121,7 +129,7 @@ gulp.task('testDist', function (cb) {
 });
 
 gulp.task('runProtractorTestsWithSelinium', function () {
-    gulp.src([filesTo.test])
+    gulp.src([filesFrom.test])
     .pipe(angularProtractor({
         configFile: './wwwroot/js/test/configuration.js',
         args: ['--baseUrl', 'http://localhost:4444/wd/hub'],
