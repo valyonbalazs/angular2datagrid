@@ -10,7 +10,7 @@
         preprocessors: {
             'js/test/ts-test-*.js': ['browserify']
         },
-        reporters: ['dots'],
+        reporters: ['mocha'],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
