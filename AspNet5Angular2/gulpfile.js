@@ -11,6 +11,7 @@ var angularProtractor = require('gulp-angular-protractor');
 var runSequence = require('run-sequence');
 var size = require('gulp-size');
 var uglify = require('gulp-uglify');
+var karma = require('karma').Server;
 
 var directory = {};
 directory.from = {};
@@ -120,15 +121,16 @@ gulp.task('connect', function () {
     });
 });
 
-gulp.task('testDist', function (cb) {
+gulp.task('createDistribution', function (cb) {
     runSequence(
+      'test:runAll',
       'RunAllCopyTasks',
       'connect',
       cb
     );
 });
 
-gulp.task('runProtractorTestsWithSelinium', function () {
+gulp.task('test:runProtractorTests', function () {
     gulp.src([filesFrom.test])
     .pipe(angularProtractor({
         configFile: './wwwroot/js/test/configuration.js',
@@ -136,6 +138,21 @@ gulp.task('runProtractorTestsWithSelinium', function () {
         'autoStartStopServer': true,
         'debug': true
     }));
+});
+
+gulp.task('test:runKarmaTests', function () {
+    karma.start({
+        configFile: __dirname + '/wwwroot/karma.conf.js',
+        singleRun: true
+    });
+});
+
+gulp.task('test:runAll', function (cb) {
+    runSequence(
+      'test:runKarmaTests',
+      'test:runProtractorTests',
+      cb
+    );
 });
 
 
@@ -163,15 +180,15 @@ var cssToMove = [
    paths.npmSrc + '/bootstrap/dist/css/bootstrap-theme.min.css',
    paths.npmSrc + '/bootstrap/dist/css/bootstrap-theme.min.css.map',
 ];
-gulp.task('moveToJs', function () {
+gulp.task('move:ToJs', function () {
     return gulp.src(jsToMove).pipe(gulp.dest(paths.jsTarget));
 });
 
-gulp.task('moveToCss', function () {
+gulp.task('move:ToCss', function () {
     return gulp.src(cssToMove).pipe(gulp.dest(paths.cssTarget));
 });
 
-gulp.task('RunAllNpmPackageMoveTasks', function (cb) {
+gulp.task('move:RunAllNpmPackageMoveTasks', function (cb) {
     runSequence(
       'moveToJs',
       'moveToCss',
