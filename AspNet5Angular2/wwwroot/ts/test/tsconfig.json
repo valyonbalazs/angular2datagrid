@@ -12,8 +12,7 @@
     "target": "es5"
   },
   "files": [
-    "test-column.ts",
-    "test-datacontainer.ts"
+    "ts-test-datacontainer.ts"
   ],
   "exclude": [
     "node_modules",
