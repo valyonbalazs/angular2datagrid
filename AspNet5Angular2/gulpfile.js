@@ -121,14 +121,14 @@ gulp.task('connect', function () {
     });
 });
 
-gulp.task('createDistribution', function (cb) {
+gulp.task('create:CreateDistribution', function (cb) {
     runSequence(
-      'test:runAll',
       'RunAllCopyTasks',
       'connect',
       cb
     );
 });
+
 
 gulp.task('test:runProtractorTests', function () {
     gulp.src([filesFrom.test])

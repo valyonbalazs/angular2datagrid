@@ -9,11 +9,11 @@ export class TestData {
         this.loadTestData();
     }
 
-    public getColumns() {
+    public getColumns() : Array<Column> {
         return this.Columns;
     }
 
-    public getRows() {
+    public getRows() : Array<any>{
         return this.Rows;
     }
 

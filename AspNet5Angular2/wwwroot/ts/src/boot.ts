@@ -5,16 +5,16 @@ import {GridContainer} from './grid-container';
 import {DataContainer} from './data-container';
 import {GridConfig} from './grid-configuration';
 import {Column} from './column';
-import {TestData} from './test-data';
+import {DataLoader} from './data-loader';
 import {Pagination} from './pagination';
 import {PaginationConfig} from './pagination-config';
 import {FilterGlobal} from './filter-global';
 import {FilterColumn} from './filter-column';
 
 
-let testData = new TestData();
-DataContainer.setRows(testData.getRows());
-DataContainer.setColumns(testData.getColumns());
+let dataLoader = new DataLoader();
+DataContainer.setRows(dataLoader.getRows());
+DataContainer.setColumns(dataLoader.getColumns());
 
 bootstrap(GridContainer, [Pagination, FilterGlobal, FilterColumn])
     .then(app => {

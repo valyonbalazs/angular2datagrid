@@ -1,4 +1,4 @@
-﻿describe('Angular 2 Grid Creation Tests', function () {
+describe('Angular 2 Grid Creation Tests', function () {
 
     browser.get('http://localhost:1124/index.html');
     it('Title of the page is present', function () {
