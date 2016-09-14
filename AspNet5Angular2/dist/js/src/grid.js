@@ -28,16 +28,16 @@ var Grid = (function () {
         return this.editable;
     };
     Grid.prototype.SetTableCellEditableEventHandler = function () {
-        $("#gridTable").on("input", function () {
-            var value = this.value;
-            console.log(this);
-            console.log(value);
+        $("#gridTable").on("input", "td", function () {
+            var td = this;
             clearTimeout($.data(this, 'timer'));
-            var wait = setTimeout(saveData, 500, value); // delay after user types
+            var wait = setTimeout(saveData.bind(td.innerText), 500); // delay after user types
             $(this).data('timer', wait);
         });
-        function saveData(data) {
-            console.log(data);
+        // Save the date of the edited cell in a preferred way
+        function saveData() {
+            console.log(this);
+            // send to the database with ajax, or websocket etc..
         }
     };
     __decorate([
