@@ -4,9 +4,15 @@
             <th *ngFor="#col of columns"><a (click)="sort(col.getDataBindingName())"> {{col.getDisplayedName()}} </a></th>
         </tr>
     </thead>
-    <tbody id="gridTbody">
+    <tbody id="gridTbody" *ngIf="!GetIsCellEditable()">
         <tr *ngFor="#row of rows">
-            <td *ngFor="#cols of columns">{{row[cols.getDataBindingName()]}}</td>
+            <td contenteditable="false" *ngFor="#cols of columns">{{row[cols.getDataBindingName()]}}</td>
+        </tr>
+    </tbody>
+
+    <tbody id="gridTbody" *ngIf="GetIsCellEditable()">
+        <tr *ngFor="#row of rows">
+            <td contenteditable="true" *ngFor="#cols of columns">{{row[cols.getDataBindingName()]}}</td>
         </tr>
     </tbody>
 </table>

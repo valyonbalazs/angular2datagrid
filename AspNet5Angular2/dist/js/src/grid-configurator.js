@@ -67,6 +67,10 @@ var GridConfigurator = (function () {
         core_1.Input("tableheight"), 
         __metadata('design:type', Number)
     ], GridConfigurator.prototype, "gridTableHeight", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], GridConfigurator.prototype, "editable", void 0);
     GridConfigurator = __decorate([
         core_1.Component({
             selector: 'grid-configurator',

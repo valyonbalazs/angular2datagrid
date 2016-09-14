@@ -17,9 +17,28 @@ var Grid = (function () {
     }
     Grid.prototype.ngOnInit = function () {
         console.log("\nletrejott GRID with name " + this.name + " and id " + this.id);
+        if (this.editable) {
+            this.SetTableCellEditableEventHandler();
+        }
     };
     Grid.prototype.sort = function (key) {
         this.sorter.sort(key, this.rows);
+    };
+    Grid.prototype.GetIsCellEditable = function () {
+        return this.editable;
+    };
+    Grid.prototype.SetTableCellEditableEventHandler = function () {
+        $("#gridTable").on("input", function () {
+            var value = this.value;
+            console.log(this);
+            console.log(value);
+            clearTimeout($.data(this, 'timer'));
+            var wait = setTimeout(saveData, 500, value); // delay after user types
+            $(this).data('timer', wait);
+        });
+        function saveData(data) {
+            console.log(data);
+        }
     };
     __decorate([
         core_1.Input(), 
@@ -29,6 +48,10 @@ var Grid = (function () {
         core_1.Input(), 
         __metadata('design:type', String)
     ], Grid.prototype, "id", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], Grid.prototype, "editable", void 0);
     Grid = __decorate([
         core_1.Component({
             selector: 'grid',

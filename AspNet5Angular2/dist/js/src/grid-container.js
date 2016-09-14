@@ -13,10 +13,6 @@ var grid_configurator_1 = require('./grid-configurator');
 var GridContainer = (function () {
     function GridContainer() {
     }
-    //private pagination: boolean = GridConfig.GetIsPaginationEnabled();
-    //private filtercolumn: boolean = GridConfig.GetIsFilterColumnEnabled();
-    //private filterglobal: boolean = GridConfig.GetIsFilterGlobalEnabled();
-    //private tableheight: number = GridConfig.GetGridTableHeight();
     GridContainer.prototype.ngOnInit = function () {
         console.log("\nletrejott GRIDCONTAINER");
     };
