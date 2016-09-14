@@ -1,3 +1,4 @@
+"use strict";
 var test_data_1 = require('./test-data');
 var DataLoader = (function () {
     function DataLoader() {
@@ -17,6 +18,6 @@ var DataLoader = (function () {
         this.Rows = testData.getRows();
     };
     return DataLoader;
-})();
+}());
 exports.DataLoader = DataLoader;
 //# sourceMappingURL=data-loader.js.map

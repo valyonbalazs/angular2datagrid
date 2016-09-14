@@ -1,3 +1,4 @@
+"use strict";
 var GridConfig = (function () {
     function GridConfig() {
         // Singleton
@@ -32,6 +33,6 @@ var GridConfig = (function () {
     GridConfig.isFilterColumnEnabled = true;
     GridConfig.gridTableHeight = 40;
     return GridConfig;
-})();
+}());
 exports.GridConfig = GridConfig;
 //# sourceMappingURL=grid-configuration.js.map

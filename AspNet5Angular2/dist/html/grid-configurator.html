@@ -1,0 +1,12 @@
+<div *ngIf="GetIsFilterGlobalEnabled()">
+    <filter-global></filter-global>
+</div>
+<div *ngIf="GetIsFilterColumnEnabled()">
+    <filter-column></filter-column>
+</div>
+
+<grid id="mainDataGrid" name="gridName" [rows]="rows" [columns]="columns"></grid>
+
+<div *ngIf="GetIsPaginationEnabled()">
+    <pagination></pagination>
+</div>

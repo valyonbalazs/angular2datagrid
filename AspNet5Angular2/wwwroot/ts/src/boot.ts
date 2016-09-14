@@ -10,13 +10,14 @@ import {Pagination} from './pagination';
 import {PaginationConfig} from './pagination-config';
 import {FilterGlobal} from './filter-global';
 import {FilterColumn} from './filter-column';
+import {GridConfigurator} from './grid-configurator';
 
 
 let dataLoader = new DataLoader();
 DataContainer.setRows(dataLoader.getRows());
 DataContainer.setColumns(dataLoader.getColumns());
 
-bootstrap(GridContainer, [Pagination, FilterGlobal, FilterColumn])
+bootstrap(GridContainer, [GridConfigurator])
     .then(app => {
         console.log(app);
     });

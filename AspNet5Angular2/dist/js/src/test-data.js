@@ -1,3 +1,4 @@
+"use strict";
 var column_1 = require('./column');
 var TestData = (function () {
     function TestData() {
@@ -88,6 +89,6 @@ var TestData = (function () {
         this.Columns = cols;
     };
     return TestData;
-})();
+}());
 exports.TestData = TestData;
 //# sourceMappingURL=test-data.js.map
