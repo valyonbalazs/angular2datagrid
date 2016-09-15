@@ -1,18 +1,23 @@
-﻿<table id="gridTable"  class="table table-striped table-hover">
+﻿<table id="gridTable" class="table table-striped table-hover">
     <thead id="gridThead">
-        <tr>
-            <th *ngFor="#col of columns"><a (click)="sort(col.getDataBindingName())"> {{col.getDisplayedName()}} </a></th>
-        </tr>
+    <tr>
+        <th *ngFor="#col of columns"><a (click)="sort(col.getDataBindingName())"> {{col.getDisplayedName()}} </a></th>
+    </tr>
     </thead>
     <tbody id="gridTbody" *ngIf="!GetIsCellEditable()">
-        <tr *ngFor="#row of rows">
-            <td contenteditable="false" *ngFor="#cols of columns">{{row[cols.getDataBindingName()]}}</td>
-        </tr>
+    <tr *ngFor="#row of rows">
+        <td contenteditable="false" *ngFor="#cols of columns">{{row[cols.getDataBindingName()]}}</td>
+    </tr>
     </tbody>
 
     <tbody id="gridTbody" *ngIf="GetIsCellEditable()">
-        <tr *ngFor="#row of rows">
-            <td contenteditable="true" *ngFor="#cols of columns">{{row[cols.getDataBindingName()]}}</td>
-        </tr>
+    <tr *ngFor="#row of rows">
+        <td contenteditable="true" *ngFor="#cols of columns">{{row[cols.getDataBindingName()]}}</td>
+    </tr>
     </tbody>
 </table>
+
+<div class='custom-menu'>
+    <h5 data-action="first">Select row</h5>
+    <h5 data-action="second">Delete row</h5>
+</div>

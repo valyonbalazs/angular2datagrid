@@ -19,6 +19,8 @@ export class Pagination {
     private numberOfPagesArray: Array<number> = [];
     private currentPage: number = 1;
 
+    @Input() numberofrows: number;
+
     constructor() {
 
     }
@@ -29,7 +31,7 @@ export class Pagination {
     */ 
     ngOnInit() {
         console.log("\nletrejott PAGINATION");
-        this.numberOfRowsOfTableToDisplay = GridConfig.GetDisplayedRowsNumberWithPagination();
+        this.numberOfRowsOfTableToDisplay = this.numberofrows;
         setTimeout(function () {
             this.initializer();
             this.showPage(1, this.numberOfRowsOfTableToDisplay);

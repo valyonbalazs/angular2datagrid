@@ -20,6 +20,7 @@ var Grid = (function () {
         if (this.editable) {
             this.SetTableCellEditableEventHandler();
         }
+        setTimeout(this.SetRightClickContextMenu, 2000);
     };
     Grid.prototype.sort = function (key) {
         this.sorter.sort(key, this.rows);
@@ -38,6 +39,53 @@ var Grid = (function () {
         function saveData() {
             console.log(this);
             // send to the database with ajax, or websocket etc..
+        }
+    };
+    Grid.prototype.SetRightClickContextMenu = function () {
+        var rows = $("#gridTbody").children();
+        var rightClickedRow = null;
+        for (var i = 0; i < rows.length - 1; i++) {
+            var row = rows[i];
+            $(row).bind("contextmenu", function (event) {
+                // Avoid the real one
+                event.preventDefault();
+                rightClickedRow = this;
+                // Show contextmenu
+                $(".custom-menu").finish().toggle(100).
+                    // In the right position (the mouse)
+                    css({
+                    top: event.pageY + "px",
+                    left: event.pageX + "px"
+                });
+            });
+            $(row).bind("mousedown", function (e) {
+                // If the clicked element is not the menu
+                if (!($(e.target).parents(".custom-menu").length > 0)) {
+                    // Hide it
+                    $(".custom-menu").hide(100);
+                }
+            });
+        }
+        // If the menu element is clicked
+        $(".custom-menu h5").click(function () {
+            // This is the triggered action name
+            switch ($(this).attr("data-action")) {
+                // A case for each action. Your actions here
+                case "first":
+                    SelectRow(this);
+                    break;
+                case "second":
+                    DeleteRow(this);
+                    break;
+            }
+            // Hide it AFTER the action was triggered
+            $(".custom-menu").hide(100);
+        });
+        function SelectRow(row) {
+            console.log(rightClickedRow);
+        }
+        function DeleteRow(row) {
+            console.log(rightClickedRow);
         }
     };
     __decorate([

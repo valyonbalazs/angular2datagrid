@@ -71,6 +71,10 @@ var GridConfigurator = (function () {
         core_1.Input(), 
         __metadata('design:type', Boolean)
     ], GridConfigurator.prototype, "editable", void 0);
+    __decorate([
+        core_1.Input("numberofrows"), 
+        __metadata('design:type', Number)
+    ], GridConfigurator.prototype, "numberOfRows", void 0);
     GridConfigurator = __decorate([
         core_1.Component({
             selector: 'grid-configurator',

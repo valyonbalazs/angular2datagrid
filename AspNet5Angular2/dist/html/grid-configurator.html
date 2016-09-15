@@ -8,5 +8,5 @@
 <grid id="mainDataGrid" name="gridName" [rows]="rows" [columns]="columns" [editable]="editable"></grid>
 
 <div *ngIf="GetIsPaginationEnabled()">
-    <pagination></pagination>
+    <pagination [numberofrows]="numberOfRows"></pagination>
 </div>

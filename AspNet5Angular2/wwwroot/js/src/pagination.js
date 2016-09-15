@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var data_container_1 = require('./data-container');
-var grid_configuration_1 = require('./grid-configuration');
 var Pagination = (function () {
     function Pagination() {
         this.numberOfRowsOfTableToDisplay = 8;
@@ -26,7 +25,7 @@ var Pagination = (function () {
     */
     Pagination.prototype.ngOnInit = function () {
         console.log("\nletrejott PAGINATION");
-        this.numberOfRowsOfTableToDisplay = grid_configuration_1.GridConfig.GetDisplayedRowsNumberWithPagination();
+        this.numberOfRowsOfTableToDisplay = this.numberofrows;
         setTimeout(function () {
             this.initializer();
             this.showPage(1, this.numberOfRowsOfTableToDisplay);
@@ -206,6 +205,10 @@ var Pagination = (function () {
             this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
         }
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Pagination.prototype, "numberofrows", void 0);
     Pagination = __decorate([
         core_1.Component({
             selector: 'pagination',

@@ -24,6 +24,7 @@ export class GridConfigurator implements OnInit {
     @Input("filterglobal") isFilterGlobalEnabled: boolean;
     @Input("tableheight") gridTableHeight: number;
     @Input() editable: boolean;
+    @Input("numberofrows") numberOfRows: number;
 
     ngOnInit() {
         console.log("\nletrejott GRIDCONFIGURATOR");
@@ -66,7 +67,3 @@ export class GridConfigurator implements OnInit {
         $("gridTable tbody").css("height", this.gridTableHeight + "vh");
     } 
 }
-
-
-
-
