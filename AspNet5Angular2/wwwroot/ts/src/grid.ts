@@ -96,8 +96,8 @@ export class Grid implements OnInit {
             switch ($(this).attr("data-action")) {
 
                 // A case for each action. Your actions here
-                case "first": SelectRow(); break;
-                case "second": DeleteRow(); break;
+                case "select": SelectRow(); break;
+                case "delete": DeleteRow(); break;
             }
 
             // Hide it AFTER the action was triggered
@@ -105,11 +105,27 @@ export class Grid implements OnInit {
         });
 
         function SelectRow() {
-            console.log(rightClickedRow);
+            var backgroundColor = $(rightClickedRow).css("background-color");
+            if ((backgroundColor == "rgba(0, 0, 0, 0)") ||
+                (backgroundColor == "rgb(0, 0, 0)") ||
+                (backgroundColor == "rgb(249, 249, 249)")) {
+                $(rightClickedRow).css("background-color", "#E8CC6F");
+            } else {
+                $(rightClickedRow).css("background-color", "#F9F9F9");
+            }
+
+            // Do something with the selected row as needed
+            // ADD CODE HERE FOR FURTHER MODIFICATION
+
         }
 
         function DeleteRow() {
             console.log(rightClickedRow);
+
+            // Just hiding for demonstration, more complex operation could 
+            // be added here, such as deleting from DB
+            $(rightClickedRow).remove();
+            $("#rowDeletedAlert").show();
         }
     }
 } 
