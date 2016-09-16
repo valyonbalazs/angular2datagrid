@@ -15,9 +15,6 @@ import {FilterColumn} from './filter-column';
 
 export class GridConfigurator implements OnInit {
 
-    private rows: Array<any>;
-    private columns: Array<Column>;
-
     @Input() name: string;
     @Input("pagination") isPaginationEnabled: boolean;
     @Input("filtercolumn") isFilterColumnEnabled: boolean;
@@ -25,6 +22,9 @@ export class GridConfigurator implements OnInit {
     @Input("tableheight") gridTableHeight: number;
     @Input() editable: boolean;
     @Input("numberofrows") numberOfRows: number;
+
+    private rows: Array<any>;
+    private columns: Array<Column>;
 
     ngOnInit() {
         console.log("\nletrejott GRIDCONFIGURATOR");

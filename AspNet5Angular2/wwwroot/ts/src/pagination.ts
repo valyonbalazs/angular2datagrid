@@ -3,7 +3,6 @@
 import {Component, Input, OnInit} from 'angular2/core';
 import {Grid} from './grid';
 import {DataContainer} from './data-container';
-import {PaginationConfig} from './pagination-config';
 import {GridConfig} from './grid-configuration';
 
 @Component({

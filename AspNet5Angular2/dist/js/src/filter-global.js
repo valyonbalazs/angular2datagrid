@@ -9,36 +9,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
-var grid_configuration_1 = require('./grid-configuration');
+var core_1 = require("angular2/core");
 var FilterGlobal = (function () {
     function FilterGlobal() {
         this.searchGlobalFilter = null;
-        console.log("\nletrejott FILTERGLOBAL");
     }
     FilterGlobal.prototype.ngOnInit = function () {
         var _this = this;
-        this.searchGlobalFilter = document.getElementById('search');
-        this.searchGlobalFilter.addEventListener("keyup", function (e) { return _this.SearchKeyUp(e); });
+        console.log("\FILTER-COLUMN was initiatied and FILTERGLOBAL");
+        this.searchGlobalFilter = document.getElementById("search");
+        this.searchGlobalFilter.addEventListener("keyup", function (e) { return _this.searchKeyUp(e); });
     };
-    FilterGlobal.prototype.SearchKeyUp = function (event) {
-        //console.log(event);
-        var $rows = $('#gridTbody tr');
-        var searchInput = $('#search');
-        var value = $.trim(searchInput.val()).replace(/ +/g, ' ').toLowerCase();
+    FilterGlobal.prototype.searchKeyUp = function (event) {
+        var $rows = $("#gridTbody tr");
+        var searchInput = $("#search");
+        var value = $.trim(searchInput.val()).replace(/ +/g, " ").toLowerCase();
         $rows.show().filter(function () {
-            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            var text = $(this).text().replace(/\s+/g, " ").toLowerCase();
             return !~text.indexOf(value);
         }).hide();
-        if (searchInput.val().length == 0 && grid_configuration_1.GridConfig.GetIsPaginationEnabled() == true) {
+        if (searchInput.val().length == 0 && this.pagination) {
             document.getElementById("paginationFirstPageButton").click();
-            console.log("was clicked");
         }
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], FilterGlobal.prototype, "pagination", void 0);
     FilterGlobal = __decorate([
         core_1.Component({
-            selector: 'filter-global',
-            templateUrl: '../html/filter-global.html'
+            selector: "filter-global",
+            templateUrl: "../html/filter-global.html"
         }), 
         __metadata('design:paramtypes', [])
     ], FilterGlobal);

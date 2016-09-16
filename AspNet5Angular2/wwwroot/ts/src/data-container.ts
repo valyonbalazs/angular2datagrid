@@ -1,7 +1,9 @@
-﻿import {Column} from './column';
+﻿import {Column} from "./column";
 
 /** 
- * Singleton datasource object for one grid
+ * Singleton datasource object for the grid.
+ * This class will hold the data for the grid
+ * in columns and rows format.
  */
 export class DataContainer {
     

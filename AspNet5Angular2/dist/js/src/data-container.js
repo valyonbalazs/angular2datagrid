@@ -1,6 +1,8 @@
 "use strict";
 /**
- * Singleton datasource object for one grid
+ * Singleton datasource object for the grid.
+ * This class will hold the data for the grid
+ * in columns and rows format.
  */
 var DataContainer = (function () {
     function DataContainer() {

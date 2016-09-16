@@ -1,5 +1,5 @@
 ﻿<div id="filterColumnContainer" class="form-group">
-    <select class="filterColumnSelect form-control" *ngFor="#column of selectOptionsArray" (change)="FilterElementSelected($event)">
+    <select class="filterColumnSelect form-control" *ngFor="#column of selectOptionsArray" (change)="filterElementSelected($event)">
         <option [value]="item" *ngFor="#item of column">{{ item }}</option>
     </select>
 </div>

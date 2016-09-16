@@ -1,21 +1,43 @@
+/// <reference path="typings/jquery/jquery.d.ts" />
 "use strict";
-var test_data_1 = require('./test-data');
+var test_data_1 = require("./test-data");
+/**
+ * Loads data from the data-source.
+ */
 var DataLoader = (function () {
     function DataLoader() {
-        this.LoadData();
+        this.loadData();
     }
     DataLoader.prototype.getColumns = function () {
-        return this.Columns;
+        return this.columns;
     };
     DataLoader.prototype.getRows = function () {
-        return this.Rows;
+        return this.rows;
     };
-    DataLoader.prototype.LoadData = function () {
-        // ANY KIND OF DATA LOADING SHOULD BE HERE SUCH AS AJAX
-        // For testing and development, loading the test data from TestData class
+    /**
+     * The main method of fetching the data from the data-source.
+     */
+    DataLoader.prototype.loadData = function () {
+        // For testing and demonstration, loading the test data from TestData class
         var testData = new test_data_1.TestData();
-        this.Columns = testData.getColumns();
-        this.Rows = testData.getRows();
+        this.columns = testData.getColumns();
+        this.rows = testData.getRows();
+        // ANY KIND OF DATA LOADING SHOULD BE PUT HERE
+        // Below 2 basic example is given with Jquery-ajax:
+        // var dataContainer = null;
+        // var url = "http://mydomain.com/restapi/v1/getdata";
+        // $.ajax({
+        //     url: url,
+        //     type: "GET"
+        //     dataType: "json",
+        //     data: dataContainer,
+        //     success: dataContainer => {
+        //         // do something with the data
+        //     }
+        // });
+        // $.getJSON(url, data => {
+        //     // do something with the fetched data
+        // });
     };
     return DataLoader;
 }());

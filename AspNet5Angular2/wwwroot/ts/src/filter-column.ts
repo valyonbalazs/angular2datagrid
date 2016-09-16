@@ -1,67 +1,70 @@
 ﻿/// <reference path="typings/jquery/jquery.d.ts" /> 
 
-import {Component, OnInit} from 'angular2/core';
-import {Column} from './column';
-import {DataContainer} from './data-container';
+import {Component, OnInit} from "angular2/core";
+import {Column} from "./column";
+import {DataContainer} from "./data-container";
 
 @Component({
-    selector: 'filter-column',
-    templateUrl: '../html/filter-column.html'
+    selector: "filter-column",
+    templateUrl: "../html/filter-column.html"
 })
 
+/**
+* Responsible for creating filters for every column in the grid.
+*/
 export class FilterColumn {
 
-    public columns: Array<Column>;
+    public Columns: Array<Column>;
     private numberOfColumns: number = 0;
     private selectOptionsArray: Array<any>;
     private selectedFilterSelectOption: HTMLElement = null;
 
-
     constructor() {
-        this.Initializer();                      
+        this.initializer();                      
     }
 
     ngOnInit() {
-        console.log("\nletrejott FILTER-COLUMN");
+        console.log("\FILTER-COLUMN was initiatied and created.");
     }
     
-    private Initializer() {
+    private initializer(): void {
         this.selectOptionsArray = new Array<any>();
-        this.columns = DataContainer.getColumns();
-        this.numberOfColumns = this.columns.length;
-        this.GetSelectOptionsForMap();
+        this.Columns = DataContainer.getColumns();
+        this.numberOfColumns = this.Columns.length;
+        this.getSelectOptionsForMap();
     }
-    
-    private GetSelectOptionsForMap() {
+
+    /**
+     * Loads the different type of elements into the filter dropdown list.
+     */
+    private getSelectOptionsForMap(): void {
         
         for (let c = 0; c < this.numberOfColumns; c++) {
-            var bindingName = this.columns[c].getDataBindingName();
+            var bindingName = this.Columns[c].getDataBindingName();
             var columnContentArray = new Array<any>();
-            DataContainer.getRows().map(function (row) {
+            DataContainer.getRows().map(row => {
                 if (columnContentArray.indexOf(row[bindingName]) > -1) {
 
                 }
                 else {
                     columnContentArray.push(row[bindingName]);                   
                 }
-            }.bind(this));
+            });
             columnContentArray.push("--none--");
             columnContentArray.sort();
             this.selectOptionsArray.push(columnContentArray);
         }
-
-        console.log(this.selectOptionsArray);
     }
 
-    private FilterElementSelected(event) {
-        console.log(event.target.value);
-
-        var $rows = $('#gridTbody tr');
-        var value = $.trim(event.target.value).replace(/ +/g, ' ').toLowerCase();
+    /**
+     * Besides of the selection of the filter, hides every other rows.
+     * @param event: filter selection happened.
+     */
+    private filterElementSelected(event): void {
+        var $rows = $("#gridTbody tr");
+        var value = $.trim(event.target.value).replace(/ +/g, " ").toLowerCase();
         $rows.show().filter(function () {
-            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-            console.log(text);
-            console.log(text.indexOf(value));
+            const text = $(this).text().replace(/\s+/g, " ").toLowerCase();
             return !~text.indexOf(value);
         }).hide()
 

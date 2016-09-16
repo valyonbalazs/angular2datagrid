@@ -1,6 +1,6 @@
 <div class="container-fluid">    
     <div *ngIf="GetIsFilterGlobalEnabled()">
-        <filter-global></filter-global>
+        <filter-global [pagination]="isPaginationEnabled"></filter-global>
     </div>
     <div *ngIf="GetIsFilterColumnEnabled()">
         <filter-column></filter-column>

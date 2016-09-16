@@ -9,8 +9,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
-var sorter_1 = require('./sorter');
+var core_1 = require("angular2/core");
+var sorter_1 = require("./sorter");
 var Grid = (function () {
     function Grid() {
         this.sorter = new sorter_1.Sorter();
@@ -31,9 +31,9 @@ var Grid = (function () {
     Grid.prototype.SetTableCellEditableEventHandler = function () {
         $("#gridTable").on("input", "td", function () {
             var td = this;
-            clearTimeout($.data(this, 'timer'));
+            clearTimeout($.data(this, "timer"));
             var wait = setTimeout(saveData.bind(td.innerText), 500); // delay after user types
-            $(this).data('timer', wait);
+            $(this).data("timer", wait);
         });
         // Save the date of the edited cell in a preferred way
         function saveData() {
@@ -116,9 +116,9 @@ var Grid = (function () {
     ], Grid.prototype, "editable", void 0);
     Grid = __decorate([
         core_1.Component({
-            selector: 'grid',
-            inputs: ['rows: rows', 'columns: columns'],
-            templateUrl: '../html/grid.html'
+            selector: "grid",
+            inputs: ["rows: rows", "columns: columns"],
+            templateUrl: "../html/grid.html"
         }), 
         __metadata('design:paramtypes', [])
     ], Grid);
