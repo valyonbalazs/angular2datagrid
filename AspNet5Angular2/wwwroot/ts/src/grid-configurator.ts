@@ -1,18 +1,21 @@
-﻿import {Component, OnInit, Input} from 'angular2/core';
-import {Grid} from './grid';
-import {Pagination} from './pagination';
-import {Column} from './column';
-import {DataContainer} from './data-container';
-import {GridConfig} from './grid-configuration';
-import {FilterGlobal} from './filter-global';
-import {FilterColumn} from './filter-column';
+﻿import {Component, OnInit, Input} from "angular2/core";
+import {Grid} from "./grid";
+import {Pagination} from "./pagination";
+import {Column} from "./column";
+import {DataContainer} from "./data-container";
+import {FilterGlobal} from "./filter-global";
+import {FilterColumn} from "./filter-column";
 
 @Component({
-    selector: 'grid-configurator',
+    selector: "grid-configurator",
     directives: [Grid, Pagination, FilterGlobal, FilterColumn],
-    templateUrl: '../html/grid-configurator.html'
+    templateUrl: "../html/grid-configurator.html"
 })
 
+/**
+* This contains all of the modules and gets the module settings
+* as input directives through the html file.
+*/
 export class GridConfigurator implements OnInit {
 
     @Input() name: string;
@@ -27,7 +30,7 @@ export class GridConfigurator implements OnInit {
     private columns: Array<Column>;
 
     ngOnInit() {
-        console.log("\nletrejott GRIDCONFIGURATOR");
+        console.log("\nGRIDCONFIGURATOR was initiatied and created");
     }
 
     constructor() {
@@ -36,34 +39,31 @@ export class GridConfigurator implements OnInit {
         this.LoadAndSetGridSettings();
     }
 
-    public getRows(): Array<any> {
+    public GetRows(): Array<any> {
         return this.rows;
     }
 
-    public getColumns(): Array<Column> {
+    public GetColumns(): Array<Column> {
         return this.columns;
     }
 
     public GetIsPaginationEnabled(): boolean {
-        // return this.isPaginationEnabled == "true" ? true : false;
         return this.isPaginationEnabled;
     }
 
     public GetIsFilterGlobalEnabled(): boolean {
-        //return this.isFilterGlobalEnabled == "true" ? true : false;
         return this.isFilterGlobalEnabled;
     }
 
     public GetIsFilterColumnEnabled(): boolean {
-        // return this.isFilterColumnEnabled == "true" ? true : false;
         return this.isFilterColumnEnabled;
     }
 
-    private LoadAndSetGridSettings() {
+    private LoadAndSetGridSettings(): void {
         this.SetGridTableHeight();
     }
 
-    private SetGridTableHeight() {
+    private SetGridTableHeight(): void {
         $("gridTable tbody").css("height", this.gridTableHeight + "vh");
     } 
 }

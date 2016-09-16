@@ -16,38 +16,52 @@ var Grid = (function () {
         this.sorter = new sorter_1.Sorter();
     }
     Grid.prototype.ngOnInit = function () {
-        console.log("\nletrejott GRID with name " + this.name + " and id " + this.id);
+        console.log("\nGRID was initiatied and created with name " + this.name + " and id " + this.id);
         if (this.editable) {
-            this.SetTableCellEditableEventHandler();
+            this.setTableCellEditableEventHandler();
         }
-        setTimeout(this.SetRightClickContextMenu, 2000);
+        setTimeout(this.setRightClickContextMenu, 300);
     };
-    Grid.prototype.sort = function (key) {
+    /**
+     * This method is called when the User wants to sort by a column.
+     * @param key: key of the column.
+     */
+    Grid.prototype.Sort = function (key) {
         this.sorter.sort(key, this.rows);
     };
     Grid.prototype.GetIsCellEditable = function () {
         return this.editable;
     };
-    Grid.prototype.SetTableCellEditableEventHandler = function () {
+    /**
+     * When the table is editable, saving the edited cell's
+     * content.
+     */
+    Grid.prototype.setTableCellEditableEventHandler = function () {
         $("#gridTable").on("input", "td", function () {
             var td = this;
+            // Delay (waiting) added for user typings
             clearTimeout($.data(this, "timer"));
-            var wait = setTimeout(saveData.bind(td.innerText), 500); // delay after user types
+            var wait = setTimeout(saveData.bind(td.innerText), 500);
             $(this).data("timer", wait);
         });
-        // Save the date of the edited cell in a preferred way
+        /**
+         * Save the date of the edited cell in a preferred way.
+         */
         function saveData() {
-            console.log(this);
-            // send to the database with ajax, or websocket etc..
+            // send to the database with ajax, or websocket or whatever is needed.
+            // ADD PREFERED CHANGE SAVING METHOD HERE
         }
     };
-    Grid.prototype.SetRightClickContextMenu = function () {
+    /**
+     * Adding rightclick contextmenu eventhandler to the table.
+     */
+    Grid.prototype.setRightClickContextMenu = function () {
         var rows = $("#gridTbody").children();
         var rightClickedRow = null;
         for (var i = 0; i < rows.length - 1; i++) {
             var row = rows[i];
             $(row).bind("contextmenu", function (event) {
-                // Avoid the real one
+                // Disable the casual right-click menu
                 event.preventDefault();
                 rightClickedRow = this;
                 // Show contextmenu
@@ -61,16 +75,14 @@ var Grid = (function () {
             $(row).bind("mousedown", function (e) {
                 // If the clicked element is not the menu
                 if (!($(e.target).parents(".custom-menu").length > 0)) {
-                    // Hide it
                     $(".custom-menu").hide(100);
                 }
             });
         }
         // If the menu element is clicked
         $(".custom-menu h5").click(function () {
-            // This is the triggered action name
             switch ($(this).attr("data-action")) {
-                // A case for each action. Your actions here
+                // Further actions can be added or change what already here.
                 case "select":
                     SelectRow();
                     break;
@@ -78,9 +90,12 @@ var Grid = (function () {
                     DeleteRow();
                     break;
             }
-            // Hide it AFTER the action was triggered
             $(".custom-menu").hide(100);
         });
+        // CHANGE THE LOGIC OF THESE METHODS AS NEEDED
+        /**
+         * The method is responsible for the actions of a selection of a row.
+         */
         function SelectRow() {
             var backgroundColor = $(rightClickedRow).css("background-color");
             if ((backgroundColor == "rgba(0, 0, 0, 0)") ||
@@ -94,12 +109,14 @@ var Grid = (function () {
             // Do something with the selected row as needed
             // ADD CODE HERE FOR FURTHER MODIFICATION
         }
+        /**
+         * The method is responsibe for the action of deleting a row.
+         */
         function DeleteRow() {
-            console.log(rightClickedRow);
             // Just hiding for demonstration, more complex operation could 
-            // be added here, such as deleting from DB
             $(rightClickedRow).remove();
             $("#rowDeletedAlert").show();
+            // ADD HERE THE DELETION FROM DB LOGIC 
         }
     };
     __decorate([
@@ -114,10 +131,17 @@ var Grid = (function () {
         core_1.Input(), 
         __metadata('design:type', Boolean)
     ], Grid.prototype, "editable", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], Grid.prototype, "rows", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], Grid.prototype, "columns", void 0);
     Grid = __decorate([
         core_1.Component({
             selector: "grid",
-            inputs: ["rows: rows", "columns: columns"],
             templateUrl: "../html/grid.html"
         }), 
         __metadata('design:paramtypes', [])

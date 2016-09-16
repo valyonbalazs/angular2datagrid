@@ -8,12 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
-var grid_1 = require('./grid');
-var pagination_1 = require('./pagination');
-var data_container_1 = require('./data-container');
-var filter_global_1 = require('./filter-global');
-var filter_column_1 = require('./filter-column');
+var core_1 = require("angular2/core");
+var grid_1 = require("./grid");
+var pagination_1 = require("./pagination");
+var data_container_1 = require("./data-container");
+var filter_global_1 = require("./filter-global");
+var filter_column_1 = require("./filter-column");
 var GridConfigurator = (function () {
     function GridConfigurator() {
         this.rows = data_container_1.DataContainer.getRows();
@@ -21,24 +21,21 @@ var GridConfigurator = (function () {
         this.LoadAndSetGridSettings();
     }
     GridConfigurator.prototype.ngOnInit = function () {
-        console.log("\nletrejott GRIDCONFIGURATOR");
+        console.log("\nGRIDCONFIGURATOR was initiatied and created");
     };
-    GridConfigurator.prototype.getRows = function () {
+    GridConfigurator.prototype.GetRows = function () {
         return this.rows;
     };
-    GridConfigurator.prototype.getColumns = function () {
+    GridConfigurator.prototype.GetColumns = function () {
         return this.columns;
     };
     GridConfigurator.prototype.GetIsPaginationEnabled = function () {
-        // return this.isPaginationEnabled == "true" ? true : false;
         return this.isPaginationEnabled;
     };
     GridConfigurator.prototype.GetIsFilterGlobalEnabled = function () {
-        //return this.isFilterGlobalEnabled == "true" ? true : false;
         return this.isFilterGlobalEnabled;
     };
     GridConfigurator.prototype.GetIsFilterColumnEnabled = function () {
-        // return this.isFilterColumnEnabled == "true" ? true : false;
         return this.isFilterColumnEnabled;
     };
     GridConfigurator.prototype.LoadAndSetGridSettings = function () {
@@ -77,9 +74,9 @@ var GridConfigurator = (function () {
     ], GridConfigurator.prototype, "numberOfRows", void 0);
     GridConfigurator = __decorate([
         core_1.Component({
-            selector: 'grid-configurator',
+            selector: "grid-configurator",
             directives: [grid_1.Grid, pagination_1.Pagination, filter_global_1.FilterGlobal, filter_column_1.FilterColumn],
-            templateUrl: '../html/grid-configurator.html'
+            templateUrl: "../html/grid-configurator.html"
         }), 
         __metadata('design:paramtypes', [])
     ], GridConfigurator);

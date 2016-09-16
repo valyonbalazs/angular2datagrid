@@ -2,7 +2,6 @@
 
 import {Component, Input, OnInit} from "angular2/core";
 import {DataContainer} from "./data-container";
-import {GridConfig} from "./grid-configuration";
 
 @Component({
     selector: "filter-global",
@@ -20,7 +19,7 @@ export class FilterGlobal {
     private searchGlobalFilter: HTMLElement = null;
 
     ngOnInit() {
-        console.log("\FILTER-COLUMN was initiatied and FILTERGLOBAL");
+        console.log("\FILTERGLOBAL was initiatied and created.");
         this.searchGlobalFilter = document.getElementById("search");
         this.searchGlobalFilter.addEventListener("keyup", (e) => this.searchKeyUp(e));
     }

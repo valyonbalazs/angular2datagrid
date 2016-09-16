@@ -14,7 +14,7 @@ var GridContainer = (function () {
     function GridContainer() {
     }
     GridContainer.prototype.ngOnInit = function () {
-        console.log("\nletrejott GRIDCONTAINER");
+        console.log("\nGRIDCONTAINER was initiatied and created");
     };
     GridContainer = __decorate([
         core_1.Component({

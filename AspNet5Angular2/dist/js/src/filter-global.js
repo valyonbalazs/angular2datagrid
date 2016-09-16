@@ -16,7 +16,7 @@ var FilterGlobal = (function () {
     }
     FilterGlobal.prototype.ngOnInit = function () {
         var _this = this;
-        console.log("\FILTER-COLUMN was initiatied and FILTERGLOBAL");
+        console.log("\FILTERGLOBAL was initiatied and created.");
         this.searchGlobalFilter = document.getElementById("search");
         this.searchGlobalFilter.addEventListener("keyup", function (e) { return _this.searchKeyUp(e); });
     };
