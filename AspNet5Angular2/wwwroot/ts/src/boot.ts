@@ -19,5 +19,5 @@ DataContainer.setColumns(dataLoader.getColumns());
  */
 bootstrap(GridContainer, [GridConfigurator])
     .then(app => {
-        console.log(app);
+        // If some debugging or settings needs to be done do here.
     });

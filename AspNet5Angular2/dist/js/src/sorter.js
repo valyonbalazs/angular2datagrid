@@ -1,4 +1,7 @@
 "use strict";
+/**
+ * Responsible for sorting the content of a column.
+ */
 var Sorter = (function () {
     function Sorter() {
         this.direction = 1;

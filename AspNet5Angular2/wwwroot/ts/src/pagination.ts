@@ -1,12 +1,12 @@
 ﻿/// <reference path="typings/jquery/jquery.d.ts" /> 
 
-import {Component, Input, OnInit} from 'angular2/core';
-import {Grid} from './grid';
-import {DataContainer} from './data-container';
+import {Component, Input, OnInit} from "angular2/core";
+import {Grid} from "./grid";
+import {DataContainer} from "./data-container";
 
 @Component({
-    selector: 'pagination',
-    templateUrl: '../html/pagination.html' 
+    selector: "pagination",
+    templateUrl: "../html/pagination.html" 
 })
 
 export class Pagination {
@@ -19,16 +19,12 @@ export class Pagination {
 
     @Input() numberofrows: number;
 
-    constructor() {
-
-    }
-
     /*
     * Used as a casual constructor
     *  setTimeout needed to wait the grid rendered into the DOM
     */ 
     ngOnInit() {
-        console.log("\nletrejott PAGINATION");
+        console.log("\nPAGINATION was initiatied and created.");
         this.numberOfRowsOfTableToDisplay = this.numberofrows;
         setTimeout(function () {
             this.initializer();
@@ -39,7 +35,7 @@ export class Pagination {
     /**
      * Basic component initalization: number of rows, number of all items, number of pages.
      */
-    private initializer() {
+    private initializer(): void {
         let showRowsPerPage = this.numberOfRowsOfTableToDisplay;
         let numberOfAllItems = DataContainer.getNumberOfRows();
         this.numberOfPages = Math.ceil(numberOfAllItems / showRowsPerPage);
@@ -49,7 +45,7 @@ export class Pagination {
      * Updates the page number array, according to the current page number.
      * It uses a 5 element range for page number display.
      */
-    private updateNumberOfPagesArray(currentLink: number, numberOfButtons: number) {
+    private updateNumberOfPagesArray(currentLink: number, numberOfButtons: number): void {
 
         if (this.numberOfPagesArray.length != 0) {
             this.numberOfPagesArray = [];
@@ -97,7 +93,7 @@ export class Pagination {
      * with the current page and link properties.
      * @param currentPage: the needed page.
      */
-    private createPager(currentPage: number) {
+    private createPager(currentPage: number): void {
 
         let numberOfPagesToDisplay = this.numberOfRowsOfTableToDisplay;
 
@@ -120,7 +116,7 @@ export class Pagination {
      * @param pageNumber: needed page.
      * @param displayNumberOfRows: how many rows have to be displayed in the grid.
      */
-    public showPage(pageNumber: number, displayNumberOfRows: number) {
+    public showPage(pageNumber: number, displayNumberOfRows: number): void {
         
         this.currentPage = pageNumber;
         this.modifyTbodyRowsAccordingToPageNumber(pageNumber, displayNumberOfRows);
@@ -129,10 +125,9 @@ export class Pagination {
         this.modifyLastPageNumber(pageNumber);
         this.modifyLastAndNextPageButtons(pageNumber);
         this.createPager(pageNumber);
-
     }
 
-    private modifyTbodyRowsAccordingToPageNumber(page: number, rows: number) {
+    private modifyTbodyRowsAccordingToPageNumber(page: number, rows: number): void {
         $("#gridTbody tr").hide();
         $("#current_page").val(page);
         $("#gridTbody tr").each(function (n) {
@@ -141,9 +136,9 @@ export class Pagination {
         });
     }
 
-    private modifyPageNumbersClass(page: number) {
-        // Adding and removing class for actual page number SASS styling
+    private modifyPageNumbersClass(page: number): void {
 
+        // Adding and removing class for actual page number SASS styling
         $(".paginationPageNumbers").each(function (n, s) {
 
             let valueOfAElement = s.textContent;
@@ -152,7 +147,7 @@ export class Pagination {
                     let previousPageNumber = $(".paginationPageNumbersSelected");
                     if (previousPageNumber != null || previousPageNumber != undefined) {
                         previousPageNumber.removeClass();
-                        previousPageNumber.addClass("paginationPageNumbers btn btn-default");
+                        previousPageNumber.addClass("paginationPageNumbers btn btn-default paginationButton");
                     } else {
                     }
                 } catch (e) {
@@ -160,29 +155,25 @@ export class Pagination {
                 }
 
                 $(this).removeClass();
-                $(this).addClass("paginationPageNumbersSelected btn btn-warning");
+                $(this).addClass("paginationPageNumbersSelected btn btn-warning paginationButton");
             }
         });
     }
 
-    private modifyFirstAndPrevPageButtons(page: number) {
+    private modifyFirstAndPrevPageButtons(page: number): void {
         if (page == 1) {
-            //$("#paginationFirstPageButton").hide();
-            //$("#paginationPrevPageButton").hide();
-            $("#paginationFirstPageButton").prop('disabled', true);
-            $("#paginationPrevPageButton").prop('disabled', true);
+            $("#paginationFirstPageButton").prop("disabled", true);
+            $("#paginationPrevPageButton").prop("disabled", true);
         } else {
-            //$("#paginationFirstPageButton").show();
-            //$("#paginationPrevPageButton").show();
-            $("#paginationFirstPageButton").prop('disabled', false);
-            $("#paginationPrevPageButton").prop('disabled', false);
+            $("#paginationFirstPageButton").prop("disabled", false);
+            $("#paginationPrevPageButton").prop("disabled", false);
         }
     }
 
-    private modifyLastPageNumber(page: number) {
+    private modifyLastPageNumber(page: number): void {
         // The not link last page number is displayed if its not the last
         let lastPageNumber = $("#lastPageNumber").text();
-        lastPageNumber = lastPageNumber.replace(/\D/g, '');
+        lastPageNumber = lastPageNumber.replace(/\D/g, "");
         if (parseInt(lastPageNumber) == page) {
             $("#lastPageNumber").hide();
 
@@ -193,9 +184,9 @@ export class Pagination {
         }
     }
 
-    private modifyLastAndNextPageButtons(page: number) {
+    private modifyLastAndNextPageButtons(page: number): void {
         let lastPageNumber = $("#lastPageNumber").text();
-        lastPageNumber = lastPageNumber.replace(/\D/g, '');
+        lastPageNumber = lastPageNumber.replace(/\D/g, "");
         if (parseInt(lastPageNumber) == page) {
             $("#paginationNextPageButton").hide();
             $("#paginationLastPageButton").hide();
@@ -206,29 +197,29 @@ export class Pagination {
         }
     }
 
-    public nextPage() {
-        let newPage = parseInt($('#current_page').val()) + 1;
+    public nextPage(): void {
+        let newPage = parseInt($("#current_page").val()) + 1;
         if (newPage <= this.numberOfPages) {
             this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
         }
     }
 
-    public lastPage() {
+    public lastPage(): void {
         let newPage = this.numberOfPages;
-        $('#current_page').val(newPage);
+        $("#current_page").val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     }
 
-    public firstPage() {
+    public firstPage(): void {
         let newPage = 1;
-        $('#current_page').val(newPage);
+        $("#current_page").val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     }
 
-    public previousPage() {
-        let newPage = parseInt($('#current_page').val()) - 1;
+    public previousPage(): void {
+        let newPage = parseInt($("#current_page").val()) - 1;
         if (newPage >= 1) {
-            $('#current_page').val(newPage);
+            $("#current_page").val(newPage);
             this.showPage(newPage, this.numberOfRowsOfTableToDisplay)
         }
     }

@@ -17,6 +17,6 @@ data_container_1.DataContainer.setColumns(dataLoader.getColumns());
  */
 browser_1.bootstrap(grid_container_1.GridContainer, [grid_configurator_1.GridConfigurator])
     .then(function (app) {
-    console.log(app);
+    // If some debugging or settings needs to be done do here.
 });
 //# sourceMappingURL=boot.js.map

@@ -9,8 +9,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
-var data_container_1 = require('./data-container');
+var core_1 = require("angular2/core");
+var data_container_1 = require("./data-container");
 var Pagination = (function () {
     function Pagination() {
         this.numberOfRowsOfTableToDisplay = 8;
@@ -24,7 +24,7 @@ var Pagination = (function () {
     *  setTimeout needed to wait the grid rendered into the DOM
     */
     Pagination.prototype.ngOnInit = function () {
-        console.log("\nletrejott PAGINATION");
+        console.log("\nPAGINATION was initiatied and created.");
         this.numberOfRowsOfTableToDisplay = this.numberofrows;
         setTimeout(function () {
             this.initializer();
@@ -133,7 +133,7 @@ var Pagination = (function () {
                     var previousPageNumber = $(".paginationPageNumbersSelected");
                     if (previousPageNumber != null || previousPageNumber != undefined) {
                         previousPageNumber.removeClass();
-                        previousPageNumber.addClass("paginationPageNumbers btn btn-default");
+                        previousPageNumber.addClass("paginationPageNumbers btn btn-default paginationButton");
                     }
                     else {
                     }
@@ -141,28 +141,24 @@ var Pagination = (function () {
                 catch (e) {
                 }
                 $(this).removeClass();
-                $(this).addClass("paginationPageNumbersSelected btn btn-warning");
+                $(this).addClass("paginationPageNumbersSelected btn btn-warning paginationButton");
             }
         });
     };
     Pagination.prototype.modifyFirstAndPrevPageButtons = function (page) {
         if (page == 1) {
-            //$("#paginationFirstPageButton").hide();
-            //$("#paginationPrevPageButton").hide();
-            $("#paginationFirstPageButton").prop('disabled', true);
-            $("#paginationPrevPageButton").prop('disabled', true);
+            $("#paginationFirstPageButton").prop("disabled", true);
+            $("#paginationPrevPageButton").prop("disabled", true);
         }
         else {
-            //$("#paginationFirstPageButton").show();
-            //$("#paginationPrevPageButton").show();
-            $("#paginationFirstPageButton").prop('disabled', false);
-            $("#paginationPrevPageButton").prop('disabled', false);
+            $("#paginationFirstPageButton").prop("disabled", false);
+            $("#paginationPrevPageButton").prop("disabled", false);
         }
     };
     Pagination.prototype.modifyLastPageNumber = function (page) {
         // The not link last page number is displayed if its not the last
         var lastPageNumber = $("#lastPageNumber").text();
-        lastPageNumber = lastPageNumber.replace(/\D/g, '');
+        lastPageNumber = lastPageNumber.replace(/\D/g, "");
         if (parseInt(lastPageNumber) == page) {
             $("#lastPageNumber").hide();
         }
@@ -172,7 +168,7 @@ var Pagination = (function () {
     };
     Pagination.prototype.modifyLastAndNextPageButtons = function (page) {
         var lastPageNumber = $("#lastPageNumber").text();
-        lastPageNumber = lastPageNumber.replace(/\D/g, '');
+        lastPageNumber = lastPageNumber.replace(/\D/g, "");
         if (parseInt(lastPageNumber) == page) {
             $("#paginationNextPageButton").hide();
             $("#paginationLastPageButton").hide();
@@ -183,25 +179,25 @@ var Pagination = (function () {
         }
     };
     Pagination.prototype.nextPage = function () {
-        var newPage = parseInt($('#current_page').val()) + 1;
+        var newPage = parseInt($("#current_page").val()) + 1;
         if (newPage <= this.numberOfPages) {
             this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
         }
     };
     Pagination.prototype.lastPage = function () {
         var newPage = this.numberOfPages;
-        $('#current_page').val(newPage);
+        $("#current_page").val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
     Pagination.prototype.firstPage = function () {
         var newPage = 1;
-        $('#current_page').val(newPage);
+        $("#current_page").val(newPage);
         this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
     };
     Pagination.prototype.previousPage = function () {
-        var newPage = parseInt($('#current_page').val()) - 1;
+        var newPage = parseInt($("#current_page").val()) - 1;
         if (newPage >= 1) {
-            $('#current_page').val(newPage);
+            $("#current_page").val(newPage);
             this.showPage(newPage, this.numberOfRowsOfTableToDisplay);
         }
     };
@@ -211,8 +207,8 @@ var Pagination = (function () {
     ], Pagination.prototype, "numberofrows", void 0);
     Pagination = __decorate([
         core_1.Component({
-            selector: 'pagination',
-            templateUrl: '../html/pagination.html'
+            selector: "pagination",
+            templateUrl: "../html/pagination.html"
         }), 
         __metadata('design:paramtypes', [])
     ], Pagination);

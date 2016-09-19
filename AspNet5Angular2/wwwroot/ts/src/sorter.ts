@@ -1,4 +1,7 @@
-﻿export class Sorter {
+﻿/**
+ * Responsible for sorting the content of a column.
+ */
+export class Sorter {
 
     private direction: number;
     private key: string;
@@ -7,7 +10,7 @@
         this.direction = 1;
     }
 
-    public sort(key: string, data: Array<any>) {
+    public sort(key: string, data: Array<any>): void {
 
         if (this.key === key) {
             this.direction = this.direction * (-1);

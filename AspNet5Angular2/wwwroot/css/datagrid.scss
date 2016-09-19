@@ -43,29 +43,29 @@
 }
 
 #gridTable th, td {
-    width: 10vw;
+    width: 10vw; 
 }
 
 #page_navigation {
-    width:auto;
+    width:100%; 
     display: flex;
     align-items:baseline;
-}
-
-#paginationShownItemsCount {
-   width: 50%; 
 }
 
 #paginationButtonsContainer { 
-    width:auto;
     display: flex;
     align-items:baseline;
-    float:right;
+    justify-content:flex-end;
+}
 
+.paginationButton {
+    font-size:12px;
+    padding: 4px, 8px;
+    border-radius: 0px;
 }
 
 .paginationPageNumbersSelected {
-    color:red;
+    color:red; 
 }
 
 #lastPageNumber {
