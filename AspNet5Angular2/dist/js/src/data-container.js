@@ -1,4 +1,5 @@
 "use strict";
+var data_loader_1 = require("./data-loader");
 /**
  * Singleton datasource object for the grid.
  * This class will hold the data for the grid
@@ -25,6 +26,14 @@ var DataContainer = (function () {
     };
     DataContainer.getNumberOfRows = function () {
         return DataContainer.rows.length;
+    };
+    /**
+     * Initiate the data container and fetch the data for the grid.
+     */
+    DataContainer.loadData = function () {
+        var dataLoader = new data_loader_1.DataLoader();
+        DataContainer.setRows(dataLoader.getRows());
+        DataContainer.setColumns(dataLoader.getColumns());
     };
     DataContainer.instance = new DataContainer();
     return DataContainer;
