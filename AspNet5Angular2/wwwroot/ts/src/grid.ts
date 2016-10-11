@@ -3,6 +3,7 @@
 import {Component, Input, OnInit} from "angular2/core";
 import {Column} from "./column";
 import {Sorter} from "./sorter";
+import {DataSaver} from "./edited-cell-data-saver";
 
 @Component({
     selector: "grid",
@@ -53,20 +54,15 @@ export class Grid implements OnInit {
         $("#gridTable").on("input", "td", function() {
             var td = this;
 
+            // Save the date of the edited cell in a preferred way.
+            var dataSaver = new DataSaver();
+
             // Delay (waiting) added for user typings
             clearTimeout($.data(this, "timer"));
-            const wait = setTimeout(saveData.bind(td.innerText), 500);
+            const wait = setTimeout(dataSaver.saveData(td.innerText), 500);
 
             $(this).data("timer", wait);
         });
-
-        /**
-         * Save the date of the edited cell in a preferred way.
-         */
-        function saveData() {
-            // send to the database with ajax, or websocket or whatever is needed.
-            // ADD PREFERED CHANGE SAVING METHOD HERE
-        }
     }
 
     /**

@@ -1,12 +1,13 @@
 ﻿/// <reference path="typings/jquery/jquery.d.ts" />
 
 import {Column} from "./column"; 
-import {TestData} from "./test-data"; 
+import {TestData} from "./test-data";
+import {IDataLoader} from "./idata-loader"; 
 
 /**
  * Loads data from the data-source.
  */
-export class DataLoader {
+export class DataLoader implements IDataLoader {
 
     private columns: Array<Column>;
     private rows: Array<any>;
