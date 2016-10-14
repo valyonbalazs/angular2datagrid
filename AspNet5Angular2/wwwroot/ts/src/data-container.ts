@@ -1,11 +1,12 @@
 ﻿import {Column} from "./column";
+import {DataLoader} from "./data-loader";
 
 /** 
  * Singleton datasource object for the grid.
  * This class will hold the data for the grid
  * in columns and rows format.
  */
-export class DataContainer {
+export class DataContainer { 
     
     private static rows: Array<any>;
     private static columns: Array<Column>;
@@ -15,7 +16,7 @@ export class DataContainer {
         if (DataContainer.instance) {
             throw new Error("Error instantiation failed! Singleton! Already exists!");
         }
-        DataContainer.instance = this;
+        DataContainer.instance = this;        
     }
 
     public static getRows(): Array<any> {
@@ -36,6 +37,15 @@ export class DataContainer {
 
     public static getNumberOfRows(): number {
         return DataContainer.rows.length;
+    }
+
+    /**
+     * Initiate the data container and fetch the data for the grid.
+     */
+    public static loadData(): void {
+        let dataLoader = new DataLoader();
+        DataContainer.setRows(dataLoader.getRows());
+        DataContainer.setColumns(dataLoader.getColumns());
     }
 } 
 

@@ -31,7 +31,7 @@ export class DataLoader implements IDataLoader {
         // For testing and demonstration, loading the test data from TestData class
         var testData = new TestData();
         this.columns = testData.getColumns();
-        this.rows = testData.getRows();
+        this.rows = testData.getRows(); 
 
 
         // ANY KIND OF DATA LOADING SHOULD BE PUT HERE
