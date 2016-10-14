@@ -18,6 +18,7 @@ export class Grid implements OnInit {
     @Input() name: string;
     @Input() id: string;
     @Input() editable: boolean;
+    @Input("menu") isMenuEnabled: boolean;
     @Input() rows: Array<any>;
     @Input() columns: Array<Column>;
 
@@ -44,7 +45,11 @@ export class Grid implements OnInit {
 
     public GetIsCellEditable(): boolean {
         return this.editable;
-    }    
+    }
+
+    public GetIsMenuEnabled(): boolean {
+        return this.isMenuEnabled;
+    }
 
     /**
      * When the table is editable, saving the edited cell's

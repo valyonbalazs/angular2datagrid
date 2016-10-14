@@ -1,7 +1,13 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "compile": {
+      "exclude": [
+        "wwwroot",
+        "node_modules"
+      ]
+    }
   },
 
   "dependencies": {
@@ -23,11 +29,7 @@
     "dnxcore50": { }
   },
 
-  "exclude": [
-    "wwwroot",
-    "node_modules"
-  ],
-  "publishExclude": [
+  "publishOptions": [
     "**.user",
     "**.vspscc"
   ]

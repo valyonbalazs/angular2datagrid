@@ -1,12 +1,12 @@
-﻿<div class="container-fluid">    
-    <div *ngIf="GetIsFilterGlobalEnabled()" class="col-lg-12 col-md-12">
+﻿<div class="container-fluid">
+    <div *ngIf="GetIsFilterGlobalEnabled()" class="col-lg-12 col-md-12" id="filterGlobalSearchContainer">
         <filter-global [pagination]="isPaginationEnabled"></filter-global>
     </div>
-    <div *ngIf="GetIsFilterColumnEnabled()" class="col-lg-12 col-md-12">
+    <div *ngIf="GetIsFilterColumnEnabled()" class="col-lg-12 col-md-12" id="filterColumnContainer">
         <filter-column></filter-column>
     </div>
 
-    <grid id="mainDataGrid" name="gridName" [rows]="rows" [columns]="columns" [editable]="editable"></grid>
+    <grid id="mainDataGrid" name="gridName" [menu]="isMenuEnabled" [rows]="rows" [columns]="columns" [editable]="editable"></grid>
 
     <div *ngIf="GetIsPaginationEnabled()" class="col-lg-12 col-md-12">
         <pagination [numberofrows]="numberOfRows"></pagination>

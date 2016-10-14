@@ -25,6 +25,7 @@ export class GridConfigurator implements OnInit {
     @Input("tableheight") gridTableHeight: number;
     @Input() editable: boolean;
     @Input("numberofrows") numberOfRows: number;
+    @Input("menu") isMenuEnabled: boolean;
 
     private rows: Array<any>;
     private columns: Array<Column>;
@@ -57,6 +58,10 @@ export class GridConfigurator implements OnInit {
 
     public GetIsFilterColumnEnabled(): boolean {
         return this.isFilterColumnEnabled;
+    }
+
+    public GetIsMenuEnabled(): boolean {
+        return this.isMenuEnabled;
     }
 
     private LoadAndSetGridSettings(): void {

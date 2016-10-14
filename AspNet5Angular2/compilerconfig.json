@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/css/datagrid.min.css",
     "inputFile": "wwwroot/css/datagrid.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/pageStyle.css",
+    "inputFile": "wwwroot/css/pageStyle.scss"
   }
 ]

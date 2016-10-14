@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("angular2/core");
 var sorter_1 = require("./sorter");
+var edited_cell_data_saver_1 = require("./edited-cell-data-saver");
 var Grid = (function () {
     function Grid() {
         this.sorter = new sorter_1.Sorter();
@@ -32,6 +33,9 @@ var Grid = (function () {
     Grid.prototype.GetIsCellEditable = function () {
         return this.editable;
     };
+    Grid.prototype.GetIsMenuEnabled = function () {
+        return this.isMenuEnabled;
+    };
     /**
      * When the table is editable, saving the edited cell's
      * content.
@@ -39,18 +43,13 @@ var Grid = (function () {
     Grid.prototype.setTableCellEditableEventHandler = function () {
         $("#gridTable").on("input", "td", function () {
             var td = this;
+            // Save the date of the edited cell in a preferred way.
+            var dataSaver = new edited_cell_data_saver_1.DataSaver();
             // Delay (waiting) added for user typings
             clearTimeout($.data(this, "timer"));
-            var wait = setTimeout(saveData.bind(td.innerText), 500);
+            var wait = setTimeout(dataSaver.saveData(td.innerText), 500);
             $(this).data("timer", wait);
         });
-        /**
-         * Save the date of the edited cell in a preferred way.
-         */
-        function saveData() {
-            // send to the database with ajax, or websocket or whatever is needed.
-            // ADD PREFERED CHANGE SAVING METHOD HERE
-        }
     };
     /**
      * Adding rightclick contextmenu eventhandler to the table.
@@ -131,6 +130,10 @@ var Grid = (function () {
         core_1.Input(), 
         __metadata('design:type', Boolean)
     ], Grid.prototype, "editable", void 0);
+    __decorate([
+        core_1.Input("menu"), 
+        __metadata('design:type', Boolean)
+    ], Grid.prototype, "isMenuEnabled", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)

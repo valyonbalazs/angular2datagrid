@@ -38,6 +38,9 @@ var GridConfigurator = (function () {
     GridConfigurator.prototype.GetIsFilterColumnEnabled = function () {
         return this.isFilterColumnEnabled;
     };
+    GridConfigurator.prototype.GetIsMenuEnabled = function () {
+        return this.isMenuEnabled;
+    };
     GridConfigurator.prototype.LoadAndSetGridSettings = function () {
         this.SetGridTableHeight();
     };
@@ -72,6 +75,10 @@ var GridConfigurator = (function () {
         core_1.Input("numberofrows"), 
         __metadata('design:type', Number)
     ], GridConfigurator.prototype, "numberOfRows", void 0);
+    __decorate([
+        core_1.Input("menu"), 
+        __metadata('design:type', Boolean)
+    ], GridConfigurator.prototype, "isMenuEnabled", void 0);
     GridConfigurator = __decorate([
         core_1.Component({
             selector: "grid-configurator",
