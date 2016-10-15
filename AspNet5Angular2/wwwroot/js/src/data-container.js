@@ -27,6 +27,9 @@ var DataContainer = (function () {
     DataContainer.getNumberOfRows = function () {
         return DataContainer.rows.length;
     };
+    DataContainer.setItem = function (rowIndex, colName, value) {
+        DataContainer.rows[rowIndex][colName] = value;
+    };
     /**
      * Initiate the data container and fetch the data for the grid.
      */

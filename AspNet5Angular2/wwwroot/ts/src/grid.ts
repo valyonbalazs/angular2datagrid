@@ -32,6 +32,10 @@ export class Grid implements OnInit {
             this.setTableCellEditableEventHandler();
         }
 
+        if (this.isMenuEnabled) {
+            setTimeout(this.setSaveButtonEventHandler, 300);
+        }
+
         setTimeout(this.setRightClickContextMenu, 300);
     }
 
@@ -64,10 +68,22 @@ export class Grid implements OnInit {
 
             // Delay (waiting) added for user typings
             clearTimeout($.data(this, "timer"));
-            const wait = setTimeout(dataSaver.saveData(td.innerText), 500);
+            const wait = setTimeout(dataSaver.saveData(td), 500);
 
             $(this).data("timer", wait);
         });
+    }
+
+    private setSaveButtonEventHandler(): void {
+        $("#navbarSaveBtn").click(function () {
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                $("#success-alert").slideUp(500);
+            });
+        });
+
+        // CALL PERMANENT DATA SAVER HERE
+
+        $("#success-alert").hide();
     }
 
     /**

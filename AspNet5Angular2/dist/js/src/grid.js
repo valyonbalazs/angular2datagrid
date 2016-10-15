@@ -21,6 +21,9 @@ var Grid = (function () {
         if (this.editable) {
             this.setTableCellEditableEventHandler();
         }
+        if (this.isMenuEnabled) {
+            setTimeout(this.setSaveButtonEventHandler, 300);
+        }
         setTimeout(this.setRightClickContextMenu, 300);
     };
     /**
@@ -47,9 +50,17 @@ var Grid = (function () {
             var dataSaver = new edited_cell_data_saver_1.DataSaver();
             // Delay (waiting) added for user typings
             clearTimeout($.data(this, "timer"));
-            var wait = setTimeout(dataSaver.saveData(td.innerText), 500);
+            var wait = setTimeout(dataSaver.saveData(td), 500);
             $(this).data("timer", wait);
         });
+    };
+    Grid.prototype.setSaveButtonEventHandler = function () {
+        $("#navbarSaveBtn").click(function () {
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                $("#success-alert").slideUp(500);
+            });
+        });
+        $("#success-alert").hide();
     };
     /**
      * Adding rightclick contextmenu eventhandler to the table.

@@ -8,9 +8,9 @@ import {DataLoader} from "./data-loader";
  */
 export class DataContainer { 
     
-    private static rows: Array<any>;
-    private static columns: Array<Column>;
-    private static instance: DataContainer = new DataContainer();
+    public static rows: Array<any>;
+    public static columns: Array<Column>;
+    public static instance: DataContainer = new DataContainer();
 
     constructor() {
         if (DataContainer.instance) {
@@ -37,6 +37,12 @@ export class DataContainer {
 
     public static getNumberOfRows(): number {
         return DataContainer.rows.length;
+    }
+
+    public static setItem(rowIndex: number, colName: string, value: any): void {
+    
+        DataContainer.rows[rowIndex][colName] = value;
+
     }
 
     /**
