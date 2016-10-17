@@ -10,7 +10,7 @@ import {GridConfigurator} from "./grid-configurator";
  * the GridConfigurator which contains all of the modules.
  */
 
-DataContainer.loadData(); 
+DataContainer.loadData();
 
 bootstrap(GridContainer, [GridConfigurator])
     .then(app => {

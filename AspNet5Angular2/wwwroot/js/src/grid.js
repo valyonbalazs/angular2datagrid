@@ -12,6 +12,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("angular2/core");
 var sorter_1 = require("./sorter");
 var edited_cell_data_saver_1 = require("./edited-cell-data-saver");
+var caretaker_1 = require("./caretaker");
+var data_container_1 = require("./data-container");
 var Grid = (function () {
     function Grid() {
         this.sorter = new sorter_1.Sorter();
@@ -23,8 +25,11 @@ var Grid = (function () {
         }
         if (this.isMenuEnabled) {
             setTimeout(this.setSaveButtonEventHandler, 300);
+            setTimeout(this.setUndoButtonEventHandler, 315);
         }
         setTimeout(this.setRightClickContextMenu, 300);
+        data_container_1.DataContainer.gridSubscribe(this);
+        caretaker_1.CareTaker.createMemento();
     };
     /**
      * This method is called when the User wants to sort by a column.
@@ -39,6 +44,12 @@ var Grid = (function () {
     Grid.prototype.GetIsMenuEnabled = function () {
         return this.isMenuEnabled;
     };
+    Grid.prototype.notifyAboutChange = function () {
+        var rowsObj = data_container_1.DataContainer.getRows();
+        var colsObj = data_container_1.DataContainer.getColumns();
+        this.rows = _.values(rowsObj);
+        this.columns = _.values(colsObj);
+    };
     /**
      * When the table is editable, saving the edited cell's
      * content.
@@ -46,22 +57,31 @@ var Grid = (function () {
     Grid.prototype.setTableCellEditableEventHandler = function () {
         $("#gridTable").on("input", "td", function () {
             var td = this;
-            // Save the date of the edited cell in a preferred way.
-            var dataSaver = new edited_cell_data_saver_1.DataSaver();
             // Delay (waiting) added for user typings
             clearTimeout($.data(this, "timer"));
-            var wait = setTimeout(dataSaver.saveData(td), 500);
+            var wait = setTimeout(saveData.bind(td), 500);
             $(this).data("timer", wait);
         });
+        function saveData() {
+            var editedData = this;
+            var dataSaver = new edited_cell_data_saver_1.DataSaver();
+            dataSaver.saveData(editedData);
+        }
     };
     Grid.prototype.setSaveButtonEventHandler = function () {
-        $("#navbarSaveBtn").click(function () {
+        $("#navbarSaveBtn").click(function setSaveBtn() {
             $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
                 $("#success-alert").slideUp(500);
             });
         });
         // CALL PERMANENT DATA SAVER HERE
         $("#success-alert").hide();
+    };
+    Grid.prototype.setUndoButtonEventHandler = function () {
+        $("#navbarUndoBtn").click(function setUndoBtn() {
+            console.log("undo pressed");
+            caretaker_1.CareTaker.undo();
+        });
     };
     /**
      * Adding rightclick contextmenu eventhandler to the table.

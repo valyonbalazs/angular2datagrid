@@ -30,6 +30,12 @@ var DataContainer = (function () {
     DataContainer.setItem = function (rowIndex, colName, value) {
         DataContainer.rows[rowIndex][colName] = value;
     };
+    DataContainer.gridSubscribe = function (datagrid) {
+        DataContainer.grid = datagrid;
+    };
+    DataContainer.notifyGrid = function () {
+        DataContainer.grid.notifyAboutChange();
+    };
     /**
      * Initiate the data container and fetch the data for the grid.
      */

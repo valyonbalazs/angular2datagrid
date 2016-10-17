@@ -4,6 +4,8 @@ import {Component, Input, OnInit} from "angular2/core";
 import {Column} from "./column";
 import {Sorter} from "./sorter";
 import {DataSaver} from "./edited-cell-data-saver";
+import {CareTaker} from "./caretaker";
+import {DataContainer} from "./data-container";
 
 @Component({
     selector: "grid",
@@ -34,9 +36,13 @@ export class Grid implements OnInit {
 
         if (this.isMenuEnabled) {
             setTimeout(this.setSaveButtonEventHandler, 300);
+            setTimeout(this.setUndoButtonEventHandler, 315);
         }
 
         setTimeout(this.setRightClickContextMenu, 300);
+
+        DataContainer.gridSubscribe(this);
+        CareTaker.createMemento();
     }
 
     /**
@@ -55,6 +61,14 @@ export class Grid implements OnInit {
         return this.isMenuEnabled;
     }
 
+    public notifyAboutChange() {
+        var rowsObj = DataContainer.getRows();
+        var colsObj = DataContainer.getColumns();
+
+        this.rows = _.values(rowsObj);
+        this.columns = <Array<Column>>_.values(colsObj);
+    }
+
     /**
      * When the table is editable, saving the edited cell's
      * content.
@@ -63,19 +77,23 @@ export class Grid implements OnInit {
         $("#gridTable").on("input", "td", function() {
             var td = this;
 
-            // Save the date of the edited cell in a preferred way.
-            var dataSaver = new DataSaver();
 
             // Delay (waiting) added for user typings
             clearTimeout($.data(this, "timer"));
-            const wait = setTimeout(dataSaver.saveData(td), 500);
+             const wait = setTimeout(saveData.bind(td), 500); 
 
-            $(this).data("timer", wait);
+             $(this).data("timer", wait);
         });
+
+        function saveData() {
+            var editedData = this;
+            var dataSaver = new DataSaver();
+            dataSaver.saveData(editedData);
+        }
     }
 
     private setSaveButtonEventHandler(): void {
-        $("#navbarSaveBtn").click(function () {
+        $("#navbarSaveBtn").click(function setSaveBtn() {
             $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
                 $("#success-alert").slideUp(500);
             });
@@ -84,6 +102,13 @@ export class Grid implements OnInit {
         // CALL PERMANENT DATA SAVER HERE
 
         $("#success-alert").hide();
+    }
+
+    private setUndoButtonEventHandler(): void {
+        $("#navbarUndoBtn").click(function setUndoBtn() {
+            console.log("undo pressed");
+            CareTaker.undo();
+        });
     }
 
     /**

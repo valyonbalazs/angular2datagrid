@@ -1,5 +1,6 @@
 ﻿import {Column} from "./column";
 import {DataLoader} from "./data-loader";
+import {Grid} from "./grid";
 
 /** 
  * Singleton datasource object for the grid.
@@ -11,6 +12,7 @@ export class DataContainer {
     public static rows: Array<any>;
     public static columns: Array<Column>;
     public static instance: DataContainer = new DataContainer();
+    private static grid: Grid;
 
     constructor() {
         if (DataContainer.instance) {
@@ -43,6 +45,14 @@ export class DataContainer {
     
         DataContainer.rows[rowIndex][colName] = value;
 
+    }
+
+    public static gridSubscribe(datagrid: Grid): void {
+        DataContainer.grid = datagrid;
+    }
+
+    public static notifyGrid(): void {
+        DataContainer.grid.notifyAboutChange();
     }
 
     /**
