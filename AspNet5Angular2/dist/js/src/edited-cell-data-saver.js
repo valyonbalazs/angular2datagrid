@@ -14,17 +14,16 @@ var DataSaver = (function () {
         var row = splittedId[0];
         var col = splittedId[1];
         var newValue = cellData.innerText;
-        var numberNewValue = parseInt(newValue);
         var cols = data_container_1.DataContainer.getColumns();
         var colName = cols[col].getDataBindingName();
-        if (numberNewValue === NaN) {
+        if (typeof newValue === "string") {
             // For demo saving
             data_container_1.DataContainer.setItem(row, colName, newValue);
             caretaker_1.CareTaker.createMemento();
         }
-        else {
+        else if (typeof newValue === "number") {
             // For demo saving
-            data_container_1.DataContainer.setItem(row, colName, numberNewValue);
+            data_container_1.DataContainer.setItem(row, colName, Number(newValue));
             caretaker_1.CareTaker.createMemento();
         }
         // send to the database with ajax, or websocket or whatever is needed.

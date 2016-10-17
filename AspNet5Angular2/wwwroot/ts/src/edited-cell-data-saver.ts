@@ -17,16 +17,16 @@ export class DataSaver implements IDataSaver{
         var col = splittedId[1];
         var newValue = cellData.innerText;
 
-        var numberNewValue = parseInt(newValue);
         var cols = DataContainer.getColumns();
         var colName = cols[col].getDataBindingName();
-        if (numberNewValue === NaN) {
+        if (typeof newValue === "string") {
             // For demo saving
             DataContainer.setItem(row, colName, newValue);
             CareTaker.createMemento();
-        } else {
+        }
+        else if (typeof newValue === "number") {
             // For demo saving
-            DataContainer.setItem(row, colName, numberNewValue);
+            DataContainer.setItem(row, colName, Number(newValue));
             CareTaker.createMemento();
         }        
 
