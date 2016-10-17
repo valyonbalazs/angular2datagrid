@@ -37,6 +37,7 @@ export class Grid implements OnInit {
         if (this.isMenuEnabled) {
             setTimeout(this.setSaveButtonEventHandler, 300);
             setTimeout(this.setUndoButtonEventHandler, 315);
+            setTimeout(this.setRedoButtonEventHandler, 320);
         }
 
         setTimeout(this.setRightClickContextMenu, 300);
@@ -106,8 +107,13 @@ export class Grid implements OnInit {
 
     private setUndoButtonEventHandler(): void {
         $("#navbarUndoBtn").click(function setUndoBtn() {
-            console.log("undo pressed");
             CareTaker.undo();
+        });
+    }
+
+    private setRedoButtonEventHandler(): void {
+        $("#navbarRedoBtn").click(function setUndoBtn() {
+            CareTaker.redo();
         });
     }
 

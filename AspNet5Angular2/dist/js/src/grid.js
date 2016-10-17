@@ -26,6 +26,7 @@ var Grid = (function () {
         if (this.isMenuEnabled) {
             setTimeout(this.setSaveButtonEventHandler, 300);
             setTimeout(this.setUndoButtonEventHandler, 315);
+            setTimeout(this.setRedoButtonEventHandler, 320);
         }
         setTimeout(this.setRightClickContextMenu, 300);
         data_container_1.DataContainer.gridSubscribe(this);
@@ -79,8 +80,12 @@ var Grid = (function () {
     };
     Grid.prototype.setUndoButtonEventHandler = function () {
         $("#navbarUndoBtn").click(function setUndoBtn() {
-            console.log("undo pressed");
             caretaker_1.CareTaker.undo();
+        });
+    };
+    Grid.prototype.setRedoButtonEventHandler = function () {
+        $("#navbarRedoBtn").click(function setUndoBtn() {
+            caretaker_1.CareTaker.redo();
         });
     };
     /**
