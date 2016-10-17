@@ -82,10 +82,20 @@ var Grid = (function () {
         $("#navbarUndoBtn").click(function setUndoBtn() {
             caretaker_1.CareTaker.undo();
         });
+        $("#navbarUndoBtn").keydown(function setUndoBtnKey(evtobj) {
+            if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+                caretaker_1.CareTaker.undo();
+            }
+        });
     };
     Grid.prototype.setRedoButtonEventHandler = function () {
         $("#navbarRedoBtn").click(function setUndoBtn() {
             caretaker_1.CareTaker.redo();
+        });
+        $("#navbarRedoBtn").keydown(function setRedoBtnKey(evtobj) {
+            if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
+                caretaker_1.CareTaker.undo();
+            }
         });
     };
     /**

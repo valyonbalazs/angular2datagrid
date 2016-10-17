@@ -26,8 +26,6 @@ var DataSaver = (function () {
             data_container_1.DataContainer.setItem(row, colName, Number(newValue));
             caretaker_1.CareTaker.createMemento();
         }
-        // send to the database with ajax, or websocket or whatever is needed.
-        // ADD PREFERED CHANGE SAVING METHOD HERE
     };
     return DataSaver;
 }());

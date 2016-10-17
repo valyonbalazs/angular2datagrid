@@ -29,11 +29,6 @@ export class DataSaver implements IDataSaver{
             DataContainer.setItem(row, colName, Number(newValue));
             CareTaker.createMemento();
         }        
-
-
-
-        // send to the database with ajax, or websocket or whatever is needed.
-        // ADD PREFERED CHANGE SAVING METHOD HERE
     }
 
 

@@ -57,6 +57,7 @@ var CareTaker = (function () {
     CareTaker.updateDataContainer = function (memento) {
         var rows = memento.getRows();
         var cols = memento.getColumns();
+        // This part should be modified if remote saving is needed
         data_container_1.DataContainer.setRows(rows);
         data_container_1.DataContainer.setColumns(cols);
         data_container_1.DataContainer.notifyGrid();

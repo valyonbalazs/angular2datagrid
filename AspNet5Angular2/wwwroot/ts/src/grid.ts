@@ -109,11 +109,23 @@ export class Grid implements OnInit {
         $("#navbarUndoBtn").click(function setUndoBtn() {
             CareTaker.undo();
         });
+
+        $("#navbarUndoBtn").keydown(function setUndoBtnKey(evtobj) {
+            if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+                CareTaker.undo();
+            }
+        });
     }
 
     private setRedoButtonEventHandler(): void {
         $("#navbarRedoBtn").click(function setUndoBtn() {
             CareTaker.redo();
+        });
+
+        $("#navbarRedoBtn").keydown(function setRedoBtnKey(evtobj) {
+            if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
+                CareTaker.undo();
+            }
         });
     }
 

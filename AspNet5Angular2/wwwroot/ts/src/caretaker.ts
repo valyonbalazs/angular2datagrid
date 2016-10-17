@@ -74,11 +74,12 @@ export class CareTaker {
         }
     }
 
-    public static  updateDataContainer(memento: DataContainerMemento): void {
+    public static updateDataContainer(memento: DataContainerMemento): void {
 
         var rows = memento.getRows();
         var cols = memento.getColumns();
 
+        // This part should be modified if remote saving is needed
         DataContainer.setRows(rows);
         DataContainer.setColumns(cols);
 
