@@ -44,9 +44,9 @@
   },
   "devDependencies": {
 
-  },
-  "scripts": {
-    "postinstall": "gulp create:CreateDistribution",
-    "heroku-postbuild": "gulp create:CreateDistribution"
   }
+  //"scripts": {
+  //  "postinstall": "gulp create:CreateDistribution",
+  //  "heroku-postbuild": "gulp create:CreateDistribution"
+  //}
 }
