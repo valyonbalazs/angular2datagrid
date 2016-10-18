@@ -135,7 +135,8 @@ gulp.task("RunAllCopyTasks", function (cb) {
 gulp.task("connect", function () {
     connect.server({
         root: [directory.to.root],
-        livereload: false
+        livereload: false,
+        port: 80
     });
 });
 
