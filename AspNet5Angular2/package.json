@@ -13,9 +13,7 @@
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.0",
     "typescript": "^1.8.7",
-    "zone.js": "0.5.10"
-  },
-  "devDependencies": {
+    "zone.js": "0.5.10",
     "chai": "^3.5.0",
     "del": "^2.2.0",
     "expect.js": "^0.3.1",
@@ -44,7 +42,11 @@
     "run-sequence": "^1.1.5",
     "typings": "^0.7.11"
   },
+  "devDependencies": {
+
+  },
   "scripts": {
-    "postinstall": "gulp RunAllCopyTasks"
+    "postinstall": "gulp create:CreateDistribution",
+    "heroku-postbuild": "gulp create:CreateDistribution"
   }
 }
