@@ -42,7 +42,8 @@
     "run-sequence": "^1.1.5",
     "typings": "^0.7.11"
   },
-  "devDependencies": {
-
+  "scripts": {
+    "postinstall": "gulp create:CreateDistribution",
+    "heroku-postbuild": "gulp create:CreateDistribution"
   }
 }
