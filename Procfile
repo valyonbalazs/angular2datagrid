@@ -1,1 +1,1 @@
-﻿web: node node_modules\gulp\bin\gulp create:CreateDistribution
+﻿web: node node_modules/gulp/bin/gulp create:CreateDistribution
