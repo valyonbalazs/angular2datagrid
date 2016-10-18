@@ -136,7 +136,7 @@ gulp.task("connect", function () {
     connect.server({
         root: [directory.to.root],
         livereload: false,
-        port: 80
+        port: process.env.PORT || 8080
     });
 });
 
