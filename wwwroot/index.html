@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Angular 2 with ASP.NET 5</title>
+    <!-- 1. Load libraries -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/pageStyle.min.css" />
+    <link rel="stylesheet" href="css/datagrid.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <script src="jslib/es6-shim.min.js"></script>
+    <script src="jslib/system-polyfills.js"></script>
+    <script src="jslib/angular2-polyfills.js"></script>
+    <script src="jslib/system.js"></script>
+    <script src="jslib/rx.js"></script>
+    <script src="jslib/angular2.dev.js"></script>
+    <!-- 2. Configure SystemJS -->
+    <script>
+        System.config({
+            packages: {
+                js: {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+    </script>
+    <script>
+
+        System.import('js/src/boot').then(null, console.error.bind(console));
+        
+
+    </script>
+
+</head>
+<body>
+    <grid-container>loading...</grid-container>   
+
+    <script src="jslib/jquery.min.js"></script>
+    <script src="jslib/lodash.min.js"></script>
+    <script src="jslib/colResizable-1.6.min.js"></script>
+    <script src="jslib/bootstrap.min.js"></script>
+</body>
+</html>

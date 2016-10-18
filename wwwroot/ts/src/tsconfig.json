@@ -1,0 +1,28 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outDir": "../../js/src/",
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "files": [
+    "boot.ts",
+    "column.ts",
+    "data-container.ts",
+    "grid.ts",
+    "grid-container.ts",
+    "pagination.ts",
+    "sorter.ts",
+    "test-data.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "typings"
+  ]
+}

@@ -1,0 +1,38 @@
+﻿{
+  "Framework": "qunit",
+  "TestHarnessReferenceMode": "Normal",
+  "TestHarnessLocationMode": "TestFileAdjacent",
+  "TypeScriptModuleKind": "CommonJs",
+  "References": [
+    { "Path": "require.js" },
+    { "Path": "qunit.js" },
+    {
+      "Path": "./typings/require.d.ts",
+      "IncludeInTestHarness": "false"
+    },
+    {
+      "Path": "./typings/qunit.d.ts",
+      "IncludeInTestHarness": "false"
+    },
+    {
+      "Includes": "*/src/*.ts",
+      "Excludes": "*/src/*.d.ts"
+    },
+    {
+      "Includes": "../src/*.ts",
+      "Excludes": "../src/*.d.ts"
+    }
+  ],
+  "Tests": [
+    {"Path": "./**"},
+    {
+      "Includes": [ "./", "./**.ts" ],
+      "Excludes": [ "./typings/**.d.ts" ]
+    }
+  ],
+  "Compile": {
+    "Mode": "External",
+    "Extensions": [ ".ts" ],
+    "ExtensionsWithNoOutput": [ ".d.ts" ]
+  }
+}
