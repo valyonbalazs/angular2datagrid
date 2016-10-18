@@ -37,10 +37,15 @@
     "jasmine-spec-reporter": "^2.4.0",
     "json-loader": "^0.5.4",
     "mocha": "^2.4.5",
+    "operadriver": "^0.2.2",
     "protractor": "^3.2.2",
     "qunit": "^0.9.0",
     "requirejs": "^2.1.22",
     "run-sequence": "^1.1.5",
     "typings": "^0.7.11"
+  },
+  "scripts": {
+    "start": "node app",
+    "postinstall": "gulp RunAllCopyTasks"
   }
 }
