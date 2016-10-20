@@ -1,1 +1,0 @@
-{"version":3,"file":"pagination-config.js","sourceRoot":"","sources":["../../ts/src/pagination-config.ts"],"names":[],"mappings":";AAAA;IAGI;QAFQ,0BAAqB,GAAW,CAAC,CAAC;IAG1C,CAAC;IAEM,mDAAwB,GAA/B,UAAgC,UAAkB;QAC9C,IAAI,CAAC,qBAAqB,GAAG,UAAU,CAAC;IAC5C,CAAC;IAEM,mDAAwB,GAA/B;QACI,MAAM,CAAC,IAAI,CAAC,qBAAqB,CAAC;IACtC,CAAC;IACL,uBAAC;AAAD,CAAC,AAbD,IAaC;AAbY,wBAAgB,mBAa5B,CAAA"}
